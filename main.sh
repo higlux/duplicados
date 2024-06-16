@@ -23,7 +23,7 @@ function pause(){
  echo ""
 }
 
-#Entrada de parâmetros do script - teste
+##Entrada de parâmetros do script - teste
 echo "Entrada de parâmetros - Por enquanto somente um parâmetro por vez"
 echo "Parâmetros passados:  1:$1"
 
