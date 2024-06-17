@@ -1,0 +1,36 @@
+#Manpage for Duplicados
+
+Script para localização de arquivos duplicados e organização por data somente. Criado para organizar fotos, mas por padrão não faz seleção de 
+
+Parâmetros
+
+[Comandos básicos]
+
+--find -f  localiza arquivos duplicados
+
+--sort -s somente organiza os arquivos por data
+
+--origem -o local de busca do script, por padrão o atual PATH será usado.
+
+--destino -d define nome da pasta onde serão movidos os arquivos
+
+--clean -c deleta arquivos temporários
+
+--extensao -s formato de arquivo que deseja organizar. Todos (padrão)
+
+
+[Formato de data]
+
+--format_fia -fd altera o formato de dia 1 (padrão) ou 01
+
+--format_mes -fm altera o formato do mês Jan ou Janeiro (padrão)
+
+--format_ano -fa altera formato do ano 24 2024(padrão)
+
+--format_join -fj une o ano com o mês
+
+[Personalização]
+
+--hash -a modifica o Hash de verificação, MD5 (padrão) este parâmetro tem que ser acompanhado do comando desejado ex: main.sh -a sha512
+
+--meta -m força o uso de metadados e deixa em branco caso não tenha
