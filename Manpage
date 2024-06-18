@@ -34,3 +34,6 @@ Parâmetros
 --hash -a modifica o Hash de verificação, MD5 (padrão) este parâmetro tem que ser acompanhado do comando desejado ex: main.sh -a sha512
 
 --meta -m força o uso de metadados e deixa em branco caso não tenha
+
+[Outros Argumentos]
+--debug Ativa mensagens extras na tela
