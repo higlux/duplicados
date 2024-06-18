@@ -65,6 +65,7 @@ fi
 BARRA_PROGRESSO="##########"
 
 #Teste para saber se a linha é um diretório, se não for ele vai adicionar o md5
+
 if [ -e .arquivos2.tmp ]; then
     echo "O Arquivo .arquivos2.tmp de busca existe"
     PROGRESSO2=1
@@ -72,9 +73,15 @@ else
     for (( i=1; i<=$QTD; i+=1 ));
     do
         ARQ=$(cat .arquivos.tmp | head -$i | tail -1)
-        md5sum "$ARQ" >> .arquivos2.tmp 2>/dev/null
+#Teste para ver se é diretório, apesar que eu mandei um find com o -f para impedir a entrada de diretorios na saída.
+        if [ -d $ARQ ]; then
+          $ARQ é um diretório
+        else
+          md5sum "$ARQ" >> .arquivos2.tmp 2>/dev/null
         PROGRESSO=$(echo "scale=2; ($i / $QTD) * 100" | bc)
-        echo -ne "\\r[$TRALHA] $PROGRESSO%"
+         echo -ne "\\r[$TRALHA] $PROGRESSO%"
+        fi
+        
     done
 fi
 
@@ -98,7 +105,9 @@ QTD_DUP=$(cat .arquivos4.tmp | wc -l)
 for (( i=1; i<=$QTD_DUP; i+=1 ));
     do
         MD5_DUP=$(cat .arquivos4.tmp | head -$i | tail -1)
-        cat .arquivos2.tmp | grep `cat .arquivos4.tmp | head -$i | tail -1` >> saida.txt          
+        cat .arquivos2.tmp | grep `cat .arquivos4.tmp | head -$i | tail -1` >> saida.txt
+
+######### PARTE DESABILITADA POR MOTIVO DESCONHECIDO. FURURAMENTE RETIRAR
         #Outro LOOP
         #for (( j=1; j<=$QTD; j+=1 ));
         #do
@@ -125,7 +134,9 @@ for (( i=1; i<=$QTD_DUP; i+=1 ));
         echo "$i: $MD5_LOC Quantidade: $QTD_MD5_LOC"
         for (( j=1; j<=$QTD_MD5_LOC - 1; j+=1 )); do
             ARQ_MOVER=$(cat .arquivos2.tmp | grep $MD5_LOC | head -$j | tail -1 | awk '{print $2}')
-            ARQ_NOVO="${ARQ_MOVER%.*}($j).${ARQ_MOVER##*.}"
+#LINHA ACIMA EXIBE O CAMINHO DO ARQUIVO DUPLICADO           
+
+ARQ_NOVO="${ARQ_MOVER%.*}($j).${ARQ_MOVER##*.}"
             ARQ_SCAM=$(echo $ARQ_NOVO | sed 's:.*/::')
             #echo "$ARQ_MOVER $PASTA_DUPLICADOS" >> .arquivos5.tmp
             #echo $ARQ_NOVO
