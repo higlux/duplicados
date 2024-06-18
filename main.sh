@@ -26,21 +26,31 @@ function pause(){
 #Entrada de parâmetros do script - teste
 echo "Entrada de parâmetros - Por enquanto somente um parâmetro por vez"
 echo "Parâmetros passados:  1:$1"
-
+DEBUG=0
 case $1 in 
     -c)
     echo "Apagando arquivos temporários"
     rm -rf .arquivos*.tmp
+    exit
     ;;
     -h)
     echo "Opções disponíveis:
     -c  Apaga os arquivos temporários
     -h  Exibe esta ajuda
     -v  Exbe a versãro do arquivo"
+    exit
     ;;
     -v)
     echo "  Duplicados Versão 0.0.0.2 alfa"
+    exit
     ;;
+    --debug)
+    echo "Modo debug ativado"
+    DEBUG=1;
+    ;;
+    *)
+    echo "O parâmetro $1 é um comando inválido"
+    exit
 esac
 
 
@@ -84,7 +94,7 @@ fi
     if [ -e .arquivos.tmp ]; then
         echo "O aquivo .arquivos.tmp existe"
     else
-        find $LOCAL > .arquivo.tmp
+        find $LOCAL -type f > .arquivo.tmp
         #Remove o nome da pasta - NOME_PASTA_DUPLICADOS = duplicados está definido como padrão
         cat .arquivo.tmp | sed /$NOME_PASTA_DUPLICADOS/d > .arquivos.tmp
         rm -rf .arquivo.tmp
@@ -105,7 +115,23 @@ else
     for (( i=1; i<=$QTD; i+=1 ));
     do
         ARQ=$(cat .arquivos.tmp | head -$i | tail -1)
-        ESPMAIOR=$(cat $ARQ | grep -o ' ' | wc -l)
+        ESPMAIOR=$(cat "$ARQ" | grep -o ' ' | wc -l)
+        ######################################## BUG ENCONTRADO ########################################
+        #Apresentando problema nesss comando acima, pois os arquivos da linha 6089 e 7156 por conta do fato deles serem arquivos de texto e com isso estão lendo o conteúdo dele. posso tentar resolver se eu tirar a variável e colocar o comando dentro da outra variável, com isso pode resolver.
+
+        #Isso faz com que o maior espaço dê valores astronômicos que passa a dar erro quando precisar mover algum arquivo mais abaixo.
+
+        #Enquanto não dá certo, podemos ignorar esse erro? Para testes sim
+        
+            if [ $DEBUG -eq 1 ]; then
+                echo "Variável ARQ: $ARQ"
+                echo "Variável ESPMAIOR $ESPMAIOR"
+                echo "Linha do arquivo .arquivos.tmp: $i"
+                #pause 'Aperte Enter'
+            fi
+            if [ $ESPMAIOR -ne 0 ]; then
+                pause
+            fi
         ##### ANTIGO
         #md5sum "$ARQ" >> .arquivos2.tmp 2>/dev/null
         #####NOVO
@@ -117,8 +143,14 @@ else
             EXIFTMP=$(ls -lt --time-style=long-iso "$ARQ" | awk '{print $6}')
             ### Aqui deve fazer a concatenação entre o MD5 e o EXIF
             SAIDATESTE=$MD5TMP" "$EXIFTMP
-            echo $SAIDATESTE #>> .arquivos2.tmp
-            pause 'Aperte Enter'
+            #Informação de DEBUG
+            #if [ $DEBUG -eq 1 ]; then
+            #    echo "Variável ARQ" "$ARQ"
+            #    echo "Variável EXITFTMP: $EXIFTMP"
+            #    echo "Variável SAIDATESTE: $SAIDATESTE"  #>> .arquivos2.tmp
+                echo "Variável ES: $ES"
+            #    pause 'Aperte Enter'
+            #fi
         PROGRESSO=$(echo "scale=2; ($i / $QTD) * 100" | bc)
         echo -ne "\\r[$TRALHA] $PROGRESSO%"
     done
