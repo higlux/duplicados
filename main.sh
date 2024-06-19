@@ -17,6 +17,48 @@
 # .arquivos3.tmp - Só os códigos MD5
 # .arquivos4.tmp - Arquivos duplicados
 
+#PAUSE
+function pause(){
+ read -s -n 1 -p "Press any key to continue . . ."
+ echo ""
+}
+
+#Entrada de parâmetros do script - teste
+echo "Entrada de parâmetros - Por enquanto somente um parâmetro por vez"
+echo "Parâmetros passados:  1:$1"
+DEBUG=0
+case $1 in 
+    -c)
+    echo "Apagando arquivos temporários"
+    rm -rf .arquivos*.tmp
+    exit
+    ;;
+    -h)
+    echo "Opções disponíveis:
+    -c  Apaga os arquivos temporários
+    -h  Exibe esta ajuda
+    -v  Exbe a versãro do arquivo"
+    exit
+    ;;
+    -v)
+    echo "  Duplicados Versão 0.0.0.2 alfa"
+    exit
+    ;;
+    --debug)
+    echo "Modo debug ativado"
+    DEBUG=1;
+    ;;
+    *)
+    echo "O parâmetro $1 é um comando inválido"
+    exit
+esac
+
+
+#echo "1:$1"
+#echo "2:$2"
+#echo "3:$3"
+echo "Fim verificação parãmetros"
+
 
 #Verificação da existência do md5
 if [ -e /usr/bin/md5sum ]; then
@@ -37,6 +79,8 @@ fi
     #Nome da pasta duplicado
     NOME_PASTA_DUPLICADOS=duplicados
     PASTA_DUPLICADOS="$LOCAL/$NOME_PASTA_DUPLICADOS"
+    #Maior número de espaços - Isso aqui vai corrigir o problema de pastas com muitos espaços
+    ESPMAIOR=6
 #Determina caso o LOCAL estiver vazio, a pasta atual como padrão
     if [ $LOCAL = "" ]; then 
         LOCAL=$PWD
@@ -50,7 +94,7 @@ fi
     if [ -e .arquivos.tmp ]; then
         echo "O aquivo .arquivos.tmp existe"
     else
-        find $LOCAL > .arquivo.tmp
+        find $LOCAL -type f > .arquivo.tmp
         #Remove o nome da pasta - NOME_PASTA_DUPLICADOS = duplicados está definido como padrão
         cat .arquivo.tmp | sed /$NOME_PASTA_DUPLICADOS/d > .arquivos.tmp
         rm -rf .arquivo.tmp
@@ -63,9 +107,7 @@ fi
 
 #Para a barra de progresso
 BARRA_PROGRESSO="##########"
-
 #Teste para saber se a linha é um diretório, se não for ele vai adicionar o md5
-
 if [ -e .arquivos2.tmp ]; then
     echo "O Arquivo .arquivos2.tmp de busca existe"
     PROGRESSO2=1
@@ -73,15 +115,44 @@ else
     for (( i=1; i<=$QTD; i+=1 ));
     do
         ARQ=$(cat .arquivos.tmp | head -$i | tail -1)
-#Teste para ver se é diretório, apesar que eu mandei um find com o -f para impedir a entrada de diretorios na saída.
-        if [ -d $ARQ ]; then
-          $ARQ é um diretório
-        else
-          md5sum "$ARQ" >> .arquivos2.tmp 2>/dev/null
-        PROGRESSO=$(echo "scale=2; ($i / $QTD) * 100" | bc)
-         echo -ne "\\r[$TRALHA] $PROGRESSO%"
-        fi
+        ESPMAIOR=$(cat "$ARQ" | grep -o ' ' | wc -l)
+        ######################################## BUG ENCONTRADO ########################################
+        #Apresentando problema nesss comando acima, pois os arquivos da linha 6089 e 7156 por conta do fato deles serem arquivos de texto e com isso estão lendo o conteúdo dele. posso tentar resolver se eu tirar a variável e colocar o comando dentro da outra variável, com isso pode resolver.
+
+        #Isso faz com que o maior espaço dê valores astronômicos que passa a dar erro quando precisar mover algum arquivo mais abaixo.
+
+        #Enquanto não dá certo, podemos ignorar esse erro? Para testes sim
         
+            if [ $DEBUG -eq 1 ]; then
+                echo "Variável ARQ: $ARQ"
+                echo "Variável ESPMAIOR $ESPMAIOR"
+                echo "Linha do arquivo .arquivos.tmp: $i"
+                #pause 'Aperte Enter'
+            fi
+            if [ $ESPMAIOR -ne 0 ]; then
+                pause
+            fi
+        ##### ANTIGO
+        #md5sum "$ARQ" >> .arquivos2.tmp 2>/dev/null
+        #####NOVO
+            ### O Resultado abaixo deve entrar em uma variável para depois unir com os dados EXIF e criar uma nova coluna
+            MD5TMP=$(md5sum "$ARQ" 2>/dev/null)
+            ### Captura dos dados EXIF
+            #EXIFTMP=$(exif "$ARQ" | grep "Data e hora (ori" | awk '{print $4}' | sed 's/[a-z(|]//g')
+            ### Informação do comando LS (Data de modificação)
+            EXIFTMP=$(ls -lt --time-style=long-iso "$ARQ" | awk '{print $6}')
+            ### Aqui deve fazer a concatenação entre o MD5 e o EXIF
+            SAIDATESTE=$MD5TMP" "$EXIFTMP
+            #Informação de DEBUG
+            #if [ $DEBUG -eq 1 ]; then
+            #    echo "Variável ARQ" "$ARQ"
+            #    echo "Variável EXITFTMP: $EXIFTMP"
+            #    echo "Variável SAIDATESTE: $SAIDATESTE"  #>> .arquivos2.tmp
+                echo "Variável ES: $ES"
+            #    pause 'Aperte Enter'
+            #fi
+        PROGRESSO=$(echo "scale=2; ($i / $QTD) * 100" | bc)
+        echo -ne "\\r[$TRALHA] $PROGRESSO%"
     done
 fi
 
@@ -105,9 +176,7 @@ QTD_DUP=$(cat .arquivos4.tmp | wc -l)
 for (( i=1; i<=$QTD_DUP; i+=1 ));
     do
         MD5_DUP=$(cat .arquivos4.tmp | head -$i | tail -1)
-        cat .arquivos2.tmp | grep `cat .arquivos4.tmp | head -$i | tail -1` >> saida.txt
-
-######### PARTE DESABILITADA POR MOTIVO DESCONHECIDO. FURURAMENTE RETIRAR
+        cat .arquivos2.tmp | grep `cat .arquivos4.tmp | head -$i | tail -1` >> saida.txt          
         #Outro LOOP
         #for (( j=1; j<=$QTD; j+=1 ));
         #do
@@ -133,10 +202,8 @@ for (( i=1; i<=$QTD_DUP; i+=1 ));
         QTD_MD5_LOC=$(cat .arquivos2.tmp | grep $MD5_LOC | wc -l)
         echo "$i: $MD5_LOC Quantidade: $QTD_MD5_LOC"
         for (( j=1; j<=$QTD_MD5_LOC - 1; j+=1 )); do
-            ARQ_MOVER=$(cat .arquivos2.tmp | grep $MD5_LOC | head -$j | tail -1 | awk '{print $2}')
-#LINHA ACIMA EXIBE O CAMINHO DO ARQUIVO DUPLICADO           
-
-ARQ_NOVO="${ARQ_MOVER%.*}($j).${ARQ_MOVER##*.}"
+            ARQ_MOVER=$(cat .arquivos2.tmp | grep $MD5_LOC | head -$j | tail -1 | awk '{print $2,$3,$4,$5,$6,$7,$8,$9}')
+            ARQ_NOVO="${ARQ_MOVER%.*}($j).${ARQ_MOVER##*.}"
             ARQ_SCAM=$(echo $ARQ_NOVO | sed 's:.*/::')
             #echo "$ARQ_MOVER $PASTA_DUPLICADOS" >> .arquivos5.tmp
             #echo $ARQ_NOVO
