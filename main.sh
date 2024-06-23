@@ -13,9 +13,10 @@
 # p - execução padrão (Mover arquivo duplicado)
 
 # .arquivos.tmp - Resultado do find
-# .arquivos2.tmp - Resultado do MD5
+# .arquivos2.tmp - Resultado do MD5 com caminho #Este arquivo ele não pode ser usado para buscar o caminho do arquivo senão vai dar problema na hora de extrair o conteúdo, por isso eu coloquei um novo arquivo com MD5 e data para facilitar a busca.
 # .arquivos3.tmp - Só os códigos MD5
 # .arquivos4.tmp - Arquivos duplicados
+# .arquivos5.tmp - Código MD5 com data
 
 #PAUSE
 function pause(){
@@ -27,32 +28,34 @@ function pause(){
 echo "Entrada de parâmetros - Por enquanto somente um parâmetro por vez"
 echo "Parâmetros passados:  1:$1"
 DEBUG=0
-case $1 in 
-    -c)
-    echo "Apagando arquivos temporários"
-    rm -rf .arquivos*.tmp
-    exit
-    ;;
-    -h)
-    echo "Opções disponíveis:
-    -c  Apaga os arquivos temporários
-    -h  Exibe esta ajuda
-    -v  Exbe a versãro do arquivo"
-    exit
-    ;;
-    -v)
-    echo "  Duplicados Versão 0.0.0.2 alfa"
-    exit
-    ;;
-    --debug)
-    echo "Modo debug ativado"
-    DEBUG=1;
-    ;;
-    *)
-    echo "O parâmetro $1 é um comando inválido"
-    exit
-esac
-
+if [ $1 != "" ]; then
+    case $1 in 
+        -c)
+        echo "Apagando arquivos temporários"
+        rm -rf .arquivos*.tmp
+        exit
+        ;;
+        -h)
+        echo "Opções disponíveis:
+        -c  Apaga os arquivos temporários
+        -h  Exibe esta ajuda
+        -v  Exbe a versãro do arquivo"
+        exit
+        ;;
+        -v)
+        echo "  Duplicados Versão 0.0.0.2 alfa"
+        exit
+        ;;
+        --debug)
+        echo "Modo debug ativado"
+        DEBUG=1;
+        ;;
+        *)
+        echo "O parâmetro $1 é um comando inválido"
+        exit
+        ;;
+    esac
+fi
 
 #echo "1:$1"
 #echo "2:$2"
@@ -67,29 +70,22 @@ else
     echo "O md5 não está instalado"
     exit 1
 fi
-
-#Remover os arquivos.
-#if [ -e .arquivos.tmp ]; then
-    #rm -rf .arquivos.tmp
-    #rm -rf .arquivos2.tmp
-#fi
-
 #Declaração de variáveis
     LOCAL="/home/higlux/Imagens/Fotografias"
     #Nome da pasta duplicado
     NOME_PASTA_DUPLICADOS=duplicados
     PASTA_DUPLICADOS="$LOCAL/$NOME_PASTA_DUPLICADOS"
-    #Maior número de espaços - Isso aqui vai corrigir o problema de pastas com muitos espaços
-    ESPMAIOR=6
+
 #Determina caso o LOCAL estiver vazio, a pasta atual como padrão
     if [ $LOCAL = "" ]; then 
         LOCAL=$PWD
     fi
-
-    echo "**** Teste de variáveis"
-    echo $LOCAL
-    echo $SUM
-    echo "**** Fim teste de variáveis"
+    if [ $DEBUG -eq 1 ]; then
+        echo "**** Teste de variáveis"
+        echo $LOCAL
+        echo $SUM
+        echo "**** Fim teste de variáveis"
+    fi
 
     if [ -e .arquivos.tmp ]; then
         echo "O aquivo .arquivos.tmp existe"
@@ -115,22 +111,18 @@ else
     for (( i=1; i<=$QTD; i+=1 ));
     do
         ARQ=$(cat .arquivos.tmp | head -$i | tail -1)
-        ESPMAIOR=$(cat "$ARQ" | grep -o ' ' | wc -l)
         ######################################## BUG ENCONTRADO ########################################
         #Apresentando problema nesss comando acima, pois os arquivos da linha 6089 e 7156 por conta do fato deles serem arquivos de texto e com isso estão lendo o conteúdo dele. posso tentar resolver se eu tirar a variável e colocar o comando dentro da outra variável, com isso pode resolver.
 
         #Isso faz com que o maior espaço dê valores astronômicos que passa a dar erro quando precisar mover algum arquivo mais abaixo.
+        #19JUN2024 - Fiz a alteração do comando "cat" para "echo" - Reolveu
 
         #Enquanto não dá certo, podemos ignorar esse erro? Para testes sim
         
             if [ $DEBUG -eq 1 ]; then
                 echo "Variável ARQ: $ARQ"
-                echo "Variável ESPMAIOR $ESPMAIOR"
                 echo "Linha do arquivo .arquivos.tmp: $i"
-                #pause 'Aperte Enter'
-            fi
-            if [ $ESPMAIOR -ne 0 ]; then
-                pause
+                #pause 'Aperte Enter'0
             fi
         ##### ANTIGO
         #md5sum "$ARQ" >> .arquivos2.tmp 2>/dev/null
@@ -144,13 +136,13 @@ else
             ### Aqui deve fazer a concatenação entre o MD5 e o EXIF
             SAIDATESTE=$MD5TMP" "$EXIFTMP
             #Informação de DEBUG
-            #if [ $DEBUG -eq 1 ]; then
-            #    echo "Variável ARQ" "$ARQ"
-            #    echo "Variável EXITFTMP: $EXIFTMP"
-            #    echo "Variável SAIDATESTE: $SAIDATESTE"  #>> .arquivos2.tmp
-                echo "Variável ES: $ES"
-            #    pause 'Aperte Enter'
-            #fi
+            if [ $DEBUG -eq 1 ]; then
+                echo "Variável ARQ" "$ARQ"
+                echo "Variável EXITFTMP: $EXIFTMP"
+                echo "Variável SAIDATESTE: $SAIDATESTE"  >> .arquivos2.tmp
+                pause 'Aperte Enter'
+            fi
+            echo "$SAIDATESTE" >> .arquivos2.tmp
         PROGRESSO=$(echo "scale=2; ($i / $QTD) * 100" | bc)
         echo -ne "\\r[$TRALHA] $PROGRESSO%"
     done
@@ -160,6 +152,8 @@ if [ -e .arquivos3.tmp ]; then
     echo "Arquivo .arquivos3.tmp unico exite"
 else
 #Pega primeira coluna do arquivos 2 e passa para o arquivos 3
+#Faz isso somente para não ficar usando o arquvio 2 para comparar com  o arquivo 4 (duplicados )
+#É desnecessário, mas melhor não arriscar por enquanto corromper o arquivo 2
     cat .arquivos2.tmp | sort | awk '{print $1}' > .arquivos3.tmp 
 fi
 #Pega o arquivos 3 e passa para o arquivos 4 sem duplicados
@@ -199,16 +193,34 @@ for (( i=1; i<=$QTD_DUP; i+=1 ));
 
     for (( i=1; i<=$QTD_DUP; i+=1 )); do
         MD5_LOC=$(cat .arquivos4.tmp | head -$i | tail -1) #Aqui sai o MD5 para procurar no outro arquivo
-        QTD_MD5_LOC=$(cat .arquivos2.tmp | grep $MD5_LOC | wc -l)
+        QTD_MD5_LOC=$(cat .arquivos2.tmp | grep $MD5_LOC | wc -l) #Conta quantidade de arquivos repetidos
         echo "$i: $MD5_LOC Quantidade: $QTD_MD5_LOC"
         for (( j=1; j<=$QTD_MD5_LOC - 1; j+=1 )); do
-            ARQ_MOVER=$(cat .arquivos2.tmp | grep $MD5_LOC | head -$j | tail -1 | awk '{print $2,$3,$4,$5,$6,$7,$8,$9}')
+            #BUG - Aqui dá o BUG que não sai o caminho completo do arquivo estou me baseando nos espaços para selecionar as colunas, porém tem arquivos com nome com espaço para resolver eu vou usar a seguinte estratégia: Ao invés de tentar descobrir a quantidade de espaços vou pegar a linha do arquivo na lista de MD5 somente códigos, e extrair do .arquivos.tmp que sai completo por ter uma coluna apenas.
+            LINHA=$(cat -n .arquivos2.tmp | grep $MD5_LOC | cut -f2 -d: | awk '{print $1}' | head -$j | tail -1)
+            ARQ_MOVER=$(cat .arquivos.tmp | head -$LINHA | tail -1)
+
             ARQ_NOVO="${ARQ_MOVER%.*}($j).${ARQ_MOVER##*.}"
             ARQ_SCAM=$(echo $ARQ_NOVO | sed 's:.*/::')
-            #echo "$ARQ_MOVER $PASTA_DUPLICADOS" >> .arquivos5.tmp
-            #echo $ARQ_NOVO
-            echo "Movendo $ARQ_MOVER para $PASTA_DUPLICADOS/$ARQ_SCAM"
-            mv $ARQ_MOVER $PASTA_DUPLICADOS/$ARQ_SCAM 2>/dev/null
+            
+            #Aqui movemos os arquivos duplicados
+
+
+             if [ $DEBUG -eq 1 ]; then
+                echo "Movendo de:"
+                echo \"$ARQ_MOVER\"
+                echo "Movendo para:"
+                echo $PASTA_DUPLICADOS/$ARQ_SCAM
+                mv -nib \"$ARQ_MOVER\" \"$PASTA_DUPLICADOS/$ARQ_SCAM\" >> error.log
+                pause
+            else
+                mv -nb \"$ARQ_MOVER\" \"$PASTA_DUPLICADOS/$ARQ_SCAM\"
+             fi
+             if [ $DEBUG -eq 1 ]; then
+                echo "######## TESTE ########"
+                echo "Linha detectada: $LINHA"
+                echo "ARQMOVER: $ARQ_MOVER"
+            fi
         done
     done
 #Exibir a linha 2 do .arquivo2.tmp
