@@ -13,7 +13,8 @@
 # p - execução padrão (Mover arquivo duplicado)
 
 # .arquivos.tmp - Resultado do find
-# .arquivos2.tmp - Resultado do MD5 com caminho #Este arquivo ele não pode ser usado para buscar o caminho do arquivo senão vai dar problema na hora de extrair o conteúdo, por isso eu coloquei um novo arquivo com MD5 e data para facilitar a busca.
+# .arquivos2.tmp - Resultado do MD5 com caminho #Este arquivo ele não pode ser usado para buscar o caminho do arquivo senão vai dar problema na hora de extrair o conteúdo, por isso eu coloquei um novo arquivo com MD5 e data para facilitar a busca. adicionei numa terceira coluna a data de criação do arquivo, mas eu irei retirar e criar um novo arquivo de texto.
+
 # .arquivos3.tmp - Só os códigos MD5
 # .arquivos4.tmp - Arquivos duplicados
 # .arquivos5.tmp - Código MD5 com data
@@ -135,6 +136,10 @@ else
             EXIFTMP=$(ls -lt --time-style=long-iso "$ARQ" | awk '{print $6}')
             ### Aqui deve fazer a concatenação entre o MD5 e o EXIF
             SAIDATESTE=$MD5TMP" "$EXIFTMP
+###### Modificação 27JUN
+           #MD5COD=$MD5TMP | awk '{print $1}'
+           #echo "$MD5COD $EXIFTMP" >> .arquivos5.tmp
+###### Fim modificação
             #Informação de DEBUG
             if [ $DEBUG -eq 1 ]; then
                 echo "Variável ARQ" "$ARQ"
@@ -230,3 +235,12 @@ for (( i=1; i<=$QTD_DUP; i+=1 ));
 #sed '2q' .arquivos2.tmp
 #Exibe só o nome do arquivo
 #cat .arquivos2.tmp | awk '{print$2}' | sed 's:.*/::'
+
+cria_pastas(){
+ sort .arquivos5.tmp | awk ${print $2} | uniq -d  >> .arquivos6.tmp
+#arquivos6.tmp Aqui tera uma lista com as datas no formato aaa-mm-dd
+#exemplo: 2024-05-22
+#criando outros arquivos para facilitar
+cat .arquivos6.tmp | grep [0-9]{4}> .ano
+
+}
