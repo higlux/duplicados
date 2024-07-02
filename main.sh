@@ -60,12 +60,71 @@ function pause(){
     echo ""
 }
 
-#
+##MES
+mes() {
+#ENTRADA DE PARÂMETRO TEM QUE SER ASSIM: formato mes
+#NÃO FAZ SENTIDO TROCAR LINHA A LINHA, MANIA DE PHP.
+#Entrada da CRIAÇÃO DE PASTA /home/higlux/Imagens/Fotografias/2010/01
+    
+#echo "ENTROU NA FUNÇÃO mes! com os dados: $1              2: $2"    
+pause
+    if [[ $1="longo" ]]; then
+        long=true
+    else
+        long=false
+    fi
+#echo "Saída de long: "$long
+  case $2 in 
+        01)
+           [[ $long=false ]] || MES="Janeiro" && MES="Jan"
+        ;;
+        02)
+            [[ $long=false ]] || MES="Fevereiro" && MES="Fev"
+        ;;
+        03)
+            [[ $long=false ]] || MES="Março" && MES="Mar"
+        ;;
+        04)
+            [[ $long=false ]] || MES="Abril" && MES="Abr"
+        ;;
+        05)
+            [[ $long=false ]] || MES="Maio" && MES="Mai"
+        ;;
+        06)
+            [[ $long=false ]] || MES="Junho" && MES="Jun"
+        ;;
+        07)
+            [[ $long=false ]] || MES="Julho" && MES="Jul"
+        ;;
+        08)
+            [[ $long=false ]] || MES="Agosto" && MES="Ago"
+        ;;
+        09)
+            [[ $long=false ]] || MES="Setembro" && MES="Set"
+        ;;
+        10)
+            [[ $long=false ]] || MES="Outubro" && MES="Out"
+        ;;
+        11)
+            [[ $long=false ]] || MES="Novembro" && MES="Nov"
+        ;;
+        12)
+            [[ $long=false ]] || MES="Dezembro"  && MES="Dez"
+        ;;   
+esac
+    echo $MES
+}
+
+##Criar Pastas
 cria_pastas() {
 ##LOCALIZAÇÃO DOS DADOS DENTRO DO ARQUIVO "DATAS.TMP"
 # cut -b 1-4 #ano #cut -b 6-7 #mês #cut -b 9-10 #dia
 
     QTD_PASTA_ANOS=$(cat .arquivos5.tmp | awk '{print $2}' | sort | cut -b 1-4 | uniq -d | wc -l)
+    #%echo "----- Criação das pastas -----"
+    #%echo $QTD_PASTA_ANOS
+    pause
+    #CRIAÇÂO DA PASTA DOS ANOS
     for (( i=1; i<=$QTD_PASTA_ANOS; i+=1 )); do
         LINHA_PASTA_ANOS=$(cat .arquivos5.tmp | awk '{print $2}' | sort | cut -b 1-4 | uniq -d | head -$i | tail -1)
 
@@ -78,58 +137,74 @@ cria_pastas() {
         fi
 
         #CRIAÇÂO DA PASTA
-        echo "Criando pasta do ano de "$LINHA_PASTA_ANOS
+        #%echo "Criando pasta do ano de "$LINHA_PASTA_ANOS >> pastas_novas.tmp
 
         DESTCRIAR=$(echo $LOCAL"/"$LINHA_PASTA_ANOS)
         
         test -d $DESTCRIAR || mkdir $DESTCRIAR && echo "Pasta existe"
         
         QTD_PASTA_MESES=$(cat .arquivos5.tmp | awk '{print $2}' | sort | cut -b 1-7 | uniq -d | grep $LINHA_PASTA_ANOS | cut -b 6-7 | wc -l)
-
+        #CRIAÇÂO DA PASTA DOS MESES
         for (( j=1; j<=$QTD_PASTA_MESES; j+=1 )); do
             LINHA_PASTA_MES=$(cat .arquivos5.tmp | awk '{print $2}' | sort | cut -b 1-7 | uniq -d | grep $LINHA_PASTA_ANOS | cut -b 6-7 | head -$j | tail -1)
-            ANOMES=$LINHA_PASTA_ANOS-$LINHA_PASTA_MES 
+            ANOMES=$(echo $LINHA_PASTA_ANOS"-"$LINHA_PASTA_MES)
             if [[ $DEBUG=1 ]]; then
-                echo "        mkdir ./"$LINHA_PASTA_ANOS"/"$LINHA_PASTA_MES #EXEMPLO: ./2020/01
+                echo "        mkdir ./"$LINHA_PASTA_ANOS"/"$LINHA_PASTA_MES > pastas_novas.tmp #EXEMPLO: ./2020/01
                 #cat datas.tmp | awk '{print $1}' | sort |  uniq -d | grep 2018-11 | cut -b 9-10 #Exibe os dias do mês
                 echo "                 \$ANOMES: "$ANOMES
             fi
-            echo "Criando pasta do ano "$LINHA_PASTA_ANOS" mês de "$LINHA_PASTA_MES
+            #%echo -e "\e[1;36mCriando pasta do ano "$LINHA_PASTA_ANOS" mês de "$LINHA_PASTA_MES"\e[0m"
+            #MUDA POR sed DE MÊS NÚMERO PARA MÊS ESCRITO
+            SAIDAMES=$(echo $LINHA_PASTA_MES | grep -i 's/-01-/-Jan-/g')
+            #%echo "Saída da função MÊs: $SAIDAMES"
+            #
             DESTCRIAR=$(echo $LOCAL"/"$LINHA_PASTA_ANOS"/"$LINHA_PASTA_MES)
-            
+            #%echo -e "\e[1;31mModificação do caminho\e[0m" $DESTCRIAR
+            #%pause
+    
             test -d $DESTCRIAR || mkdir $DESTCRIAR && echo "Pasta existe"
 
-            QTD_PASTA_DIAS=$(cat .arquivos5.tmp | awk '{print $2}' | sort | cut -b 1-7 | uniq -d | grep $ANOMES | cut -b 9-10 | wc -l)
-            echo "        Quantidade de dias no mês de "$LINHA_PASTA_MES" : "$QTD_PASTA_DIAS
+            QTD_PASTA_DIAS=$(cat .arquivos5.tmp | awk '{print $2}' | grep $ANOMES | uniq | sort | uniq | wc -l)
+            #%echo "        Quantidade de dias no mês de "$LINHA_PASTA_MES" : "$QTD_PASTA_DIAS
             for (( k=1; k<=$QTD_PASTA_DIAS; k+=1 )); do
-                LINHA_PASTA_DIAS=$(cat .arquivos5.tmp | awk '{print $2}' | sort | cut -b 1-7 | uniq -d | grep $ANOMES | cut -b 9-10 | head -$k | tail -1)
+                LINHA_PASTA_DIAS=$(cat .arquivos5.tmp | awk '{print $2}' | grep $ANOMES | cut -b 9-10 | sort | uniq | head -$k | tail -1)
                 if [[ $DEBUG=1 ]]; then
                     echo "                            mkdir "$LINHA_PASTA_ANOS"/"$LINHA_PASTA_MES"/"$LINHA_PASTA_DIAS
                 fi
-                echo "Criando pasta do ano "$LINHA_PASTA_ANOS" mês de "$LINHA_PASTA_MES" dia de " $LINHA_PASTA_DIAS
+                #%echo "Criando pasta do ano "$LINHA_PASTA_ANOS" mês de "$LINHA_PASTA_MES" dia de " $LINHA_PASTA_DIAS
                 DESTCRIAR=$(echo $LOCAL"/"$LINHA_PASTA_ANOS"/"$LINHA_PASTA_MES"/"$LINHA_PASTA_DIAS)
 
-                test -d $DESTCRIAR || mkdir $DESTCRIAR && echo "Pasta existe"
+                #test -d $DESTCRIAR || mkdir $DESTCRIAR && echo "Pasta existe"
+                mkdir $DESTCRIAR
+                echo $DESTCRIAR >> caminhos_novos.tmp
             done
         done
     done
     echo "Deseja mover os arquivos para essas pastas? [S/N]"
     read RESP
-    if [[ $RESP = "S" || $RESP = "s" ]]; then
+    if [[ $RESP="S" || $RESP="s" ]]; then
+        echo "Respondeu SIM"
         classificar_mover
     else
+        echo "Respondeu Não"
         exit
     fi
     exit
 }
 
 classificar_mover() {
+    echo "CRIANDO CAMINHOS NÃO ENCONTRADOS" >> caminhos_novos.tmp
     QTD_MOVER=$(cat .arquivos5.tmp | wc -l)
     for (( mi=1; mi<=$QTD_MOVER; mi+=1 )); do
-        echo "Foi"
+        MD5_MOVER=$(cat .arquivos5.tmp | awk '{print $1}' | head -$mi | tail -1)
+        LINHA_MOVER=$(cat .arquivos5.tmp | nl | grep $MD5_MOVER | awk '{print $1}')
         CAMINHO_MOVER=$LOCAL/$(cat .arquivos5.tmp | sed 's/-/\//g' | awk '{print $2}' | head -$mi | tail -1)
+        ARQ_MOVER=$(cat .arquivos.tmp | head -$mi | tail -1 | sed 's/ /\\/g')
         if [[ -d $CAMINHO_MOVER ]]; then
             echo "Existe o caminho"
+            echo "Arquivo para mover: $ARQ_MOVER"
+            echo "Caminho para colocar o arquivo: $CAMINHO_MOVER"
+            mv $ARQ_MOVER $CAMINHO_MOVER/
         else
         #PAREI AQUI PARA TESTAR
         ########BUG ENCONTRADO
@@ -139,10 +214,11 @@ classificar_mover() {
         #
         #
         #
-            echo "Crinado... "$CAMINHO_MOVER
+            echo "Criando... "$CAMINHO_MOVER
             mkdir $CAMINHO_MOVER
+            mv $ARQ_MOVER $CAMINHO_MOVER/
+            echo $CAMINHO_MOVER >> caminhos_novos.tmp
         fi
-    pause
     done
 }
 ######### FIM DAS FUNÇÕES PERSONALIZADAS
@@ -155,8 +231,9 @@ if [ $1 != "" ]; then
     case $1 in 
         -d)
         echo "Apagando arquivos temporários"
-        rm -rf .arquivos*.tmp
-        rm -rf datas.tmp
+        echo -r "Realmente deseja apagar os arquivos temporários? "
+        read RESP
+        [[ $RESP=[sS] ]] && rm -rf .arquivos*.tmp || echo "Não Apagado"
         exit
         ;;
         -h)
@@ -241,6 +318,8 @@ if [ -e .arquivos2.tmp ]; then
     echo "O Arquivo .arquivos2.tmp de busca existe"
     PROGRESSO2=1
 else
+    echo $QTD
+    pause
     for (( i=1; i<=$QTD; i+=1 ));
     do
         ARQ=$(cat .arquivos.tmp | head -$i | tail -1)
@@ -283,6 +362,8 @@ else
         PROGRESSO=$(echo "scale=2; ($i / $QTD) * 100" | bc)
         echo -ne "\\r[$TRALHA] $PROGRESSO%"
     done
+    echo $i
+    pause
 fi
 
 if [ -e .arquivos3.tmp ]; then
@@ -369,59 +450,3 @@ for (( i=1; i<=$QTD_DUP; i+=1 ));
 #cat .arquivos2.tmp | awk '{print$2}' | sed 's:.*/::'
 
 
-mes() {
-    long=true
-  case $1 in 
-        -01)
-           [[ $long=false ]] || echo "Janeiro" && echo "Jan"
-            exit
-        ;;
-        -02)
-            [[ $long=false ]] || echo "Fevereiro" && echo "Fev"
-            exit
-        ;;
-        -03)
-            [[ $long=false ]] || echo "Março" && echo "Mar"
-            exit
-        ;;
-        -04)
-            [[ $long=false ]] || echo "Abril" && echo "Abr"
-            exit
-        ;;
-        -05)
-            [[ $long=false ]] || echo "Maio" && echo "Mai"
-            exit
-        ;;
-        -06)
-            [[ $long=false ]] || echo "Junho" && echo "Jun"
-            exit
-        ;;
-        -07)
-            [[ $long=false ]] || echo "Julho" && echo "Jul"
-            exit
-        ;;
-        -08)
-            [[ $long=false ]] || echo "Agosto" && echo "Ago"
-            exit
-        ;;
-        -09)
-            [[ $long=false ]] || echo "Setembro" && echo "Set"
-            exit
-        ;;
-        -10)
-            [[ $long=false ]] || echo "Outubro" && echo "Out"
-            exit
-        ;;
-        -11)
-            [[ $long=false ]] || echo "Novembro" && echo "Nov"
-            exit
-        ;;
-        -12)
-            [[ $long=false ]] || echo "Dezembro"  && echo "Dez"
-            exit
-        ;;
-esac
-
-
-
-}
