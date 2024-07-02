@@ -1,4 +1,4 @@
-# duplicados
+# Duplicados
 Shell script double files detector and remover
 
 Um código cagado que eu fiz que pode ser útil para alguém, logo, copie, faça melhor e me avise.
@@ -14,12 +14,9 @@ Para entender essa carroça você vai precisar saber como funciona:
   SORT
   ECHO
   MV
+ CHMOD
 
 Vou disponibilizar o arquivo funcional (Não no sentido completo da palavra) como versão e a atual como em desenvolvimento.
-
-Qualquer dúvida entre em contato pelo e-mail: higluxmorales@gmail.com
-
-Eu demoro para ver a caixa de mensagem, então espere sentado por qualquer resposta.
 
 Atualizado em 02Julho2024
 
@@ -35,3 +32,7 @@ Depois execute $ ./main -c
 Pronto, depois de muitas linhas na tela seus arquivos estarão organizados por data.
 
 Problemas ainda sem solução: Arquivos e pastas com espaço no nome, caso tenha arquivos assim execute o script, renomeie os arquivos e pastas e execute novamente.
+
+Qualquer dúvida entre em contato pelo e-mail: higluxmorales@gmail.com
+
+Eu demoro para ver a caixa de mensagem, então espere sentado por qualquer resposta.
