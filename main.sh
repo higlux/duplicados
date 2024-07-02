@@ -216,7 +216,11 @@ classificar_mover() {
         #
             echo "Criando... "$CAMINHO_MOVER
             mkdir $CAMINHO_MOVER
-            mv $ARQ_MOVER $CAMINHO_MOVER/
+            
+#Aqui move os arquivos. Não testei 100% ainda logo vou deixar a opção copiar como padrão.
+
+            #mv $ARQ_MOVER $CAMINHO_MOVER/
+            cp $ARQ_MOVER $CAMINHO_MOVER/
             echo $CAMINHO_MOVER >> caminhos_novos.tmp
         fi
     done
@@ -327,9 +331,13 @@ else
         #Apresentando problema nesss comando acima, pois os arquivos da linha 6089 e 7156 por conta do fato deles serem arquivos de texto e com isso estão lendo o conteúdo dele. posso tentar resolver se eu tirar a variável e colocar o comando dentro da outra variável, com isso pode resolver.
 
         #Isso faz com que o maior espaço dê valores astronômicos que passa a dar erro quando precisar mover algum arquivo mais abaixo.
-        #19JUN2024 - Fiz a alteração do comando "cat" para "echo" - Reolveu
 
         #Enquanto não dá certo, podemos ignorar esse erro? Para testes sim
+
+
+        #19JUN2024 - Fiz a alteração do comando "cat" para "echo" - Resolveu
+
+        
         
             if [ $DEBUG -eq 1 ]; then
                 echo "Variável ARQ: $ARQ"
