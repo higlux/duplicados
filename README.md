@@ -33,6 +33,13 @@ Pronto, depois de muitas linhas na tela seus arquivos estarão organizados por d
 
 Problemas ainda sem solução: Arquivos e pastas com espaço no nome, caso tenha arquivos assim execute o script, renomeie os arquivos e pastas e execute novamente.
 
+Atualizado em 07JUL2024
+Melhorias no código para funcionar melhor, ainda persiste o problema do espaço, trabalhando para resolver isso.
+
+Funciona, mas você precisa executar da mesma maneira acima, depois que você encontrar os arquivos com espaço, renomeios e rode novamente o script.
+
+Problemas ainda sem solução: Arquivos e pastas com espaço no nome, caso tenha arquivos assim execute o script, renomeie os arquivos e pastas e execute novamente.
+
 Qualquer dúvida entre em contato pelo e-mail: higluxmorales@gmail.com
 
 Eu demoro para ver a caixa de mensagem, então espere sentado por qualquer resposta.
