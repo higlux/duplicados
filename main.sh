@@ -1,4 +1,6 @@
 #!/bin/bash
+#Criado por: Higlux Morales
+#Aprendendo Shellscript com ajuda da internet, código sem seguir as boas práticas.
 
 ##Opções
 # l - Local de verificação dos arquivos
@@ -10,13 +12,10 @@
 # v - Versão do aplicativo
 # c - Criar as pastas a partir de datas
 
-
-
 ###Preciso decidir como tratar os arquivos duplicados, pois tem dois modos
 # 1 - Mesmo nome, mas com MD5 diferente
 # 2 - Nome diferente, mas com MD5 igual
 # 3 - Mesmo nome e com MD5 igual.
-
 
 ##Arquivos temporários
 # .arquivos.tmp  - Resultado do find
@@ -27,7 +26,8 @@
 
 
 #Declaração de variáveis
-LOCAL="/home/higlux/Imagens/Fotografias"
+#LOCAL="/home/higlux/Imagens/Fotografias"
+LOCAL="/home/higlux/Imagens/INTOCADO"
 #Nome da pasta duplicado
 NOME_PASTA_DUPLICADOS=duplicados
 PASTA_DUPLICADOS="$LOCAL/$NOME_PASTA_DUPLICADOS"
@@ -36,15 +36,15 @@ PASTA_DUPLICADOS="$LOCAL/$NOME_PASTA_DUPLICADOS"
 if [ $LOCAL = "" ]; then 
     LOCAL=$PWD
 fi
-if [ $DEBUG -eq 1 ]; then
+if [[ $DEBUG -eq 1 ]]; then
     echo "**** Teste de variáveis"
-    echo $LOCAL
-    echo $SUM
+    echo -e "\e[1;36m$LOCAL\e[0m"
+    echo -e "\e[1;36m$SUM\e[0m\n"
     echo "**** Fim teste de variáveis"
 fi
 
 if [ -e .arquivos.tmp ]; then
-    echo "O aquivo .arquivos.tmp existe"
+    echo -e "\e[1;36mO aquivo \e[1;33m.arquivos.tmp \e[1;36mexiste\e[0m"
 else
     find $LOCAL -type f > .arquivo.tmp
     #Remove o nome da pasta - NOME_PASTA_DUPLICADOS = duplicados está definido como padrão
@@ -193,7 +193,7 @@ cria_pastas() {
 }
 
 classificar_mover() {
-    echo "CRIANDO CAMINHOS NÃO ENCONTRADOS" >> caminhos_novos.tmp
+    echo -e "\e[1;31mCRIANDO CAMINHOS NÃO ENCONTRADOS\e[0m" >> caminhos_novos.tmp
     QTD_MOVER=$(cat .arquivos5.tmp | wc -l)
     for (( mi=1; mi<=$QTD_MOVER; mi+=1 )); do
         MD5_MOVER=$(cat .arquivos5.tmp | awk '{print $1}' | head -$mi | tail -1)
@@ -201,10 +201,11 @@ classificar_mover() {
         CAMINHO_MOVER=$LOCAL/$(cat .arquivos5.tmp | sed 's/-/\//g' | awk '{print $2}' | head -$mi | tail -1)
         ARQ_MOVER=$(cat .arquivos.tmp | head -$mi | tail -1 | sed 's/ /\\/g')
         if [[ -d $CAMINHO_MOVER ]]; then
-            echo "Existe o caminho"
+            echo -e "\e[1;31mExiste o caminho\e[0m"
             echo "Arquivo para mover: $ARQ_MOVER"
             echo "Caminho para colocar o arquivo: $CAMINHO_MOVER"
-            mv $ARQ_MOVER $CAMINHO_MOVER/
+            #mv $ARQ_MOVER $CAMINHO_MOVER/ #TESTE
+            cp $ARQ_MOVER $CAMINHO_MOVER/
         else
         #PAREI AQUI PARA TESTAR
         ########BUG ENCONTRADO
@@ -216,10 +217,7 @@ classificar_mover() {
         #
             echo "Criando... "$CAMINHO_MOVER
             mkdir $CAMINHO_MOVER
-            
-#Aqui move os arquivos. Não testei 100% ainda logo vou deixar a opção copiar como padrão.
-
-            #mv $ARQ_MOVER $CAMINHO_MOVER/
+            #mv $ARQ_MOVER $CAMINHO_MOVER/ #TESTE
             cp $ARQ_MOVER $CAMINHO_MOVER/
             echo $CAMINHO_MOVER >> caminhos_novos.tmp
         fi
@@ -228,16 +226,17 @@ classificar_mover() {
 ######### FIM DAS FUNÇÕES PERSONALIZADAS
 
 #Entrada de parâmetros do script - teste
-echo "Entrada de parâmetros - Por enquanto somente um parâmetro por vez"
+echo -e "\e[1;36mEntrada de parâmetros - Por enquanto somente um parâmetro por vez\e[0m"
 echo "Parâmetros passados:  1:$1"
 DEBUG=0
-if [ $1 != "" ]; then
+if [[ $1 != "" ]]; then
     case $1 in 
         -d)
         echo "Apagando arquivos temporários"
         echo -r "Realmente deseja apagar os arquivos temporários? "
         read RESP
-        [[ $RESP=[sS] ]] && rm -rf .arquivos*.tmp || echo "Não Apagado"
+        #[[ $RESP=[sS] ]] && rm -rf .arquivos*.tmp || echo "Não Apagado"
+        echo "Impedido de fazer para intuito de teste"
         exit
         ;;
         -h)
@@ -297,7 +296,7 @@ fi
 
 #Determina caso o LOCAL estiver vazio, a pasta atual como padrão
     if [ $LOCAL = "" ]; then 
-        LOCAL=$PWD
+        LOCAL=$PWDecho -e "\e[1;36mTESTE\e[0m
     fi
     if [ $DEBUG -eq 1 ]; then
         echo "**** Teste de variáveis"
@@ -309,7 +308,7 @@ fi
 ###Início do Script
 ###.# Criação do arquivo .arquivos.tmp - Saída bruta do find 
     if [ -e .arquivos.tmp ]; then
-        echo "O aquivo .arquivos.tmp existe"
+        echo "O aquivo .arquivos.tmp existe"echo -e "\e[1;36mTESTE\e[0m
     else
         find $LOCAL -type f > .arquivo.tmp
         #Remove o nome da pasta - NOME_PASTA_DUPLICADOS = duplicados está definido como padrão
@@ -319,25 +318,21 @@ fi
 ###.# Criação do arquivo .arquivos2.tmp - Saída do MD5
 
 if [ -e .arquivos2.tmp ]; then
-    echo "O Arquivo .arquivos2.tmp de busca existe"
+    echo -e "\e[1;36mO Arquivo \e[1;35m.arquivos2.tmp \e[1;36mde busca existe\e[0m"
     PROGRESSO2=1
 else
     echo $QTD
     pause
     for (( i=1; i<=$QTD; i+=1 ));
     do
-        ARQ=$(cat .arquivos.tmp | head -$i | tail -1)
+        ARQ=$(cat .arquivos.tmp | head -$i | tail -1)echo -e "\e[1;36mTESTE\e[0m"
         ######################################## BUG ENCONTRADO ########################################
         #Apresentando problema nesss comando acima, pois os arquivos da linha 6089 e 7156 por conta do fato deles serem arquivos de texto e com isso estão lendo o conteúdo dele. posso tentar resolver se eu tirar a variável e colocar o comando dentro da outra variável, com isso pode resolver.
 
         #Isso faz com que o maior espaço dê valores astronômicos que passa a dar erro quando precisar mover algum arquivo mais abaixo.
+        #19JUN2024 - Fiz a alteração do comando "cat" para "echo" - Reolveu
 
         #Enquanto não dá certo, podemos ignorar esse erro? Para testes sim
-
-
-        #19JUN2024 - Fiz a alteração do comando "cat" para "echo" - Resolveu
-
-        
         
             if [ $DEBUG -eq 1 ]; then
                 echo "Variável ARQ: $ARQ"
@@ -458,3 +453,6 @@ for (( i=1; i<=$QTD_DUP; i+=1 ));
 #cat .arquivos2.tmp | awk '{print$2}' | sed 's:.*/::'
 
 
+#%echo -e "\e[1;36mTESTE\e[0m" -> Ciano # Informações
+#%echo -e "\e[1;31mTESTE\e[0m" -> Vermelho # Erros
+#%echo -e "\e[1;33mTESTE\e[0m" -> Laranja
