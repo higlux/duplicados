@@ -437,12 +437,12 @@ CLASSIFICAR_MOVER() {
     local arq4=$(echo $1"/.arquivos4.tmp")
     local arq5=$(echo $1"/.arquivos5.tmp")
     local lugar=$1
-    local destino=$2S
+    local destino=$2
     local destino_duplicado=$3
 
     #cp $arq5 $1"/.arqmod.tmp"
     local arqmod=$(echo $1"/.arqmod.tmp")
-    local dest=$2
+    local dest="$2"
     #LOCAL PARA onde vão os duplicados
     local local_dup="$3"
     local cod=$4
@@ -495,12 +495,12 @@ CLASSIFICAR_MOVER() {
     local qtd_mover=$(cat $arq5 | wc -l)
     for (( i=1; i<=$qtd_mover; i+=1 )); do
 
-        local md5_mover=$(cat $arq5 | awk '{print $1}' | head -$i | tail -1)
-        local linha_mover=$(cat $arq5 | nl | grep $md5_mover | awk '{print $1}')
-        local caminho_mover=$(cat $arq5 | sed 's/-/\//g' | awk '{print $2}' | head -$i | tail -1)
+        local md5_mover=$(cat "$arq5" | awk '{print $1}' | head -$i | tail -1)
+        local linha_mover=$(cat "$arq5" | nl | grep "$md5_mover" | awk '{print $1}') #aqui aparecem mais de uma linha
+        local caminho_mover=$(cat "$arq5" | awk '{print $2}' | sed 's/-/\//g' |head -"$i" | tail -1)
         local caminho_mover="$dest/$caminho_mover"
-        local arq_mover=$(cat "$arq1" | head -$i | tail -1 | sed 's/ /\\/g')
-        local linha_qtd=$(cat $arq5 | nl | grep $md5_mover | awk '{print $1}' | wc -l)
+        local arq_mover=$(cat "$arq1" | head -"$i" | tail -1)
+        local linha_qtd=$(cat "$arq5" | nl | grep $md5_mover | awk '{print $1}' | wc -l)
             
         if [[ $debug -eq 1 ]]; then
             echo -e "$DBG""DEBUG: ENTROU EM CLASSIFICAR_MOVER$RESET
@@ -510,7 +510,7 @@ CLASSIFICAR_MOVER() {
             Destino a mover os arquvios: $caminho_mover
             Destino a mover os arquivos duplicados: $local_dup
             Arquivo a se mover: $arq_mover
-            $DBGFIM DEBUG$RESET"
+            $DBG FIM DEBUG$RESET"
         fi
         ####### ATENÇÃO
         # Essa parte do script é para prevenir caso o outro script de criação de pasta não funcione como esperado, como pode acontecer por isso ser um script beta.
@@ -522,71 +522,75 @@ CLASSIFICAR_MOVER() {
         #
 
         #######
-        if [[ $linha_qtd -gt 1 ]]; then
-            echo -e $linha_mover | sed 's/ /\n/g' >> ./duplicados.txt
+        if [[ -e $arq_mover ]]; then 
+            if [[ $linha_qtd -gt 1 ]]; then
+                echo -e $linha_mover | sed 's/ /\n/g' >> ./duplicados.txt
 
-            #arq_original=$($md5_mover)
-                for (( j=1; j<="$linha_qtd"; j+=1 )); do
-                    linha_repetido=$(cat "$arq2" | nl | grep "$md5_mover" | head -"$j" | tail -1 | awk '{print $1}')
-                    if [[ "$j" -eq 1 ]]; then
-                        arq_repetido1=$(cat $arq1 | head -"$linha_repetido" | tail -1)
-                        arq_repetido1_nome=$(echo "$arq_repetido1" | sed 's:.*/::')
-                        if [[ -e "$arq_repetido1" ]]; then
-                            if [[ -e "$caminho_mover" ]]; then
-                                echo "Movendo para $caminho_mover"
-                                #
-                                mv "$arq_repetido1" "$caminho_mover"
+                #arq_original=$($md5_mover)
+                    for (( j=1; j<="$linha_qtd"; j+=1 )); do
+                        linha_repetido=$(cat "$arq2" | nl | grep "$md5_mover" | head -"$j" | tail -1 | awk '{print $1}')
+                        if [[ "$j" -eq 1 ]]; then
+                            arq_repetido1=$(cat "$arq1" | head -"$linha_repetido" | tail -1)
+                            arq_repetido1_nome=$(echo "$arq_repetido1" | sed 's:.*/::')
+                            if [[ -e "$arq_repetido1" ]]; then
+                                if [[ -e "$caminho_mover" ]]; then
+                                    echo "Movendo para $caminho_mover"
+                                    #
+                                    mv "$arq_repetido1" "$caminho_mover"
+                                else
+                                    RECRIAR_PASTA "$caminho_mover"
+                                    echo "Movendo para $caminho_mover"
+                                    #
+                                    mv "$arq_repetido1" "$caminho_mover"
+                                fi
                             else
-                                RECRIAR_PASTA "$caminho_mover"
-                                echo "Movendo para $caminho_mover"
-                                #
-                                mv "$arq_repetido1" "$caminho_mover"
+                                echo "ERRO: O arquivo não exite"
+                                #AQUI FAZ MAIS ALGUMA COISA? POR ENQUANTO NÃO.
                             fi
+                            echo "Arquivo Original: $arq_repetido1"
+                            echo "Movendo: $arq_repetido1"
                         else
-                            echo "ERRO: O arquivo não exite"
-                            #AQUI FAZ MAIS ALGUMA COISA? POR ENQUANTO NÃO.
-                        fi
-                        echo "Arquivo Original: $arq_repetido1"
-                        echo "Movendo: $arq_repetido1"
-                    else
-                        arq_repetidon=$(cat $arq1 | head -$linha_repetido | tail -1)
-                        arq_repetidon_nome=$(basename "$arq_repetidon")
-                        arq_repetido1_nome=$(basename "$arq_repetido1")
-                        echo "\"$arq_repetido1_nome\" é igual a \"$arq_repetidon_nome\""
-                        if [[ $arq_repetido1_nome = $arq_repetidon_nome ]]; then
-                        #Só funciona com .jpg kKKKkkkkkKKkKKKKK
-                            echo "Furunfou - Movendo arquivo duplicado com nome igual"
-                            extarq=${arq_repetidon_nome##*.}
-                            dest_dup=$local_dup"/${arq_repetidon_nome%.$extarq}($j).$extarq"
-                            echo "cp  $arq_repetidon $dest_dup"
-                            mv  "$arq_repetidon" "$dest_dup/"
+                            arq_repetidon=$(cat $arq1 | head -$linha_repetido | tail -1)
+                            arq_repetidon_nome=$(basename "$arq_repetidon")
+                            arq_repetido1_nome=$(basename "$arq_repetido1")
+                            echo "\"$arq_repetido1_nome\" é igual a \"$arq_repetidon_nome\""
+                            if [[ $arq_repetido1_nome = $arq_repetidon_nome ]]; then
+                            #Só funciona com .jpg kKKKkkkkkKKkKKKKK
+                                echo "Furunfou - Movendo arquivo duplicado com nome igual"
+                                extarq=${arq_repetidon_nome##*.}
+                                dest_dup=$local_dup"/${arq_repetidon_nome%.$extarq}($j).$extarq"
+                                echo "cp  $arq_repetidon $dest_dup"
+                                mv  "$arq_repetidon" "$dest_dup/"
+                                #PAUSE
+                            fi
+                            local resto=$(expr $j % 2)
+                            local cor=""
+                            [[ $resto -eq 0 ]] && cor=$INFO || cor=$DBG
+                            echo -e "$cor Arquivo cópia - $j: $arq_repetidon $RESET
+                            $cor Movendo: \"$arq_repetidon\" $local_dup $RESET"
+                            mv "$arq_repetidon" "$local_dup/"
                             #PAUSE
                         fi
-                        local resto=$(expr $j % 2)
-                        local cor=""
-                        [[ $resto -eq 0 ]] && cor=$INFO || cor=$DBG
-                        echo -e "$cor Arquivo cópia - $j: $arq_repetidon $RESET
-                        $cor Movendo: \"$arq_repetidon\" $local_dup $RESET"
-                        mv "$arq_repetidon" "$local_dup/"
-                        #PAUSE
-                    fi
-                done
-            #PAUSE
-        else
-            if [[ -d "$caminho_mover" ]]; then
-                #mv /home/higlux/Imagens/INTOCADO/marinha/IMG-20240410-WA0057.jpg /destino/duplicado/IMG_20240501_095852(2).jpg/2024/04/10/
-                #echo "
-                mv "$arq_mover" "$caminho_mover/"
-                #"
+                    done
+                #PAUSE
             else
-            #mv /home/higlux/Imagens/INTOCADO/marinha/IMG-20240410-WA0057.jpg /destino/duplicado/IMG_20240501_095852(2).jpg/2024/04/10/
-                RECRIAR_PASTA $caminho_mover
-                #echo "
-                mv "$arq_mover" "$caminho_mover/"
-                #"
+                if [[ -d "$caminho_mover" ]]; then
+                    #mv /home/higlux/Imagens/INTOCADO/marinha/IMG-20240410-WA0057.jpg /destino/duplicado/IMG_20240501_095852(2).jpg/2024/04/10/
+                    #echo "
+                    mv "$arq_mover" "$caminho_mover/"
+                    #"
+                else
+                #mv /home/higlux/Imagens/INTOCADO/marinha/IMG-20240410-WA0057.jpg /destino/duplicado/IMG_20240501_095852(2).jpg/2024/04/10/
+                    RECRIAR_PASTA $caminho_mover
+                    #echo "
+                    mv "$arq_mover" "$caminho_mover/"
+                    #"
+                fi
             fi
+        else
+            echo "Arquivo não existe"
+            PAUSE
         fi
-
 
         ####  ESE CÓDIGO É PARA FAZER UM LOOP DIFERENTE.
         #resto=$(cat $arqmod | wc -l)
@@ -597,10 +601,6 @@ CLASSIFICAR_MOVER() {
         #    echo "entrou aqui: $arqmod"
         #    sed -i '1d' $arqmod
         #fi
-
-        if [[ $i -eq 1 ]]; then 
-            i=2
-        fi
     done
 }
 
@@ -848,8 +848,8 @@ echo -e "$INFO ENTRADA DE PARÂMETROS$RESET"
 if [ -z $1 ]; then
     echo $prg' '$vers':'
     echo -e \
-    "   $DBGdebug$RESET ativado automáticamente
-        As menságens em $(echo -e "$DBGlaranja$RESET") são saídas do script.
+    "   $DBG Debug$RESET ativado automáticamente
+        As menságens em $(echo -e "$DBG laranja$RESET") são saídas do script.
         Use o parâmetro $(echo -e "$INFO -h ou --help$RESET") para exibir as opções
     "
     exit
@@ -976,7 +976,7 @@ fi
 #   VERIFICAÇÃO DE VARIÁVEIS
 ################
 
-[[ -d $local ]] && echo " VAR \$local: $local" || echo -e "$ERROSERRO: $local - No Existe. Especifique um diretório válido$RESET"
+[[ -d $local ]] && echo " VAR \$local: $local" || echo -e "$ERROS ERRO: $local - No Existe. Especifique um diretório válido$RESET"
 #Verificador ele é opcional - Padrão MD5
 #Verificação da existência do md5
 [[ -e $cmd_sum ]] || cmd_sum=/usr/bin/md5sum
@@ -1013,22 +1013,22 @@ CRIA_LISTA_DUP $local
 #
 
 
-echo "Deseja mover os arquivos para essas pastas? [S/N]"
-read resp
-resp=${resp^^}
+#echo "Deseja mover os arquivos para essas pastas? [S/N]"
+#read resp
+#resp=${resp^^}
 
-if [[ "$resp" = "S" ]]; then
-    echo "respondeu Sim"
+#if [[ "$resp" = "S" ]]; then
+    #echo "respondeu Sim"
     ########## FUNLÇÃO CLASSIFICAR_MOVER
     ###### VARIÁVEIS UTILIZADAS
     # $local -> LUGAR DE BUSCA DOS ARQUIVOS
     ### 
     #CRIA_PASTAS_GERAL Local Destino (Cópia o Mover)
-    MOV_ARQ_DUP $local $local_destino_duplicado
-else
-    echo "respondeu Não"
-    exit
-fi
+    #MOV_ARQ_DUP $local $local_destino_duplicado
+#else
+ #   echo "respondeu Não"
+    #exit
+#fi
 
 ########## FUNLÇÃO CRIAR PASTAS
 ###### VARIÁVEIS UTILIZADAS
@@ -1051,7 +1051,7 @@ if [[ "$resp" = "S" ]]; then
     # $local -> LUGAR DE BUSCA DOS ARQUIVOS
     ### 
     #CRIA_PASTAS_GERAL Local Destino (Cópia o Mover)
-    CLASSIFICAR_MOVER  $local $local_destino  $execucao
+    CLASSIFICAR_MOVER  $local $local_destino $local_destino_duplicado $execucao
 else
     echo "respondeu Não"
     exit
