@@ -14,31 +14,33 @@ Para entender essa carroça você vai precisar saber como funciona:
   SORT
   ECHO
   MV
- CHMOD
+  CHMOD
 
-Vou disponibilizar o arquivo funcional (Não no sentido completo da palavra) como versão e a atual como em desenvolvimento.
+-> Vou disponibilizar o arquivo funcional (Não no sentido completo da palavra) como versão e a atual como em desenvolvimento.
 
-Atualizado em 02Julho2024
-
-Código funcionando criando as pastas, aceitando alguns parâmetros. para usar
-
-Edite o arquivo e localize a variável de caminho da pasta altere, salve.
-
-transforme-o em arquivo executável $ chmod +x ./main.sh
-
-Depois você execute o cmonado ./main.sh
-Depois execute $ ./main -c
-
+Como usar:
+  - Transforme-o em arquivo executável $ chmod +x ./main.sh
+  - Depois você execute o cmonado ./main.sh
+  - Use a opção -h para ajuda
+  - Exemplo de uso: ./main.sh -l /home/SEUUSUARIO/IMAGENS -d PASTA_DESTINO -m PASTA_DUPLICADOS
 Pronto, depois de muitas linhas na tela seus arquivos estarão organizados por data.
 
-Problemas ainda sem solução: Arquivos e pastas com espaço no nome, caso tenha arquivos assim execute o script, renomeie os arquivos e pastas e execute novamente.
+Atualizado em 02Julho2024
+-Código funcionando criando as pastas, aceitando alguns parâmetros. para usar
+-Edite o arquivo e localize a variável de caminho da pasta altere, salve.
+- Problemas ainda sem solução:
+  +Arquivos e pastas com espaço no nome, caso tenha arquivos assim execute o script, renomeie os arquivos e pastas e execute novamente.
 
 Atualizado em 07JUL2024
-Melhorias no código para funcionar melhor, ainda persiste o problema do espaço, trabalhando para resolver isso.
+- Melhorias no código para funcionar melhor, ainda persiste o problema do espaço, trabalhando para resolver isso.
+- Funciona, mas você precisa executar da mesma maneira acima, depois que você encontrar os arquivos com espaço, renomeios e rode novamente o script.
+- Problemas ainda sem solução:
+    +Arquivos e pastas com espaço no nome, caso tenha arquivos assim execute o script, renomeie os arquivos e pastas e execute novamente. (RESOLVIDO PARCIALMENTE)
 
-Funciona, mas você precisa executar da mesma maneira acima, depois que você encontrar os arquivos com espaço, renomeios e rode novamente o script.
+Atualizado em 04SET2024
+- Melhoria na estrutura e nas práticas de programação.
+- Funciona de modo fidedigno, ele está por padrão mover os arquivos para fazer o programa copiar organizado tem que ser alterado.
 
-Problemas ainda sem solução: Arquivos e pastas com espaço no nome, caso tenha arquivos assim execute o script, renomeie os arquivos e pastas e execute novamente.
 
 Qualquer dúvida entre em contato pelo e-mail: higluxmorales@gmail.com
 
