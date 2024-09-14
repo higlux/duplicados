@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 ######################################################################
+#   fpiokfdaspófisnhjifvshnǘsnǘ0oasni0vasdnjvíoasnvóisnmvóasnvónvsśovnśdnvśvós
 # AUTOR:        Higlux Morales
 # EMAIL:        higluxmorales@gmail.com
 # PROGRAMA:     duplicados.sh
