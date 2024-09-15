@@ -1,0 +1,2856 @@
+[1;36m [INFORMAÇÃO] - [0m(PARÂMETROS) - ENTRADA DE PARÂMETROS
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 0: -l
+[1;33m[DEBUG][0m - (PARÂMETROS): Valor de $local - /home/higlux/Imagens/Teste/Fotografias
+[1;36m [INFORMAÇÃO] - [0m/home/higlux/Imagens/Teste/Fotografias - Encontrado
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 1: /home/higlux/Imagens/Teste/Fotografias
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 2: -d
+-d
+-
+[1;33m Debug: Entrou em CRIAR_DESTINO [0m
+        Entrada: Feito
+        Destino: /home/higlux/Imagens/Teste/Fotografias/Feito
+                    
+[1;36m Usando diretório válido:[0m /home/higlux/Imagens/Teste/Fotografias/Feito
+Usando destino: /home/higlux/Imagens/Teste/Fotografias/Feito
+-d
+/home/higlux/Imagens/Teste/Fotografias/Feito
+
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 3: Feito
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 4: 
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 5: 
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 6: 
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 7: 
+[1;33m[DEBUG][0m - (PARÂMETROS):Valor de entrada 8: 
+[1;36m [INFORMAÇÃO] - [0m(PARÂMETROS) - FIM ENTRADA DE PARÂMETROS
+[1;36m [INFORMAÇÃO] - [0m(VARIAVEIS) - INÍCIO VERIFICAÇÃO DE VARIÁVEIS
+[1;33m[DEBUG][0m - (VARIAVEIS) - Variáveis setadas: 
+        Origem - $local: /home/higlux/Imagens/Teste/Fotografias
+        Verificador - $cmd_sum: /usr/bin/md5sum
+        Destino dos arquivos - $local_destino: /home/higlux/Imagens/Teste/Fotografias/Feito
+        Destino dos duplicados - $local_destino_duplicado: Vazio
+[1;36m [INFORMAÇÃO] - [0m(VARIAVEIS) - FIM VERIFICAÇÃO DE VARIÁVEIS
+[1;36m [INFORMAÇÃO] - [0m(MAIN) - EXECUÇÃO DO SCRIPT
+[1;33mDebug: Entrou na função CRIAR_LISTAS com os dados:[0m
+        $arq1: /home/higlux/Imagens/Teste/Fotografias/.arquivos.tmp - [[1;31m NÃO EXISTE [0m] - Lista Bruta
+        $arq2: /home/higlux/Imagens/Teste/Fotografias/.arquivos2.tmp - [[1;31m NÃO EXISTE [0m] - Lista MD5
+        $arq3: /home/higlux/Imagens/Teste/Fotografias/.arquivos3.tmp - [[1;31m NÃO EXISTE [0m] - Lista MD5 pura
+        $arq4: /home/higlux/Imagens/Teste/Fotografias/.arquivos4.tmp - [[1;31m NÃO EXISTE [0m] - Lista MD5 duplicados
+        $arq5: /home/higlux/Imagens/Teste/Fotografias/.arquivos5.tmp - [[1;31m NÃO EXISTE [0m] - Lista MD5 com data
+        $cmd_sum: /usr/bin/md5sum - Formatos a serem buscados
+
+[1;36m [INFORMAÇÃO] - [0mCriação do .arquivos.tmp
+A remover Vazio
+[1;36m [INFORMAÇÃO] - [0mQTD Antes: 247
+[1;36m [INFORMAÇÃO] - [0mQTD Depois: 247
+[1;36m [INFORMAÇÃO] - [0mFIM da ciração do .arquivos.tmp
+[1;36m [INFORMAÇÃO] - [0mINÍCIO CRIAÇÃO DA LISTA MD5
+[1;33m[DEBUG][0m - Variáveis usadas:
+    Local arquivo: /home/higlux/Imagens/Teste/Fotografias
+    Comando usado: /usr/bin/md5sum
+    Quantidade total de arqvivos: 247
+    Caminho do .arquvios2: /home/higlux/Imagens/Teste/Fotografias/.arquivos2.tmp
+    Caminho do .arquvios5: /home/higlux/Imagens/Teste/Fotografias/.arquivos5.tmp
+[1;33m[DEBUG][0m - FIM DEBUG
+[1;36m [INFORMAÇÃO] - [0mCriação dos arquivos 2 e 5
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/.arquivos.tmp 
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/5b960f4c-6341-42f9-89b3-70704f428cf8_749.JPG 
+Processando: [1.00%]  /home/higlux/Imagens/Teste/Fotografias/02513dea-d593-49e5-8245-a166968ad01a_087.JPG 
+Processando: [1.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3230.PNG 
+Processando: [2.00%]  /home/higlux/Imagens/Teste/Fotografias/b5a8114a-0c41-474c-8c0a-56862d686545_212.JPG 
+Processando: [2.00%]  /home/higlux/Imagens/Teste/Fotografias/44a7a95d-1061-40a0-bab8-6ee1cdf831c9.JPG 
+Processando: [2.00%]  /home/higlux/Imagens/Teste/Fotografias/62738866-5082-46da-8cf4-19d1477bb32f_413.JPG 
+Processando: [3.00%]  /home/higlux/Imagens/Teste/Fotografias/4780c598-5631-4338-8db2-c74d908441e5_667.JPG 
+Processando: [3.00%]  /home/higlux/Imagens/Teste/Fotografias/b813d1c2-b6f0-41be-9fe7-39c9e1dd7251_115.JPG 
+Processando: [4.00%]  /home/higlux/Imagens/Teste/Fotografias/04475d22-487a-4230-ae93-c136f9ec1f1a_070.JPG 
+Processando: [4.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4726_799.PNG 
+Processando: [4.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4216_947.PNG 
+Processando: [5.00%]  /home/higlux/Imagens/Teste/Fotografias/48325b2c-1976-4bbf-8021-b618b271d3bd_310.JPG 
+Processando: [5.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_20180224_115039.jpg 
+Processando: [6.00%]  /home/higlux/Imagens/Teste/Fotografias/c62f0fe8-65d8-451b-bdc1-d3f8b5de64d9_959.JPG 
+Processando: [6.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_2714.PNG 
+Processando: [6.00%]  /home/higlux/Imagens/Teste/Fotografias/81117d68-c07a-49b9-b06d-6e15c9fcfaeb_133.JPG 
+Processando: [7.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4391_356.PNG 
+Processando: [7.00%]  /home/higlux/Imagens/Teste/Fotografias/750CE72C-7844-491E-A040-0B5C79F0BE05_126.JPG 
+Processando: [8.00%]  /home/higlux/Imagens/Teste/Fotografias/C9CCB377-1D39-4915-8E2A-EC3C709E388B.JPG 
+Processando: [8.00%]  /home/higlux/Imagens/Teste/Fotografias/4ff1f46d-d758-454b-9369-369178a95fe5_030.JPG 
+Processando: [8.00%]  /home/higlux/Imagens/Teste/Fotografias/2d0578b6-b396-4ba0-b326-a5b260b1c4a3_940.JPG 
+Processando: [9.00%]  /home/higlux/Imagens/Teste/Fotografias/50ba5217-7821-46ed-8702-ec5a4396ba97_122.JPG 
+Processando: [9.00%]  /home/higlux/Imagens/Teste/Fotografias/38c78400-b029-4d13-9e61-33cdee1a743f_286.JPG 
+Processando: [10.00%]  /home/higlux/Imagens/Teste/Fotografias/ef9721f5-5026-4aee-ada5-6661c341475a_523.JPG 
+Processando: [10.00%]  /home/higlux/Imagens/Teste/Fotografias/7b713eac-5fab-4547-b7c1-cc7e2c5a8601_057.JPG 
+Processando: [10.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3466_900.JPG 
+Processando: [11.00%]  /home/higlux/Imagens/Teste/Fotografias/c86b4b3a-73cd-4559-ab16-134878db0357.JPG 
+Processando: [11.00%]  /home/higlux/Imagens/Teste/Fotografias/6ce47a09-20a6-4ebf-9ba3-0e480ce58b73_429.JPG 
+Processando: [12.00%]  /home/higlux/Imagens/Teste/Fotografias/A8971F73-19FD-43E8-861C-B6F47BC3070A_552.JPG 
+Processando: [12.00%]  /home/higlux/Imagens/Teste/Fotografias/f41da705-7736-4009-8ee9-573fc91e4ce5_348.JPG 
+Processando: [12.00%]  /home/higlux/Imagens/Teste/Fotografias/276922af-f325-4467-8ad2-f0e861738c8c_183.JPG 
+Processando: [13.00%]  /home/higlux/Imagens/Teste/Fotografias/40f8604f-1467-4dd7-ac33-dfc82bb13954_403.JPG 
+Processando: [13.00%]  /home/higlux/Imagens/Teste/Fotografias/1463c9e0-953d-4cc7-b536-1e2a52e2bcfd_427.JPG 
+Processando: [14.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3007.PNG 
+Processando: [14.00%]  /home/higlux/Imagens/Teste/Fotografias/ef776d9e-8f0b-4c46-bf22-7fc97223bfa1_435.MP4 
+Processando: [14.00%]  /home/higlux/Imagens/Teste/Fotografias/ca1f5004-61ac-4aad-a6c4-c82ad5f8bb1e_691.JPG 
+Processando: [15.00%]  /home/higlux/Imagens/Teste/Fotografias/23DA7C6C-1CCB-45D2-9FBE-48560E9CB362_239.JPG 
+Processando: [15.00%]  /home/higlux/Imagens/Teste/Fotografias/D78154C6-F127-4DA0-8867-603F3ECD34BD_531.JPG 
+Processando: [16.00%]  /home/higlux/Imagens/Teste/Fotografias/5c332832-8611-49a8-8ae7-e90e32e3949d_639.JPG 
+Processando: [16.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4777_105.JPG 
+Processando: [17.00%]  /home/higlux/Imagens/Teste/Fotografias/e1fe7aa8-d264-4443-aac5-463f5faa0953_812.JPG 
+Processando: [17.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3116_576.JPG 
+Processando: [17.00%]  /home/higlux/Imagens/Teste/Fotografias/bfec0d04-4846-4ed0-a27b-f363d30fdf9d.JPG 
+Processando: [18.00%]  /home/higlux/Imagens/Teste/Fotografias/29936DAB-1EB3-4B3A-ADDC-ECE7748A27FE_388.JPG 
+Processando: [18.00%]  /home/higlux/Imagens/Teste/Fotografias/912dad73-0e9b-4ddd-86f8-2581d067a8e6.JPG 
+Processando: [19.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3326_232.JPG 
+Processando: [19.00%]  /home/higlux/Imagens/Teste/Fotografias/ec6d4094-733b-4190-84e5-1b28246a5346_843.JPG 
+Processando: [19.00%]  /home/higlux/Imagens/Teste/Fotografias/35653418-2b47-44c0-a2e7-097f4e916823_316.JPG 
+Processando: [20.00%]  /home/higlux/Imagens/Teste/Fotografias/66bca2fe-595d-4189-98d5-429e4229832f_225.JPG 
+Processando: [20.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_2273_638.JPG 
+Processando: [21.00%]  /home/higlux/Imagens/Teste/Fotografias/ad80e95a-9302-45c8-9d26-dcedf06b586d_503.JPG 
+Processando: [21.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3201.PNG 
+Processando: [21.00%]  /home/higlux/Imagens/Teste/Fotografias/655e491c-cc10-4734-a9b4-72c4323fe22b.JPG 
+Processando: [22.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4191_004.JPG 
+Processando: [22.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3324_658.JPG 
+Processando: [23.00%]  /home/higlux/Imagens/Teste/Fotografias/cfb420b8-820d-4c6b-9915-edcb9d1e0a8b_850.JPG 
+Processando: [23.00%]  /home/higlux/Imagens/Teste/Fotografias/fa58a7b8-d2e3-46ff-9d28-ad7f48496048_705.JPG 
+Processando: [23.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_2965.PNG 
+Processando: [24.00%]  /home/higlux/Imagens/Teste/Fotografias/4bc20031-f9af-4734-a641-84e4cb5c5aaf_253.JPG 
+Processando: [24.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4734_656.PNG 
+Processando: [25.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_20180224_115006.jpg 
+Processando: [25.00%]  /home/higlux/Imagens/Teste/Fotografias/50D9092C-09C1-47A7-B629-D9888E64295A_567.JPG 
+Processando: [25.00%]  /home/higlux/Imagens/Teste/Fotografias/8070d4af-7943-47d2-9f31-0716747970b9_813.JPG 
+Processando: [26.00%]  /home/higlux/Imagens/Teste/Fotografias/8241dd02-9401-49cb-8f8e-d817f0b8d160_683.JPG 
+Processando: [26.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3422.JPG 
+Processando: [27.00%]  /home/higlux/Imagens/Teste/Fotografias/6ca64cbb-d699-4576-b7eb-ce731a0846e6_460.JPG 
+Processando: [27.00%]  /home/higlux/Imagens/Teste/Fotografias/aa43db91-0498-490d-acef-dabbfdd4a661_056.JPG 
+Processando: [27.00%]  /home/higlux/Imagens/Teste/Fotografias/d92672dd-1719-46eb-8f26-c31c326ecf02_752.JPG 
+Processando: [28.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_2457_305.JPG 
+Processando: [28.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_20180224_115027.jpg 
+Processando: [29.00%]  /home/higlux/Imagens/Teste/Fotografias/3C984F33-9A46-494D-84FC-C88FA4B88553_525.JPG 
+Processando: [29.00%]  /home/higlux/Imagens/Teste/Fotografias/B8B9283A-6572-4C6B-8933-D50790A59AAF_871.JPG 
+Processando: [29.00%]  /home/higlux/Imagens/Teste/Fotografias/5ad267b1-416b-473d-b480-69c666c75883_616.JPG 
+Processando: [30.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4147_564.PNG 
+Processando: [30.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG-20180227-WA0001.jpg 
+Processando: [31.00%]  /home/higlux/Imagens/Teste/Fotografias/176dbc9f-1d6b-4a5d-9c3a-9c863954c7aa_276.JPG 
+Processando: [31.00%]  /home/higlux/Imagens/Teste/Fotografias/1F861AB8-700D-47B8-A983-27EC6E7D7AB5_523.JPG 
+Processando: [31.00%]  /home/higlux/Imagens/Teste/Fotografias/51d836e9-b90e-48f0-a817-2809a8d84dcb_368.JPG 
+Processando: [32.00%]  /home/higlux/Imagens/Teste/Fotografias/f6bae039-cdec-486d-a295-2f0e5e6045e8_137.JPG 
+Processando: [32.00%]  /home/higlux/Imagens/Teste/Fotografias/77638053-7229-493d-8cd2-dd78885c7cb7_486.JPG 
+Processando: [33.00%]  /home/higlux/Imagens/Teste/Fotografias/4E23101C-CE5E-4E68-A35F-6BDBD0EE7DB0_408.JPG 
+Processando: [33.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3597.PNG 
+Processando: [34.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/7b2dd67f-1f39-45e4-9f2e-d3740ef6d5fa_190.JPG 
+Processando: [34.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/eff926c1-e11a-4639-805d-5aaa3c1a8856_913.JPG 
+Processando: [34.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/06ce19d6-0a18-4651-a494-33359b992968_380.JPG 
+Processando: [35.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/05ce5854-2752-40c4-b28d-a5b81f10f6c1_970.JPG 
+Processando: [35.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/89a87594-63b9-4aa2-8ce1-7d06dabfacc7_397.JPG 
+Processando: [36.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3462_871.JPG 
+Processando: [36.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/c13697e9-719b-4c9d-b06b-8f6c1fbe86ce_711.JPG 
+Processando: [36.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/5c1d8d8e-f258-4a67-a622-df31be50e20a_510.JPG 
+Processando: [37.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/7398f494-b911-4310-b565-e94dd2b09c93_180.JPG 
+Processando: [37.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/9ca75836-b991-47f7-b705-baec5bf615bf_049.JPG 
+Processando: [38.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/01B19CCA-31C5-4AA8-805D-6A9F8DA08939.JPG 
+Processando: [38.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/06f825d9-1e1a-40f7-809e-a925595604d3_789.JPG 
+Processando: [38.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/dd698dc7-5bb0-4e9a-a637-a2bd51ce80ff_301.JPG 
+Processando: [39.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/.arquivos2.tmp 
+Processando: [39.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/65529EF9-9F0A-4480-A00F-49CD867CFF79-1029-000000D5F9542AED_833.JPG 
+Processando: [40.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/8ee53d68-9a82-486d-bd6b-531462367350.JPG 
+Processando: [40.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3179.PNG 
+Processando: [40.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/4e0e0ca0-7c81-4597-a80f-1cb275afa819_435.JPG 
+Processando: [41.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/5d111aa3-f4d9-42ad-9ea5-3a70faaa0f95_326.JPG 
+Processando: [41.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_4721_589.PNG 
+Processando: [42.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/3D9C5179-8A8F-466D-B07D-8E7E67F58061_168.JPG 
+Processando: [42.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/993729ef-d665-4659-b6b2-dc747a832093.JPG 
+Processando: [42.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/b3db8794-0789-4c31-82d2-1e52fde984b6_573.JPG 
+Processando: [43.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_4818_136.JPG 
+Processando: [43.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/8875a800-2386-4772-b349-b8eafcec920c_979.JPG 
+Processando: [44.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/e76dc92d-ab27-4a42-92e9-c0543ed872b4.JPG 
+Processando: [44.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/4d8a9ac6-23e0-4691-8fc2-a129d00976d2.JPG 
+Processando: [44.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/47de666c-a1bf-4f93-b873-849bd6ec2441_759.JPG 
+Processando: [45.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_2459_393.JPG 
+Processando: [45.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/e73b9ae0-4541-43bf-b51b-815732575f44_383.JPG 
+Processando: [46.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_4735_609.PNG 
+Processando: [46.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/8f1cbf5f-706b-44fa-b7ee-a2e2bd9a16f6_888.JPG 
+Processando: [46.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/74fac1e4-8e8d-45a9-a8ce-9597e163a743_947.JPG 
+Processando: [47.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/cea06621-4722-4397-aef5-f078b2d90191_466.JPG 
+Processando: [47.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/c6656878-43fb-42c3-87f4-4f9eb2c5336d_862.JPG 
+Processando: [48.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/3424ab67-3ee9-41f0-9265-e0cc2bd0010e_055.JPG 
+Processando: [48.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/be3ff4c1-d79f-428a-bfcf-82ed2dd08838_089.JPG 
+Processando: [48.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/e36b8683-f9a4-45e5-a001-52ef62909cb5.JPG 
+Processando: [49.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3464_743.JPG 
+Processando: [49.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/4f6c1faa-0841-410f-879a-120426bb2361_943.JPG 
+Processando: [50.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_2577_039.JPG 
+Processando: [50.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/aff20725-63e5-4d68-b153-ff184f6b7537_668.JPG 
+Processando: [51.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3328_968.JPG 
+Processando: [51.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/d766aa7c-6376-4f36-aebd-2a22ef2cc86c.JPG 
+Processando: [51.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/D33657BC-B9D8-4A1C-BEF6-619542154824_567.JPG 
+Processando: [52.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/54A92F1E-D5DB-4323-951A-6E496CDFCCB4_422.JPG 
+Processando: [52.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/db2fd9c0-5925-4cd7-928a-46ac725ccecb_343.JPG 
+Processando: [53.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/68042a3b-1fcb-4737-a9db-464a2cf85db4_859.JPG 
+Processando: [53.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/17b006b3-820f-469b-91de-78bc361e39e2_432.JPG 
+Processando: [53.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/f1dd9b87-fa1c-46f1-b6a4-9dbbabea14b6_488.JPG 
+Processando: [54.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/0DE9CF21-C265-4780-B63B-2CCDDF6B8365.JPG 
+Processando: [54.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_4195_963.JPG 
+Processando: [55.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/0C640248-F11C-4E5A-BFEF-610D8F3D9E21_171.JPG 
+Processando: [55.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/596dcdc5-c936-4c3d-918a-4f942a68330b_729.JPG 
+Processando: [55.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/5af764bb-faa4-4244-80bb-6e54ff77f61d_013.JPG 
+Processando: [56.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/53023072-3e3a-4d7e-804b-e37578807c21_706.JPG 
+Processando: [56.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/d10371d2-9f8b-4056-a93e-213e700f4cbe_755.JPG 
+Processando: [57.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/A17CA345-70D3-46EC-9300-D49E1CB3A1D8_103.JPG 
+Processando: [57.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/a5ff9465-aac6-484e-8f9a-44654a51f73a.JPG 
+Processando: [57.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/083e4381-96e7-4833-acb0-c9d485d0de34_281.JPG 
+Processando: [58.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/20808230-5544-4F92-8F29-A0DB5D694BFE_961.JPG 
+Processando: [58.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/83d68fed-f3a7-441c-a870-808aefb38550_577.JPG 
+Processando: [59.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/4a76a603-4593-4ad8-b9d0-d3085aaa3140_753.JPG 
+Processando: [59.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_0010_845.JPG 
+Processando: [59.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/0ddcaeee-c2c0-4370-a3d2-7fc815ab1aec_062.JPG 
+Processando: [60.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3113_500.JPG 
+Processando: [60.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3180_303.PNG 
+Processando: [61.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/e2a9f96f-7632-45bc-bd1b-c22e3e3b9262_606.JPG 
+Processando: [61.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/BB618501-1174-4E93-8802-487F1C571999_315.JPG 
+Processando: [61.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/138c03e1-24d2-4711-805e-d7cc911a34b6_735.JPG 
+Processando: [62.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/b0f4312e-38a1-4793-9f27-588d0893f355_092.JPG 
+Processando: [62.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3297_316.JPG 
+Processando: [63.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/9aa2594a-3047-4506-93ab-050dc2f5c863_548.JPG 
+Processando: [63.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/1e251852-1cb8-4f5a-9620-850c3257d45d.JPG 
+Processando: [63.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/c6c0579e-f097-4339-95da-fcf575b98e27_899.JPG 
+Processando: [64.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_2458_066.JPG 
+Processando: [64.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/a3f7daa7-2f8e-4ef6-915f-2bd796a020f1_474.JPG 
+Processando: [65.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/D29D3C9C-45D7-44E0-B0B0-3390D58B7DA8.JPG 
+Processando: [65.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/c1dc5c2a-3f92-421d-9f81-b6ed045510f0_231.JPG 
+Processando: [65.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3197.PNG 
+Processando: [66.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/0653465D-B2D8-44B0-95CC-4A5D4AAF41CF_695.JPG 
+Processando: [66.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/2481bbcb-bfa4-4f5d-9c04-c8c3695a0fce_855.JPG 
+Processando: [67.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/c40cddcd-4f94-4781-ae4e-48f711150062.JPG 
+Processando: [67.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/9f252af4-5b3e-4b22-b212-6e9eb2e828fb_967.JPG 
+Processando: [68.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/f23d2c1b-f4ec-4782-aa03-89c78c78fdc7_527.JPG 
+Processando: [68.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/e560b282-91c9-4ed3-96f3-9245587086ad_130.JPG 
+Processando: [68.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/1f78a9bd-ab82-4de8-a7a9-9bad9a66c742_224.JPG 
+Processando: [69.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/eea99a01-e6e9-485d-bccd-ff579b3c0df7_557.JPG 
+Processando: [69.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/82efd840-1472-4d19-ac9b-cf892ddd9686_003.JPG 
+Processando: [70.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/1A9626FB-FBF3-485C-B988-1D21CD4891E0_715.JPG 
+Processando: [70.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/c4a0005d-0243-42a6-9bab-5dbbb0e1a175.JPG 
+Processando: [70.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/.arquivos3.tmp 
+Processando: [71.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/d7206014-2ee7-40cd-a3ae-685b93981779_549.JPG 
+Processando: [71.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/5e4b5210-ec40-4aa1-a63f-9650195cf183_298.JPG 
+Processando: [72.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3108_445.JPG 
+Processando: [72.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/38f4ef04-f4d2-4e0f-9e9a-c809c0d0ebe9_752.JPG 
+Processando: [72.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/13012fd7-a978-4362-8be3-f48bf8f6e86d_677.JPG 
+Processando: [73.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/2c53bcdf-94e0-4f5a-baa9-bac52d37a6fd_431.JPG 
+Processando: [73.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/159fae9d-678a-4342-afd4-93e081657a3a_192.JPG 
+Processando: [74.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/8b1499b1-d115-4ef1-9a0b-93b3beb5cf7b_816.JPG 
+Processando: [74.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/4d82f898-510b-4e46-abfb-472b44d9ffab_856.JPG 
+Processando: [74.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/e0c82171-ab6c-4f33-8f0b-bbf8db87e505_815.JPG 
+Processando: [75.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_4455_968.JPG 
+Processando: [75.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/51498ef1-b29d-429f-ac8e-180587d78610_661.JPG 
+Processando: [76.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/f69ad9dc-cc7c-47f7-a289-11ed167a83be_734.JPG 
+Processando: [76.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/a41de15f-88aa-4e8a-bbb0-4640223419b7_021.JPG 
+Processando: [76.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/a0a1564d-f889-4146-9193-d6a46cc04bb1_130.JPG 
+Processando: [77.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/0fceab76-1e61-4824-8ffd-70a680a89b77_121.JPG 
+Processando: [77.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/f9fbf451-f391-493e-a5ea-c418acdbe11b_146.JPG 
+Processando: [78.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3596.PNG 
+Processando: [78.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/B37B0068-8A6B-4262-A09C-DD2FE3460726-869-00000063384B7BDB_968.PNG 
+Processando: [78.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/IMG_3563_529.JPG 
+Processando: [79.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/8e3bcb39-d328-44c6-bb89-17ee3afb6269_779.JPG 
+Processando: [79.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/fad138a0-9aff-49a0-ad00-7e14e3c3c405.JPG 
+Processando: [80.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/eedab0bb-1f80-4b19-b1e2-e07962de12a5_155.JPG 
+Processando: [80.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/6ecd4310-a15d-4d72-84ee-c55ce78d6a30_472.JPG 
+Processando: [80.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/f8722826-a95f-4bf9-b348-4be0c3893c90_395.JPG 
+Processando: [81.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/ed3f8142-407e-4a4c-bb10-04defb7bafee_918.JPG 
+Processando: [81.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/7AF8336A-C1BE-4BE2-832D-EA04F60243E0_850.JPG 
+Processando: [82.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/93b4cd3a-30c6-4dc6-a3ce-15e0611a0e3c_571.JPG 
+Processando: [82.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/79a1247d-6f42-4f8d-993c-c52f069ed006_159.JPG 
+Processando: [82.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/DA8C0806-A3AD-46F4-A778-96D38324873C_939.JPG 
+Processando: [83.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/8F6A3E15-4C95-4467-942F-E5C24FDF562E.JPG 
+Processando: [83.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/b1da1ee4-dce2-4ee2-b9f2-e444981932fd_012.JPG 
+Processando: [84.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/d4cf1b9b-6c78-49bd-b152-86a1bb715963_042.JPG 
+Processando: [84.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/9bcf746e-2274-439f-be40-d76a889bb38e_510.JPG 
+Processando: [85.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/.arquivos.tmp 
+Processando: [85.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14/.arquivos.tmp 
+Processando: [85.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/IMG-20180226-WA0001.jpeg 
+Processando: [86.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/IMG-20180226-WA0003.jpeg 
+Processando: [86.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/IMG-20180227-WA0003.jpg 
+Processando: [87.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/IMG-20180227-WA0000.jpg 
+Processando: [87.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/IMG_20180206_135830.jpg 
+Processando: [87.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/IMG_20180224_115616.jpg 
+Processando: [88.00%]  /home/higlux/Imagens/Teste/Fotografias/c0279d01-d41d-49e8-a9a3-eac39d2cc197_603.JPG 
+Processando: [88.00%]  /home/higlux/Imagens/Teste/Fotografias/1EECBDE5-D2C5-45F5-9BC0-F95DD6922B0D_167.JPG 
+Processando: [89.00%]  /home/higlux/Imagens/Teste/Fotografias/1d6dfc6d-18bd-43cb-ab28-e32282f06495_164.JPG 
+Processando: [89.00%]  /home/higlux/Imagens/Teste/Fotografias/b51bc2c1-e295-43ae-a6d6-efc8cfb29269_601.JPG 
+Processando: [89.00%]  /home/higlux/Imagens/Teste/Fotografias/882A3100-2B67-4F6F-BB8C-A6F515AC4C81-2521-000002324BEDDD4D_563.JPG 
+Processando: [90.00%]  /home/higlux/Imagens/Teste/Fotografias/5c40245f-de84-4298-b5d8-0f871251a0b1_072.JPG 
+Processando: [90.00%]  /home/higlux/Imagens/Teste/Fotografias/a35a6a7e-d2d0-41c3-9b7c-5f05f112edc6_056.JPG 
+Processando: [91.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG-20180227-WA0002.jpg 
+Processando: [91.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4364_950.JPG 
+Processando: [91.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_3408_570.JPG 
+Processando: [92.00%]  /home/higlux/Imagens/Teste/Fotografias/0A9B988E-E476-4952-AB4B-1F3ACA081373_073.JPG 
+Processando: [92.00%]  /home/higlux/Imagens/Teste/Fotografias/b7ddf939-dce4-4349-ad83-1783b1580d5b_784.JPG 
+Processando: [93.00%]  /home/higlux/Imagens/Teste/Fotografias/c3c5d41a-3858-49cd-a5a0-46b966965969_866.JPG 
+Processando: [93.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4424_513.JPG 
+Processando: [93.00%]  /home/higlux/Imagens/Teste/Fotografias/d80cefda-647a-4745-b7d4-b085e64389cf_701.JPG 
+Processando: [94.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_1307_453.JPG 
+Processando: [94.00%]  /home/higlux/Imagens/Teste/Fotografias/4ae04724-ebc3-4d38-96e7-acc8068fc88e_096.JPG 
+Processando: [95.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_2857_391.JPG 
+Processando: [95.00%]  /home/higlux/Imagens/Teste/Fotografias/73f96fb9-7dfd-4506-93fa-e0c996521e54_895.JPG 
+Processando: [95.00%]  /home/higlux/Imagens/Teste/Fotografias/2116c142-7d1d-4517-bf5d-3e5a73098697_632.JPG 
+Processando: [96.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_4361_916.PNG 
+Processando: [96.00%]  /home/higlux/Imagens/Teste/Fotografias/486bc37a-b7a4-4bcd-8cec-5557d3a0d2a3_460.JPG 
+Processando: [97.00%]  /home/higlux/Imagens/Teste/Fotografias/1940FA53-69C7-44F8-B8E5-DA7A9EA5930F_027.JPG 
+Processando: [97.00%]  /home/higlux/Imagens/Teste/Fotografias/IMG_20180224_115046.jpg 
+Processando: [97.00%]  /home/higlux/Imagens/Teste/Fotografias/e3d5adda-7318-44ff-9205-a8f5a0d45970_137.JPG 
+Processando: [98.00%]  /home/higlux/Imagens/Teste/Fotografias/5898ef1c-b68a-4d53-9d44-b99ad79bcc3c.JPG 
+Processando: [98.00%]  /home/higlux/Imagens/Teste/Fotografias/cd59776b-3f02-4643-9c9c-e248bbeefe4a.JPG 
+Processando: [99.00%]  /home/higlux/Imagens/Teste/Fotografias/C2141E04-FEBB-40CB-96C6-CF528C519BED_497.JPG 
+Processando: [99.00%]  /home/higlux/Imagens/Teste/Fotografias/b5abf2a6-bfc5-4531-9319-8910b40e2993_201.JPG 
+Processando: [100.00%]  /home/higlux/Imagens/Teste/Fotografias/771f2cd2-75c0-4689-8f04-137e450a3020_151.JPG 
+[1;36m [INFORMAÇÃO] - [0mCriação dos arquivos 3 e 4
+/home/higlux/Imagens/Teste/Fotografias/Feito
+/home/higlux/Imagens/Teste/Fotografias/Feito
+[1;33m[DEBUG][0m - Entrou em CRIA_PASTAS_GERAL
+[1;36m [INFORMAÇÃO] - [0mLocal arquivo: /home/higlux/Imagens/Teste/Fotografias
+[1;36m [INFORMAÇÃO] - [0mLocal criar pastas: /home/higlux/Imagens/Teste/Fotografias/Feito
+[1;36m [INFORMAÇÃO] - [0mCaminho do .arquvios5: /home/higlux/Imagens/Teste/Fotografias/.arquivos5.tmp - Exite
+[1;36m [INFORMAÇÃO] - [0mCaminho do .arquvios7: /home/higlux/Imagens/Teste/Fotografias/.arquivos7.tmp - Não exite
+[1;36m [INFORMAÇÃO] - [0mFormato de data: DD/MM/AAAA
+[1;36m [INFORMAÇÃO] - [0mArquivo selecionado: 
+[1;36m [INFORMAÇÃO] - [0mQuantidade de arquivos: 
+[1;33m[DEBUG][0m - Início do código de Criação de pastas
+Progresso: 0
+[1;33mDEBUG: CRIAÇÃO DE PASTA ANOS - \ [0m
+Quantidade de pastas a criar: 
+Quantidade de pastas a criadas: 
+Ano atual: 2018
+Quantidade de meses: 1
+*Criando pastas ano 2018: /home/higlux/Imagens/Teste/Fotografias/Feito/2018
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018
+[1;36m [INFORMAÇÃO] - [0mAtenção: Pasta existe
+[1;33m[DEBUG][0m - CRIAÇÃO DE PASTAS MESES[0m
+Mês atual: 02
+Quantidade de meses: 1
+*Criando pastas mês 02: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02
+[1;36m [INFORMAÇÃO] - [0mPasta existe
+[1;33m[DEBUG][0m - CRIAÇÃO DE PASTAS DIA
+ Dia atual: 27
+ Criando pastas dia 27: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27 
+[1;36m [INFORMAÇÃO] - [0m/home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27 - Existe
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27 
+Progresso: 0
+[1;33mDEBUG: CRIAÇÃO DE PASTA ANOS - 1\ [0m
+Quantidade de pastas a criar: 
+Quantidade de pastas a criadas: 1
+Ano atual: 2021
+Quantidade de meses: 1
+*Criando pastas ano 2021: /home/higlux/Imagens/Teste/Fotografias/Feito/2021
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021
+[1;36m [INFORMAÇÃO] - [0mAtenção: Pasta existe
+[1;33m[DEBUG][0m - CRIAÇÃO DE PASTAS MESES[0m
+Mês atual: 05
+Quantidade de meses: 1
+*Criando pastas mês 05: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05
+[1;36m [INFORMAÇÃO] - [0mPasta existe
+[1;33m[DEBUG][0m - CRIAÇÃO DE PASTAS DIA
+ Dia atual: 04
+ Criando pastas dia 04: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04 
+[1;36m [INFORMAÇÃO] - [0m/home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04 - Existe
+Processando: [0%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04 
+Progresso: 1.00
+[1;33mDEBUG: CRIAÇÃO DE PASTA ANOS - 11\ [0m
+Quantidade de pastas a criar: 
+Quantidade de pastas a criadas: 11
+Ano atual: 2024
+Quantidade de meses: 1
+*Criando pastas ano 2024: /home/higlux/Imagens/Teste/Fotografias/Feito/2024
+Processando: [1.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2024
+[1;36m [INFORMAÇÃO] - [0mAtenção: Pasta existe
+[1;33m[DEBUG][0m - CRIAÇÃO DE PASTAS MESES[0m
+Mês atual: 09
+Quantidade de meses: 1
+*Criando pastas mês 09: /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09
+Processando: [1.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09
+[1;36m [INFORMAÇÃO] - [0mPasta existe
+[1;33m[DEBUG][0m - CRIAÇÃO DE PASTAS DIA
+ Dia atual: 14
+ Criando pastas dia 14: /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14 
+[1;36m [INFORMAÇÃO] - [0m/home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14 - Existe
+Processando: [1.00%]  /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14 
+[1;33mFIM DEBUG[0m
+Deseja mover os arquivos para essas pastas? [S/N]
+respondeu Sim
+[1;36m [INFORMAÇÃO] - [0mArquivo .arquivos.tmp existe
+[1;36m [INFORMAÇÃO] - [0mArquivo .arquivos2.tmp existe
+[1;33m[DEBUG][0m - ENTROU EM CLASSIFICAR_MOVER
+Arquivo de busca: /home/higlux/Imagens/Teste/Fotografias/.arquivos.tmp
+ Arquivo duplicado: /home/higlux/Imagens/Teste/Fotografias/.arquivos5.tmp
+ Arquivo duplicado: /home/higlux/Imagens/Teste/Fotografias/.arquivos2.tmp
+[1;33m[DEBUG][0m - FIM DEBUG
+247
+Valor de 1
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 4bc7f12dd185c8d95839deb2e94f3087
+            Linha a se mover: 1
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: /home/higlux/Imagens/Teste/Fotografias/.arquivos.tmp
+            [1;33m FIM DEBUG[0m
+Arquivo existe
+Valor de 2
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 22c60084f62324599e3af0d8828011ca
+            Linha a se mover: 2
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 3
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 363a1500629caac3ca7e28279f8134ac
+            Linha a se mover: 3
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 4
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 39d1120014307504bb1a1ddd70066451
+            Linha a se mover: 4
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 5
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c271853bdac06eda5915e0705dba3da4
+            Linha a se mover: 5
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 6
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 5d80fdafc2f225dd72cb41e8be413e4b
+            Linha a se mover: 6
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 7
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a9db159b894ac1fdd0b39893fd9b77f0
+            Linha a se mover: 7
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 8
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 118017949895b45344a9644f5b316ed3
+            Linha a se mover: 8
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 9
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a39333cc8d1fa4bc8b663588dcb24688
+            Linha a se mover: 9
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 10
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a708e060f73f8120ee606dbb6048e73d
+            Linha a se mover: 10
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 11
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 973e8284f8029e4003e4c197b8d43aac
+            Linha a se mover: 11
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 12
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 43a6be29548d04894e93fbac2a24ac19
+            Linha a se mover: 12
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 13
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 10a9661b16c217ac3b6e13d13c56a9f1
+            Linha a se mover: 13
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 14
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 9e07a0dc403bdb1b463585d5ac09b885
+            Linha a se mover: 14
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 15
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 59d03b2c827b9f47becdedb839d1ae82
+            Linha a se mover: 15
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 16
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6043eb5a4201a881ed4cdbbccba0a1b8
+            Linha a se mover: 16
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 17
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 7cde05a0aefb0dcf1af76989f69ddeb8
+            Linha a se mover: 17
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 18
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ecfa3f2d9cc138a9508d897994b94ad2
+            Linha a se mover: 18
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 19
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3be2e59805013752276363f8daa95a92
+            Linha a se mover: 19
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 20
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 57f1c08f089b1d1189ed86502d4963ae
+            Linha a se mover: 20
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 21
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0b081096c04a8cb17eb89df9ddd51fc1
+            Linha a se mover: 21
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 22
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8e9868e5ec1b6bc39150f082a00cc386
+            Linha a se mover: 22
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 23
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 75fdb2f4929f12ebaa3b66f6b62c512e
+            Linha a se mover: 23
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 24
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 22ec659518af522730a603488b96d965
+            Linha a se mover: 24
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 25
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 2c4087972438b0ba806cb68e57a6db5f
+            Linha a se mover: 25
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 26
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f98f08ee660d28ba8dd586591b90a8d1
+            Linha a se mover: 26
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 27
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a04720cdb4efb24bdd20fe250636d4a4
+            Linha a se mover: 27
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 28
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 41104f3e58a8f6ffd4a045fb19122347
+            Linha a se mover: 28
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 29
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c682672dd0ace60bb73a000c290d5d36
+            Linha a se mover: 29
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 30
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8e9409af51d6dcb4f0a3504236c7ee7b
+            Linha a se mover: 30
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 31
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e3d7581b83383bd9d37f3ea8aa21af3a
+            Linha a se mover: 31
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 32
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 2ecd135517a3a64f49788f2f7feb1752
+            Linha a se mover: 32
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 33
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 4c0ff00cd3fd8caf3a6e06bb302a3200
+            Linha a se mover: 33
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 34
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 55f2ae4ea9c42b30cfac1268f19c5784
+            Linha a se mover: 34
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 35
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 63f68689ad5cabe4cbb9ca694c66660c
+            Linha a se mover: 35
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 36
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3585dd5c2378a18c27b85a4d3a67dab3
+            Linha a se mover: 36
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 37
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 78f658f4345db73f79a71b5a70352c95
+            Linha a se mover: 37
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 38
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 18531d7609a160899626cc335ea653ad
+            Linha a se mover: 38
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 39
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 5b8b7bf3f464415ac7f7ca3d63cd8c03
+            Linha a se mover: 39
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 40
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 42067e515116c877be9f2ea7d5b931fc
+            Linha a se mover: 40
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 41
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 283d025edeba5a66df54c0ca3ec8bae8
+            Linha a se mover: 41
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 42
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: dcf6767985284edccb84fa558082b472
+            Linha a se mover: 42
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 43
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6b2535b459c2b3a11281b8a613617005
+            Linha a se mover: 43
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 44
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0d36826125090bca90d817a326175824
+            Linha a se mover: 44
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 45
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6d5664f76e52e613a900ca29cb76b8b0
+            Linha a se mover: 45
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 46
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 5a08b9886d2007151c9bdde06aee34ed
+            Linha a se mover: 46
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 47
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 162b318d5777e0e0a8e53112a2e1bbcc
+            Linha a se mover: 47
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 48
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 146ec422d1f2817ea19a93ed5c4b0b02
+            Linha a se mover: 48
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 49
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 66981fe7103ca8d07752a7fb3dcf9c44
+            Linha a se mover: 49
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 50
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 854a7439f1612b866a55029fc963b52a
+            Linha a se mover: 50
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 51
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: fe3d00f6a85e1e7914a4c7b70b6da120
+            Linha a se mover: 51
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 52
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 611a38f53e21e1212417aa4b396ed842
+            Linha a se mover: 52
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 53
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3bae092aeb0f0be8947f524767c4ab49
+            Linha a se mover: 53
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 54
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6a28742633b73fa97466e71c6fc4e7da
+            Linha a se mover: 54
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 55
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ebc215587c7bd942ae353f71ce3bb830
+            Linha a se mover: 55
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 56
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 46d939378b4188ed8496ecd57dcc02bc
+            Linha a se mover: 56
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 57
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: bd0d0d18916dad2816c3d87c72e35d53
+            Linha a se mover: 57
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 58
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: bdc1703070f3d9f010981c57b6c76f1e
+            Linha a se mover: 58
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 59
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d3756b3fc7a726cd0a768e0082a8c573
+            Linha a se mover: 59
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 60
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 5b8e4797953c936913c83a515c5305be
+            Linha a se mover: 60
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 61
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c3a6e88252e4c0509558e54fa7b5fe58
+            Linha a se mover: 61
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 62
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ab6c1de120d319f5988095d3212bf12e
+            Linha a se mover: 62
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 63
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: de8a416bc6c645935659663951354478
+            Linha a se mover: 63
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 64
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 017d3731933c46d9a09ec23313bc7149
+            Linha a se mover: 64
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 65
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 432231a36800a9875c06d9258cd7ff22
+            Linha a se mover: 65
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 66
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a2b458997ac6e6058f20eb4b7898415c
+            Linha a se mover: 66
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 67
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d73dc425bfb06d2ff3b1cca7c067ba83
+            Linha a se mover: 67
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 68
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 465f6774a15b7dd89a5005ecdf89eb7a
+            Linha a se mover: 68
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 69
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 7748d7f02708b7be7c2ba5dc026bda67
+            Linha a se mover: 69
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 70
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 712ed7964de26b5957d892b3e496441c
+            Linha a se mover: 70
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 71
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3448d71458f01d7ebb44d483c131d977
+            Linha a se mover: 71
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 72
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 78c37e6336900cb2777d1e64a00e8f21
+            Linha a se mover: 72
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 73
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 1b6e28eaf86cdc99fb6c1a086ec21930
+            Linha a se mover: 73
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 74
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 417f97e393dfafbab0a8d2e579614439
+            Linha a se mover: 74
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 75
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 71f305b3d3cffa7f6f42bd46ad7653b8
+            Linha a se mover: 75
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 76
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 26a0169811abb661bbfff67b5a55f91e
+            Linha a se mover: 76
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 77
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0094c503f89f370eb6d1e10c26b1caeb
+            Linha a se mover: 77
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 78
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 1435422a88b99bc2442220caed25b7c2
+            Linha a se mover: 78
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 79
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 71ca71436a39e7bf2ad305982ccc5ebf
+            Linha a se mover: 79
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 80
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 574be21332e5edabc383256aa34fd182
+            Linha a se mover: 80
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 81
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 2b6899c693b5c51dbe8c861561e464c1
+            Linha a se mover: 81
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 82
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ad1394ab154b7a4d55b74014301f02e8
+            Linha a se mover: 82
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 83
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 831ee510927ab1e4b86b0bdade32d130
+            Linha a se mover: 83
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 84
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 9fd007f9e765d04e9159abd2b620083b
+            Linha a se mover: 84
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 85
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 2ed31b9f20b64c1e2c04a76f7015a9a0
+            Linha a se mover: 85
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 86
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 812a1486250c984c20a92546a544fe45
+            Linha a se mover: 86
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 87
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 956d68815fac92a25505e8ff704cbfbd
+            Linha a se mover: 87
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 88
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a569051ca6912255f67e3e7ccf5331ba
+            Linha a se mover: 88
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 89
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 039a0daf893daf9d91159a9bcda44d99
+            Linha a se mover: 89
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 90
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b9961c8544e81bbf6f340e225428d717
+            Linha a se mover: 90
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 91
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8b4c8158151d2a121e20cdec7d8e8b91
+            Linha a se mover: 91
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 92
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c2e6685e0bdb1d4408328531933068a0
+            Linha a se mover: 92
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 93
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6f32a45165dc56b4a51b33162ccd83b3
+            Linha a se mover: 93
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 94
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 43e8714886543dd4cd6cf0138934322d
+            Linha a se mover: 94
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 95
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3a678765523c75dfe912679cf4950e0b
+            Linha a se mover: 95
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 96
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 60a83fa27b8d69c683887f64bb23bf3c
+            Linha a se mover: 96
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 97
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 1a11cad3b2a81a67561c9434e98aeb70
+            Linha a se mover: 97
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 98
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 35710426d4eb090c7507d3302a2114b8
+            Linha a se mover: 98
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 99
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8ada1d569551d2476ed685a0f6c060cc
+            Linha a se mover: 99
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 100
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 146c4685d43ff1e4a00f1c76f3942c75
+            Linha a se mover: 100
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 101
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ef662bd64cd91976b7e0cd8194713042
+            Linha a se mover: 101
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 102
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 90d2f95f423e5fbaeb50cb3adc5f713a
+            Linha a se mover: 102
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 103
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b52031fd154602f79b71935d9ce66291
+            Linha a se mover: 103
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 104
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d791650426e074634161826c575ae1d8
+            Linha a se mover: 104
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 105
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e419d79420fcd082ec33b6ed9b730ea8
+            Linha a se mover: 105
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 106
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f83320669dd658b2c312b1646c96c704
+            Linha a se mover: 106
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 107
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 4752c5a088045b9c817429d18fad34d2
+            Linha a se mover: 107
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 108
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 1f44178dc4a7e6e487e0ac4b86928d0d
+            Linha a se mover: 108
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 109
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 40b2ef8bc19674b52993491dc92a9331
+            Linha a se mover: 109
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 110
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 48e3dea24a6653db17758f6b916f1af7
+            Linha a se mover: 110
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 111
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c90e95b23bc0c7f96dcc65ac40ebe20f
+            Linha a se mover: 111
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 112
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 28b90da538b3434d56826471d3907ef5
+            Linha a se mover: 112
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 113
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3e5d4377d8012863a9a390ac8be7d402
+            Linha a se mover: 113
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 114
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: dcb58126e6207c410179394577e13897
+            Linha a se mover: 114
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 115
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 94909546cbf7dbf308d5f51f52b23eb4
+            Linha a se mover: 115
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 116
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0e1bcf045a1ff2d186cabe3dc66af424
+            Linha a se mover: 116
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 117
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c071dd6a3f2e6fa4eef08423c76723e4
+            Linha a se mover: 117
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 118
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f91c8c8c9738b0e3d52a85d27cb30218
+            Linha a se mover: 118
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 119
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b491ba2be243f3e6c1e8e13371b9e3dc
+            Linha a se mover: 119
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 120
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 9cb4f29b1a45fd490a544bba3ee86d29
+            Linha a se mover: 120
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 121
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f42523d740bb8475f4fda3db53d774ff
+            Linha a se mover: 121
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 122
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: fed53c8cff8eb875d4a9074965e8f082
+            Linha a se mover: 122
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 123
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 624df64cba2cc40293ad2c87b32f7d8d
+            Linha a se mover: 123
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 124
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3518091e9ce5bd92c883f7b8f15821f8
+            Linha a se mover: 124
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 125
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 362cc6eaf2904a258f2be76a74ec8802
+            Linha a se mover: 125
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 126
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0b7d4547063263be93f1f86551dacb98
+            Linha a se mover: 126
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 127
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 306c3ff153bc80e73f06a7d12ae27c1b
+            Linha a se mover: 127
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 128
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 32e3c3b79656ff9116c89366bded8144
+            Linha a se mover: 128
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 129
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f43f626ff121656da8c032ec775806bc
+            Linha a se mover: 129
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 130
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b2760d0e23c2e2ce428e3637eaa478b6
+            Linha a se mover: 130
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 131
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 22e370f2178eb2f67c4719ab25e4cb0c
+            Linha a se mover: 131
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 132
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 4f45d9da241c013152c0284d431f4bee
+            Linha a se mover: 132
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 133
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: bd7db3e8582161199e1acd0e19e1cea4
+            Linha a se mover: 133
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 134
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 01103fb2b87188c893c35a52e562c89e
+            Linha a se mover: 134
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 135
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 90e91aa562edf367a431c439091db178
+            Linha a se mover: 135
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 136
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: dc93791b8725516ca985ec8ab0a824d7
+            Linha a se mover: 136
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 137
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ad01abbd88724f4d3e635425be7f46d0
+            Linha a se mover: 137
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 138
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d777094da28f8a481b8f62f3d235addc
+            Linha a se mover: 138
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 139
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 35e04c4514931cf50204653f595df8dc
+            Linha a se mover: 139
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 140
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 294da949a3ecdbebf5ad8005669c3452
+            Linha a se mover: 140
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 141
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f781fe2348f238d94329e06662307014
+            Linha a se mover: 141
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 142
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 9948e42764b450765c62ce723ecb6cfe
+            Linha a se mover: 142
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 143
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b52e2fe739c164dc8cb0a949e0e75782
+            Linha a se mover: 143
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 144
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 92e7c748d26c0a300d22a040a9ab1a77
+            Linha a se mover: 144
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 145
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 39be041026669b9493dc1b25d20eac6b
+            Linha a se mover: 145
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 146
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6297d115048aebca9b3afe33ec566eb8
+            Linha a se mover: 146
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 147
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d8f704c63f28dc1293dc1aac82c333dc
+            Linha a se mover: 147
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 148
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d169512a9493713049fa45ed9e9edcba
+            Linha a se mover: 148
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 149
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c53dc2cca3b7061c897bd284a9623b77
+            Linha a se mover: 149
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 150
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b5fada6d987d81de28a2cc40cb350534
+            Linha a se mover: 150
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 151
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e760de34c5b1952e52ad2c810a250afd
+            Linha a se mover: 151
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 152
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 342207a9b9bfb6bbb91cb82420a47594
+            Linha a se mover: 152
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 153
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d750cf848f4d6a5d5fbd2f554c065469
+            Linha a se mover: 153
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 154
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 60797543ab18c3a9203ce3703f8d6b38
+            Linha a se mover: 154
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 155
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b5dce8a0bb8e811f2383919924b91aca
+            Linha a se mover: 155
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 156
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d9bbbc6e5fbb12a7a42d4543d73d143f
+            Linha a se mover: 156
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 157
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b12a35e7fa3d9cf7087a3c52c13d9a68
+            Linha a se mover: 157
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 158
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d6a7e15e5c7cc095dfd758e70fce6195
+            Linha a se mover: 158
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 159
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a466c3fe0a0352dce2a805e1469fdcd2
+            Linha a se mover: 159
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 160
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 61e2cb8792461f126cdd4625a19693ef
+            Linha a se mover: 160
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 161
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 7eb7091c8dde4f2d69243e2cb0bfe660
+            Linha a se mover: 161
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 162
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d7ff525a9c8d21d1892374fdd4bac633
+            Linha a se mover: 162
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 163
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 96ece7bc6c934b260447ee7af6a6d41a
+            Linha a se mover: 163
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 164
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 84372d2cf94936a93a922ff5165c0198
+            Linha a se mover: 164
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 165
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e99ee43aefeb531b73ff6aacb7236c7f
+            Linha a se mover: 165
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 166
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c1f8560039dfed8e750eb8c37b0247d2
+            Linha a se mover: 166
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 167
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 43ce76d3c775e7f8e551dcd81d4ced54
+            Linha a se mover: 167
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 168
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0c4fadd840b1fc9ba2be50bc78ed9015
+            Linha a se mover: 168
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 169
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0c26732a3e56a6edc49e7a89e49553f7
+            Linha a se mover: 169
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 170
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 4f8f42ca1ff1612e206e6f8c6dd197dd
+            Linha a se mover: 170
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 171
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a4b660ffb937fe5c000b08ab50719a9e
+            Linha a se mover: 171
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 172
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8b7aadcf3c8acdf0fbd2aabef5f7e582
+            Linha a se mover: 172
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 173
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ca40a912ec88b1ac6c5306f80b19b4ed
+            Linha a se mover: 173
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 174
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8720eb47173a13b2ebe24662d980cd0a
+            Linha a se mover: 174
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 175
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 2fcd3a3c752726d1ad14490d3cb27d22
+            Linha a se mover: 175
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 176
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6cbac4f08672cbaf5a19424ac504df53
+            Linha a se mover: 176
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 177
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6bb5a20c7c654f55d9808c0f26a891bc
+            Linha a se mover: 177
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 178
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3657aac13da71afa107476cf33b10e51
+            Linha a se mover: 178
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 179
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8e710db864b49b56ebb3c2a94b1c38c6
+            Linha a se mover: 179
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 180
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 77ef181100d07efdf33cb2dbe005736a
+            Linha a se mover: 180
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 181
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 5160f8569131497ac9d2f06fea786a99
+            Linha a se mover: 181
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 182
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 14fd7612a0989f5f720d99c89c2c707c
+            Linha a se mover: 182
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 183
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: da9630a8954b14cba25ca592f5ce6e64
+            Linha a se mover: 183
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 184
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ebeb33bd7b1ada82f8e1e1c24d603317
+            Linha a se mover: 184
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 185
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6f5ad10d46859f4b40ae829793e2b901
+            Linha a se mover: 185
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 186
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 2b0a3ee578b077cd9051cc4340169e50
+            Linha a se mover: 186
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 187
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0c35dcd066d0a4f4878d7a59c7572010
+            Linha a se mover: 187
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 188
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 161d2ed44d327489687360f710b1de25
+            Linha a se mover: 188
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 189
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b97eb0fe2b4684c3913fb507212116ee
+            Linha a se mover: 189
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 190
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f1f6eedcdc57d2df186a08fc3ea0d154
+            Linha a se mover: 190
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 191
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8fca18b5c78736e770b52e69d99ba1fd
+            Linha a se mover: 191
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 192
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 34f94868cc0f028a27191b394d6a4016
+            Linha a se mover: 192
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 193
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 80a8b774f8628623c00521519fb47f96
+            Linha a se mover: 193
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 194
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 9a32b441b99e9db75971ebab4e8b6456
+            Linha a se mover: 194
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 195
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 59851fe00f2e1a6a4889c378580bbebc
+            Linha a se mover: 195
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 196
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e6c02551ce7b91900e1d9373d2e8a297
+            Linha a se mover: 196
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 197
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 000e2727bbeedb49ea88369e19fe4074
+            Linha a se mover: 197
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 198
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3863db70473473cb2a7ec3081cad2f0d
+            Linha a se mover: 198
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 199
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 54fea682620470b8770316b62e092fe2
+            Linha a se mover: 199
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 200
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 6f1fb05c39f8655531bfe25203e6f9b9
+            Linha a se mover: 200
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 201
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 377d4da82fbd9a2a2cd9d4de2841d70b
+            Linha a se mover: 201
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 202
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 5fa797b076b5dc118f21e6c9f57fbd76
+            Linha a se mover: 202
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 203
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e2d047fd186c7ef2b6ea6c2ade1107e6
+            Linha a se mover: 203
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 204
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 7d9467fb1560c32aa918bc40400104d8
+            Linha a se mover: 204
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 205
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 286d28bdba3e52725db50bd754439ece
+            Linha a se mover: 205
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 206
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 634e41464a0a29e9ced37c4ee49a4fd3
+            Linha a se mover: 206
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 207
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c269416f97b1bbea1af17ec7511844f9
+            Linha a se mover: 207
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 208
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 23b72b4e80f70f311b7574690ee206a3
+            Linha a se mover: 208
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 209
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 666f448e341dbf4266e4746b06ee3d27
+            Linha a se mover: 209
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 210
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8ab29186277f88b93a89c5a53a5a38d9
+            Linha a se mover: 210
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 211
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d2aa4f4fd5903ba95304be444541b4a8
+            Linha a se mover: 211
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2024/09/14/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 212
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0b23bdec946f4881fbabd19847c0cac8
+            Linha a se mover: 212
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 213
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ec4c514a21aa3a57115dee9e73405732
+            Linha a se mover: 213
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 214
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 9bd4a4ad81ee57f15b6307a71787a3e3
+            Linha a se mover: 214
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 215
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: de58be157fc3e5b2ab01eb48383c070a
+            Linha a se mover: 215
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 216
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a2d5424cf8d98e2bf7fade8d84f59b63
+            Linha a se mover: 216
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 217
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 50e2c27cc52520ebb13fa2965380a4ef
+            Linha a se mover: 217
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 218
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b8783035ace553a7a8b0af334dd2a66f
+            Linha a se mover: 218
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 219
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 7c954b5e02d82c8fbafe4bc19403fa9b
+            Linha a se mover: 219
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 220
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: ab1e3dbc2fc0e39c2e84b9ce2bd1fb10
+            Linha a se mover: 220
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 221
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8dd57bbcd932294d8f1d66091c1205c0
+            Linha a se mover: 221
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 222
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 88685772d5db779db6c09113061aa107
+            Linha a se mover: 222
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 223
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: b98aea94f68c86666d34be0c611b52cf
+            Linha a se mover: 223
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 224
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 641ce730cc3755c2706acb3b9ae5ef84
+            Linha a se mover: 224
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 225
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 9632dfcc3df66d633f932e81c5f8c70a
+            Linha a se mover: 225
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 226
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c9cf38f615829cb7ddbf85c4921489c3
+            Linha a se mover: 226
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 227
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e9c0a8c1b4ba5251bb2db17feb7bb1f1
+            Linha a se mover: 227
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 228
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 8f6e1d633c77f27aff2dfa15c4bf04d7
+            Linha a se mover: 228
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 229
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 1b033123679c427676cebe966be54608
+            Linha a se mover: 229
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 230
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0cc8aef28ef113f0101fa146e88960a1
+            Linha a se mover: 230
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 231
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 1d58b1b79b85968ef3fb5c4fa8c682d3
+            Linha a se mover: 231
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 232
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: a9a665f3c9102f8755a7ff66ec3a37f4
+            Linha a se mover: 232
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 233
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 3d1d6f9dc2b13e01289d1cf837c6baa3
+            Linha a se mover: 233
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 234
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 594ddd903cfa51b5f046c7236802bfaa
+            Linha a se mover: 234
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 235
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: c4a16cde7a6722350b54f3c60bc513ab
+            Linha a se mover: 235
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 236
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 0b1215539f10a0135a5366003a679e14
+            Linha a se mover: 236
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 237
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d0d0c137f71a9573ee7135713bcf8977
+            Linha a se mover: 237
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 238
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e7955f3e71bb7bcb67e97db3ea51cebd
+            Linha a se mover: 238
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 239
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 623ae9fea0fbf71f1d21587c5d6bb285
+            Linha a se mover: 239
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 240
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 822f07979e738eb6a3b5555f0f21ebad
+            Linha a se mover: 240
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 241
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e2fabe234d837e5b3699540697d174a0
+            Linha a se mover: 241
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2018/02/27/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 242
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: e7cbb2f057da66b12beb4bee0dc4da7b
+            Linha a se mover: 242
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 243
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 84f6940121c527e766dafe5f5434e30e
+            Linha a se mover: 243
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 244
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: d4eeeb69508da896ec10d41447c18427
+            Linha a se mover: 244
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 245
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: f6692187fadc79d3220601252dacf065
+            Linha a se mover: 245
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 246
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: 483bbf7a874ddc67329737d3138148d9
+            Linha a se mover: 246
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+Valor de 247
+[1;33mDEBUG: ENTROU EM CLASSIFICAR_MOVER[0m
+            MD5 a MOVER: dcc487b063be948ef4c024975d925388
+            Linha a se mover: 247
+            Quantidade: 1
+            Destino a mover os arquvios: /home/higlux/Imagens/Teste/Fotografias/Feito/2021/05/04/
+            Destino a mover os arquivos duplicados: Vazio
+            Arquivo a se mover: 
+            [1;33m FIM DEBUG[0m
+ Arquivo não existe
+O script terminou a execução
+Deseja apagar os arquivos temporários? [S/N]

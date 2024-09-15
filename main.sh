@@ -172,7 +172,7 @@ CRIA_DESTINO() {
                 echo -e "$INFO Diretório $destino existe $RESET"
             else   
                 echo -e "$INFO""Diretório $destino, não exite $RESET"
-                read -p -r "Deseja Criar? [S/N]" resp
+                read -p "Deseja Criar? [S/N]" resp
                 resp=${resp^^} #passando o conteúdo para uppercase
                 if [ "$resp" = "S" ]; then
                     echo -e "$INFO Criando $destino:$RESET"
@@ -317,7 +317,7 @@ CRIA_LISTAS(){
         #Remove a pasta para onde os arquivos serão movidos
         INFRM "QTD Antes: $qtd_arq1"
         sed -i "/$(echo '\/'$remover'\/')/d" "$arq1"
-        
+        sed -i "/.tmp/d" "$arq1"
         qtd_arq1=$(wc -l < $arq1)
         INFRM "QTD Depois: $qtd_arq1"
     fi
@@ -333,7 +333,7 @@ CRIA_LISTAS(){
     Caminho do .arquvios2: $arq2
     Caminho do .arquvios5: $arq5"
     DBG "FIM DEBUG"
-    exit
+
     fi
 
     if [ -e "$arq2" ]; then
@@ -341,7 +341,7 @@ CRIA_LISTAS(){
         progresso=1
     else
         INFRM "Criação dos arquivos 2 e 5"
-        for (( i=1; i<="$qtd_linhas_arq1"; i+=1 ));
+        for (( i=1; i<="$qtd_arq1"; i+=1 ));
         do
             arq=$(head -"$i" < "$arq1" | tail -1)
 
@@ -364,7 +364,7 @@ CRIA_LISTAS(){
 
             ###### Fim modificação
             echo "$saidateste" >> "$arq2"
-            progresso=$(echo "scale=2; ($i/$qtd_linhas_arq1)*100" | bc)
+            progresso=$(echo "scale=2; ($i/$qtd_arq1)*100" | bc)
             echo -ne "\\rProcessando: [$progresso%]  $(echo "$md5tmp" | awk '{print $2}') \\n"
         done
 
@@ -373,8 +373,7 @@ CRIA_LISTAS(){
         [[ -e "$arq3" ]] && INFRM "O Arquivo 3 existe" || cat "$arq2" | awk '{print $1}' > "$arq3"
 
         ### Criação do arquivo 4
-        [[ -e "$arq4" ]] && INFRM "O Arquivo 4 existe" || sort "$arq3" | uniq -d > "$arq4"
-
+        [[ -e "$arq4" ]] && INFRM "O Arquivo 4 existe" || sort "$arq3" | uniq > "$arq4"
     fi
 }
 
@@ -456,10 +455,9 @@ CRIA_PASTAS_GERAL() {
     #### FIM DECLARAÇÃO VARIÁVEIS
 
     local="$1"
-    arq5=$(echo "$local/.arquivos5.tmp")
-    arq7=$(echo "$local/.arquivos7.tmp")
+    arq5="$local/.arquivos5.tmp"
+    arq7="$local/.arquivos7.tmp"
     qtd_linhas=$(cat "$arq5" | wc -l)
-    arq="0"
     local_destino="$2"
 
     if [[ -z "$3" ]]; then
@@ -488,7 +486,7 @@ CRIA_PASTAS_GERAL() {
         #cut -b 9-10    #->dia
         
         #Aqui a quantidade de linhas únicas do ano, será usado para ser o limite do loop abaixo
-        qtd_pasta_anos=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-4 | uniq -d | wc -l)
+        qtd_pasta_anos=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-4 | uniq | wc -l)
 
         #CRIAÇÂO DA PASTA DOS ANOS
         for (( i=1; i<="$qtd_pasta_anos"; i+=1 )); do
@@ -496,9 +494,9 @@ CRIA_PASTAS_GERAL() {
             echo "Progresso: $progresso"
     #            [[ $i=1000 ]] && exit
             #Aqui vai aparecer linha a linha do arquivo
-            linha_anos=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-4 | uniq -d | head -"$i" | tail -1)
+            linha_anos=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-4 | uniq | head -"$i" | tail -1)
             destcriar=$(echo "$local_destino/$linha_anos")
-            qtd_pasta_meses=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq -d | grep "$linha_anos" | cut -b 6-7 | wc -l)
+            qtd_pasta_meses=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq | grep "$linha_anos" | cut -b 6-7 | wc -l)
             if [[ "$debug" -eq 1 ]]; then
                 echo -e "$DBG""DEBUG: CRIAÇÃO DE PASTA ANOS - $qtd_total_criada\\$qtd_total $RESET"
                 echo -e "Quantidade de pastas a criar: $qtd_total"
@@ -526,7 +524,7 @@ CRIA_PASTAS_GERAL() {
             #CRIAÇÂO DA PASTA DOS MESES
             for (( j=1; j<="$qtd_pasta_meses"; j+=1 )); do
                 
-                linha_mes=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq -d | grep "$linha_anos" | cut -b 6-7 | head -$j | tail -1)
+                linha_mes=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq | grep "$linha_anos" | cut -b 6-7 | head -$j | tail -1)
                 destcriar=$(echo "$local_destino/$linha_anos/$linha_mes")
                 #IMPORTANTE - Essa variável $anomes ela irá filtrar dentro da lista do arquivo .arquivos5.tmp
                 anomes=$(echo "$linha_anos-$linha_mes")
@@ -788,167 +786,6 @@ APAGAR_ARQUIVOS() {
     echo -e "$DBG""Debug:$RESET Início apagar arquivos."
     echo -e "\e[1;5;33mdebug:Impedido de fazer para intuito de teste$RESET"
 }
-################# DESCONTINUADO #################
-CRIA_LISTA_BRUTA() {
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: Criação do arquivo .arquivos.tmp - Saída bruta do find
-#################
-    ############ DECLARAÇÃO DE VARIÁVEIS
-    local arq1
-    local qtd_arq1
-    local dest_dup
-    ############ FIM DECLARAÇÃO DE VARIÁVEIS
-
-    ############ ATRIBUIÇÃO DE VARIÁVEIS
-    arq1="$1"/.arquivos.tmp
-    dest_dup="$3"
-    ############ FIM DECLARAÇÃO DE VARIÁVEIS
-
-  if [[ "$debug" -eq 1 ]]; then
-        echo -e "$DBG""Debug: Entrou na função CRIAR_LISTA_BRUTA com os dados:
-        $INFO\$1: $1 - Origem
-        \$2: $2 - Destino
-        \$3: $3 - Pasta duplicados
-        \$4: $( [[ -z $4 ]] && echo "*" || echo $4) - Formatos a ser buscados$RESET"
-    fi
-    ######## SAÍDA PARA NÃO ENTRAR VALOR VAZIO
-    if [[ -z "$1" ]]; then 
-        echo -e "$ERROS""ERRO: Origem não pode ser vazio$RESET"
-        exit
-    fi
-    if [[ -z "$2" ]]; then
-        echo -e "$ERROS""ERRO: Destino não pode ser vazio$RESET"
-        exit
-    fi
-    echo "$3"
-    ######## VERIFICAÇÃO SE O ARQUIVO EXISTE
-    if [ -e "$arq1" ]; then
-        echo -e "$INFO""O aquivo .arquivos.tmp existe$RESET"
-    else
-        echo -e "$DBG""DEBUG: Criação do .arquivos.tmp$RESET"
-        #Aqui cria a lista de arquvios
-        find "$1" -type f > "$arq1"
-        qtd_arq1=$(wc -l < $arq1)
-
-        #CÓDIGO PARA REMOVER A PASTA INDICADA COMO DUPLICADO DO BANCO DE BUSCA
-        #Remove o nome da pasta - nome_pasta_duplicados = duplicados estava definido como padrão
-        remover=$(basename "$dest_dup")
-        echo "A remover $remover"
-        #Remove a pasta para onde os arquivos serão movidos
-        echo -e "$INFO""QTD Antes: "$qtd_arq1
-        sed -i "/$(echo '\/'$remover'\/')/d" "$arq1"
-        qtd_arq1=$(wc -l < $arq1)
-        echo -e "$INFO""QTD Depois: $qtd_arq1""$RESET"
-    fi
-    echo -e "$DBG""DEBUG: FIM da ciração do .arquivos.tmp$RESET"
-}
-
-DETECTTEMP(){
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: Detectando arquivos temporários
-#################
-###
-
-    ###### DECLARAÇÃO DE VARIÁVEIS
-    local arq2=""
-    local arq5=""
-
-    ###### FIM DECLARAÇÃO DE VARIÁVEIS
-    arq2=$(echo "$1" | sed 's/arquivos/arquivos2/g')
-    arq5=$(echo "$1" | sed 's/arquivos/arquivos5/g')
-    if [[ "$debug" -eq 1 ]]; then
-    echo -e "$DBGDEBUG: Entrou em CRIAR_LISTA_MD5$RESET"
-    echo -e "Local arquivo: $1"
-    echo -e "Comando usado: $2"
-    echo -e "Quantidade total de arqvivos: $qtd_linhas"
-    echo -e "Caminho do .arquvios2: $arq2"
-    echo -e "Caminho do .arquvios5: $arq5"
-    echo -e "$DBGFIM DEBUG$RESET"
-    fi  
-
-    
-    
-    [[ -e .arquivos.tmp ]] && echo -e 'Os arquivos abaixo foram detectados: .arquivos.tmp' || TMP=0
-    for (( NUM=2; NUM<=7; NUM+=1));
-    do
-        echo $(echo ".arquivos""$NUM"".tmp")
-        if [ -e $(echo ".arquivos""$NUM"".tmp") ]; then
-            echo "    .arquivos""$NUM"".tmp"
-            TMP+="$TMP"
-        fi
-    done
-    if [[ "$TMP" -eq 0 ]]; then
-        echo 'Rodar esse script de verificação pela segunda vez adicionará novas linhas nos arquivos e vai gerar erros.'
-        echo 'Gostaria de apagar os arquivos? [S/N]'
-        read -r resp
-        resp=${resp^^}
-        if [ "$resp" = "S" ]; then
-            echo 'DEU SIM'
-            exit
-        fi
-    else
-        echo 'Não foram detectados arquivos temporários'
-    fi
-    #enxerto do script - tudo que é de detecção vai aqui para organizar 
-    if [ -e .arquivos.tmp ]; then
-        echo -e "$INFOO" "aquivo ""$DBG" ".arquivos.tmp ""$INFO"" existe""$RESET"
-    else
-        find "$local" -type f > .arquivo.tmp
-        #Remove o nome da pasta - nome_pasta_duplicados = duplicados está definido como padrão
-        cat .arquivo.tmp | sed /"$nome_pasta_duplicados"/d > .arquivos.tmp
-        rm -rf .arquivo.tmp
-    fi
-}
-################# DESCONTINUADO #################
-CRIA_LISTA_DUP() {
-###.# Criação do arquivo .arquivos3.tmp
-###.# Criação do arquivo .arquivos4.tmp
-#
-# .arquivos3.tmp - VERIFICADOR(MD5)
-# .arquivos4.tmp - DUPLICADOS - VERIFICADOR(MD5)
-#
-####################### A função faz:
-#Pega primeira coluna do arquivos 2 e passa para o arquivos 3
-#Pega o arquivo 3, ordena e deixa os duplicados
-#Código pode ser adicionado no final do CRIA_LISTA_MD5. Isso será feito assim que o script ficar bom
-    local arq2=""
-    local arq3=""
-    local arq4=""
-    local qtd_linhas=""
-
-    arq2=$(echo "$1""/.arquivos2.tmp")
-    arq3=$(echo "$1""/.arquivos3.tmp")
-    arq4=$(echo "$1""/.arquivos4.tmp")
-    qtd_linhas=$(cat $arq2 | wc -l)
-    if [[ "$debug" -eq 1 ]]; then
-        echo -e "$DBG DEBUG: Entrou em CRIA_LISTA_DUP$RESET"
-        echo -e "$INFO""Local arquivo: $RESET $1
-        $INFO Caminho do .arquvios2: $RESET $arq2
-        $INFO Caminho do .arquvios3: $RESET $arq3
-        $INFO Caminho do .arquvios4: $RESET $arq4 "
-    fi  
-    
-    if [ -e "$arq3" ]; then
-        echo -e "$INFO""Atenção: Arquivo .arquivos3.tmp unico exite $RESET"
-    else
-        cat "$arq2" | sort | awk '{print $1}' > "$arq3"
-    fi
-    #Pega o arquivos 3 e passa para o arquivos 4 sem duplicados
-    sort "$arq3" | uniq -d > "$arq4"
-    qtd_dup=$(cat "$arq4" | wc -l)
-    if [[ "$debug" -eq 1 ]]; then
-        echo -e "Quantidade total de arqvivos: $qtd_linhas"
-        echo -e "Quantidade total de duplicados: $qtd_dup"
-        echo -e "$DBG""FIM DEBUG$RESET"
-    else
-        echo "Quantidade de arquivos:"
-        echo "                       (.arquivos3.tmp) detectados: ""$qtd"
-        echo "                       (.arquivos4.tmp) duplicados: ""$qtd_dup"    
-    fi 
-
-}
 
 CRIA_PASTA_DUP(){
 #Criar pasta para mover arquivos duplicados
@@ -1188,8 +1025,6 @@ done
 INFRM "(VARIAVEIS) - INÍCIO VERIFICAÇÃO DE VARIÁVEIS";
 [[ -e "$cmd_sum" ]] || cmd_sum="/usr/bin/md5sum"
 [[ -z "$local_destino" ]] && local_destino="$local"
-[[ -a "$local_destino" ]] && local_destino="$local"
-[[ -a "$local_destino_duplicado" ]] && local_destino_duplicado="Vazio"
 [[ -z "$local_destino_duplicado" ]] && local_destino_duplicado="Vazio"
 
 if [[ "$debug" -eq 1 ]]; then
@@ -1221,7 +1056,7 @@ fi
 #CRIA_LISTAS $1=Origem $2=MD5/SHA $3=Formato
 
 CRIA_LISTAS "$local" "$cmd_sum" "$fmt" "$local_destino_duplicado"
-exit
+
 
 ########## FUNLÇÃO CRIAR PASTAS
 ###### VARIÁVEIS UTILIZADAS
