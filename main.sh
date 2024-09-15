@@ -23,6 +23,7 @@
 #   (06SET2024) - 1.1 - Higlux Morales
 #       Correção de erros do Shellcheck - Colocar aspas nas variáveis
 #       Correção de erros do Shellcheck - Useless cat
+#   (15SET2024) - 1.1 - Higlux Morales
 ######################################################################
 
 #ESSE CÓDIGO ELE FAZ O SCRIPT SAIR QUANDO DÁ ERRO
@@ -38,7 +39,7 @@ declare debug=1
 declare local_destino=""
 declare local_destino_duplicado=""
 
-entradas=("$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9")
+entradas=($*)
 readonly RESET='\e[0m'      #Volta o texto ao nomal
 readonly DBG='\e[1;33m'     #Laranja
 readonly INFO='\e[1;36m'    #Ciano # Informações
@@ -85,7 +86,7 @@ SET_SUM(){
         ver_sum=$(whereis md5sum | awk '{print $2}')
         [[ -e "$ver_sum" ]] || END_BAD "O MD5 não está instalado no seu sistema."
     else
-        ver_sum=$(whereis "$cmd_sum" | awk '{print $2}')
+        ver_sum=$(whereis "$sum" | awk '{print $2}')
         [[ -e "$ver_sum" ]] || END_BAD "O Verificador $cmd_sum não está instalado no seu sistema."
     fi
     cmd_sum="$ver_sum"
@@ -396,7 +397,8 @@ FUNMES() {
     else
         long=false
     fi
-    #echo "Saída de long: "$long
+    echo "Saída de long: "$long
+    exit
     case $2 in 
         01)
            [[ "$long" = false ]] || MES="Janeiro" && MES="Jan"
@@ -893,7 +895,7 @@ if [ -z "$1" ]; then
         As menságens em $(echo -e "$DBG laranja$RESET") são saídas do script.
         Use o parâmetro $(echo -e "$INFO -h ou --help$RESET") para exibir as opções
     "
-    exit
+    exit 0
 fi
 ##### ERRO NOS PARÂMETROS
 #DUPLICADO -u E O -d
@@ -931,7 +933,11 @@ do
             -c|--create)
                 #CRIA as pastas
                 #Função CRIAPASTAS $1-LOCAL do .arquivos5.tmp $2 - Formato
-                case $2 in
+                
+                (( a+=1 ))
+                param="${entradas[$a]}"
+                echo $param
+                case $param in
                     l|long|longo)
                         fmt=longo
                     ;;
@@ -939,10 +945,10 @@ do
                         fmt=curto
                     ;;
                     *)
-                        if [[ -z $2 ]]; then
-                            fmt=normal
+                        if [[ -z $param ]]; then
+                            fmt=""
                         else
-                            exit 1
+                            END_BAD "O formato $param não foi encontrado"
                         fi
                     ;;
                 esac
@@ -987,11 +993,11 @@ do
                 (( a+=1 ))
                 local_tmp="${entradas[$a]}"
                 CRIA_DESTINO "$local_tmp" "$param"
-                echo "ecude"
             ;;
             -t|--tipo)
                 (( a+=1 ))
-                SET_SUM "${entradas["$a"]}"
+                prm="${entradas["$a"]}"
+                SET_SUM "$prm"
                 INFRM "Verificador selecionado $cmd_sum"
             ;;
             *)
