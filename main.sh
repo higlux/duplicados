@@ -24,6 +24,9 @@
 #       Correção de erros do Shellcheck - Colocar aspas nas variáveis
 #       Correção de erros do Shellcheck - Useless cat
 #   (15SET2024) - 1.1 - Higlux Morales
+#       Ajuste do código
+#       Criação do código que coloca o nome dos meses por extenso tanto curto como longo
+#       Melhoria de prática
 ######################################################################
 
 #ESSE CÓDIGO ELE FAZ O SCRIPT SAIR QUANDO DÁ ERRO
@@ -55,6 +58,11 @@ readonly EXIST='\e[1;32m'   #VERDE
 #################
 
 RELP() {
+############
+# TIPO:      FUNÇÃO DE INFORMAÇÃO
+# FUNÇÃO:    Exibir os parâmetros
+# ALTERAÇÃO: 15SET2024
+############
                     echo "Opções disponíveis:           
                 -h --help      Exibe ajuda
                 -l --local     Local de verificação dos arquivos (Requerido)
@@ -75,25 +83,15 @@ RELP() {
                 "
 }
 
-SET_SUM(){
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: ATRIBUI VALOR A VARIÁVEL $CMD_SUM PARA QUE ELA EXECUTE A VERIFICAÇÃO MD5/SHA OU OUTRA
-#################
-    local sum
-    sum=$1
-    if [[ -z "$sum" ]]; then
-        ver_sum=$(whereis md5sum | awk '{print $2}')
-        [[ -e "$ver_sum" ]] || END_BAD "O MD5 não está instalado no seu sistema."
-    else
-        ver_sum=$(whereis "$sum" | awk '{print $2}')
-        [[ -e "$ver_sum" ]] || END_BAD "O Verificador $cmd_sum não está instalado no seu sistema."
-    fi
-    cmd_sum="$ver_sum"
-}
+
 
 ################# FUNÇÕES DE SAÍDA
 END_BAD(){
+############
+# TIPO:      FUNÇÃO DE saída
+# FUNÇÃO:    Sair do script indicando erro 1
+# ALTERAÇÃO: 06SET2024
+############
     local msg
     msg=$1
     echo -e "$ERROS""[ERRO] - $msg""$RESET"
@@ -103,12 +101,21 @@ END_BAD(){
 }
 
 END_GOOD() {
+############
+# TIPO:      FUNÇÃO DE saída
+# FUNÇÃO:    Sair do script indicando erro 0
+# ALTERAÇÃO: 06SET2024
+############
     echo "Muito obrigado por usar $prg $vers"
     exit 0
 }
 
-################# FUNÇÕES DE INFORMAÇÃO
 INFRM(){
+############
+# TIPO:      FUNÇÃO DE INFORMAÇÃO
+# FUNÇÃO:    Exibe mensagem personalizada na cor azul
+# ALTERAÇÃO: 06SET2024
+############
     local msg
     msg=$1
     [[ -z $msg ]] && echo -e "$ERROS""[ERRO] - INFRM requer uma mensagem""$RESET" \ exit;
@@ -117,17 +124,36 @@ INFRM(){
 }
 
 DBG(){
+############
+# TIPO:      FUNÇÃO DE INFORMAÇÃO
+# FUNÇÃO:    Exibe mensagem de DEBUG personalizada na cor AMARELA/LARANJA
+# ALTERAÇÃO: 06SET2024
+############
     local msg
     msg=$1
     [[ -z $msg ]] && echo -e "$ERROS""[ERRO] - DBG requer uma mensagem""$RESET" \ exit;
     echo -e "$DBG[DEBUG]$RESET - $msg"
 }
 
-################# FUNÇÕES DE CRIAÇÃO
+PAUSE(){
+############
+# TIPO:      FUNÇÃO DE INFORMAÇÃO
+# FUNÇÃO:    Pausa a execução do script
+# ALTERAÇÃO: 06SET2024
+############
+    read -srp "Press any key to continue . . ."
+    echo ""
+}
 
 CRIA_DESTINO() {
-#Destino dos arquivos, pode ser um caminho completo ou um nome, Obrigatório
-    #Primeiro testa pra ver se é vazio ou se a próxima string é um - do próximo parâmetro
+############
+# TIPO:      FUNÇÃO DE CRIAÇÃO
+# FUNÇÃO:    Cria as pastas de destino dos arquivos e pasta duplicada
+# ALTERAÇÃO: 06SET2024
+# COMENTÁRIOS:  Destino dos arquivos, pode ser um caminho completo ou um nome, Obrigatório
+#               Primeiro testa pra ver se é vazio ou se a próxima string é um - do próximo parâmetro
+############
+    
 
     ####### DECLARAÇÃO DE VARIÁVEIS
     local nz
@@ -196,45 +222,20 @@ CRIA_DESTINO() {
     echo "$local_destino_duplicado"
 }
 
-PAUSE(){
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: Para função e exibe a msg na tela
-#################
-    read -srp -n 1 "Press any key to continue . . ."
-    echo ""
-}
-
-RECRIAR_PASTA() {
-#################
-# FUNÇÃO PERSONALIZADA - TEMPORÁRIA
-# AÇÃO: RECRIA PASTAS QUE NÃO FORAM CRIADAS POR ALGUM MOTIVO PELA FUNÇÃO CRIAR_PASTAS
-#################
-    #DECLARAÇÃO DE VARIÁVEIS
-    local log=""
-
-    log="./RECRIAR_PASTA.log"
-
-    if [[ "$debug" -eq 1 ]]; then
-        echo -e \
-        "$DBGDEBUG: ENTROU EM RECRIAR_PASTA$RESET"
-        #EXEMPLO: Meses do ano de 2020
-        echo "$1 não existe, vou criar"        
-        echo -e "$DBGFIM DEBUG$RESET"
-    fi
-}
 
 CRIA_LISTAS(){
-#################
-# FUNÇÃO PERSONALIZADA - CRIAR LISTAS
-# AÇÃO: CRIA OS ARQUIVOS ABAIXO:
-#.arquivos.tmp  - Lista Bruta
-#.arquivos2.tmp - Lista MD5
-#.arquivos3.tmp - Lista MD5 pura
-#.arquivos4.tmp - Lista MD5 duplicados
-#.arquivos5.tmp - Lista MD5 com data
-#################
-
+############
+# TIPO:      FUNÇÃO DE CRIAÇÃO
+# FUNÇÃO:    Cria os arquivos temporários
+# ALTERAÇÃO: 06SET2024
+# COMENTÁRIOS: CRIA OS ARQUIVOS
+#               .arquivos.tmp  - Lista Bruta
+#               .arquivos2.tmp - Lista MD5
+#               .arquivos3.tmp - Lista MD5 pura
+#               .arquivos4.tmp - Lista MD5 duplicados
+#               .arquivos5.tmp - Lista MD5 com data
+#               .arquivos6.tmp - Lista MD5 com data por extenso
+############
     ############ DECLARAÇÃO DE VARIÁVEIS
     local arq1
     local arq2
@@ -393,16 +394,35 @@ CRIA_LISTAS(){
     fi
 }
 
-##MES
-FUNMES() {
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: ENTRADA DE PARÂMETRO TEM QUE SER ASSIM: FUNMMES formato mes
-#       Neste caso será sempre o $1 o formato e $2 o mês correspondente
-#################
-    #NÃO FAZ SENTIDO TROCAR LINHA A LINHA, MANIA DE PHP. - Pode trocar no arquivo inteiro de uma vez
-    #echo "ENTROU NA FUNÇÃO mes! com os dados: $1              2: $2"
+SET_SUM(){
+############
+# TIPO:      FUNÇÃO DE ATRIBUIÇÃO
+# FUNÇÃO:    Atribui valor a variável $CMD_SUM para que ela execute a verificação MD5/SHA
+# ALTERAÇÃO: 15SET2024
+# COMENTÁRIOS:  Funcionando dentro do esperado
+#               
+############
+    local sum
+    sum=$1
+    if [[ -z "$sum" ]]; then
+        ver_sum=$(whereis md5sum | awk '{print $2}')
+        [[ -e "$ver_sum" ]] || END_BAD "O MD5 não está instalado no seu sistema."
+    else
+        ver_sum=$(whereis "$sum" | awk '{print $2}')
+        [[ -e "$ver_sum" ]] || END_BAD "O Verificador $cmd_sum não está instalado no seu sistema."
+    fi
+    cmd_sum="$ver_sum"
+}
 
+
+FUNMES() {
+############
+# TIPO:      FUNÇÃO DE TRANSFORMAÇÃO
+# FUNÇÃO:    Recebe o mês numérico e transforma em texto curto ou longo
+# ALTERAÇÃO: 15SET2024
+# COMENTÁRIOS:  Neste caso será sempre o $1 o formato e $2 o mês correspondente
+#               NÃO FAZ SENTIDO TROCAR LINHA A LINHA, MANIA DE PHP. - Pode trocar no arquivo inteiro de uma vez              
+############
     fmt="$2"
     linha="$1"
 
@@ -445,16 +465,20 @@ FUNMES() {
         ;;   
     esac
     [[ "$fmt" == "longo" ]] || MES=$(echo $MES | cut -b 1-3)
+    ########
+    # Aqui pode entrar modos de se modificar a formatação (uppercase, minúsculo ou primeira maiúscula)
+    ########
     echo "$MES"
 }
 
 CRIA_PASTAS_GERAL() {
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: Leitura do arquivo: .arquivos5.tmp
-#       Cria as pastas baseado no .arquvio5.tmp
-#       Recebe o parâmetro $2 de formato de data, se é LONGO, CURTO ou NORMAL
-    #################
+############
+# TIPO:      FUNÇÃO DE CRIAÇÃO
+# FUNÇÃO:    Cria as pastas com AAAA/MM/DD ou AAAA/MMMM/DD
+# ALTERAÇÃO: 15SET2024
+# COMENTÁRIOS:  Leitura dos arquivos .arquivos5.tmp e .arquivos6.tmp
+#               Recebe o parâmetro $2 de formato de data, se é LONGO, CURTO ou NORMAL        
+############
     #### DECLARAÇÃO DE VARIÁVEIS
     local local=""
     local arq5=""
@@ -472,13 +496,7 @@ CRIA_PASTAS_GERAL() {
     local_destino="$2"
     arq=$arq5
     fmt="$3"
-    #if [[ -z "$3" ]]; then
-    #    arq="$arq5"
-    #else
-        #AQUI VAI CHAMAR A FUNÇÃO DE TROCAR OS NÚMEROS 1-12 PARA TEXTO
-    #    arq="$arq6"
-    #fi
-    
+
     if [[ "$debug" -eq 1 ]]; then
         echo -e "$DBG""DEBUG: Entrou em CRIA_PASTAS_GERAL$RESET"
         echo -e "$INFO""Local arquivo: $RESET $local"
@@ -595,19 +613,16 @@ CRIA_PASTAS_GERAL() {
 }
 
 CLASSIFICAR_MOVER() {
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: MOVE OS ARQUIVOS PARA AS PASTAS
-#       Modifiquei a estrutura do loop para evitar que o arquivo fique repetindo com os arquivos duplicados.
-#################
-  
-  ##### FUNÇÃO APRESENTANDO PROBLEMA E TRAVANDO O LOOP EM 15985 E TODO ARQUIVO DUPLICADO ELE RODA UM POR UM E FAZ O SCRIPT DEMORAR
-  #PROBLEMA RESOLVIDO - VARIÁVEL ERRADA NA PARTE DE CONTROLE DE LOOP
-  #AGORA É TESTAR PARA VER SE O SCRIPT VAI COPIAR OS ARQUIVOS DO JEITO CERTO
-  #SUSPEITO QUE VÁ TER PROBLEMA COM ARQUIVOS REPETIDOS -> SUSPEITA CONFIRMADA.
-  #18AGO2024 -> PRIMEIRA TENTATIVA: IGNORAR AS LINHAS DUPLICADAS
-  #31AGO2024 -> REORGANIZAÇÃO DO CÓDIGO
-
+############
+# TIPO:      FUNÇÃO DE TRANSFORMAÇÃO
+# FUNÇÃO:    MOVE OS ARQUIVOS PARA AS PASTAS
+# ALTERAÇÃO: 15SET2024
+# COMENTÁRIOS:  Modifiquei a estrutura do loop para evitar que o arquivo fique repetindo com os arquivos duplicados.
+#               Atenção com essa função com relação arquivos de texto dentro da pasta, caso o número de arquivos aumente o erro está aqui
+#               VARIÁVEL ERRADA NA PARTE DE CONTROLE DE LOOP - PROBLEMA RESOLVIDO
+#               18AGO2024 -> PRIMEIRA TENTATIVA: IGNORAR AS LINHAS DUPLICADAS - RESOLVIDO
+#               31AGO2024 -> REORGANIZAÇÃO DO CÓDIGO - RESOLVIDO
+############
     #### DEFININDO AS VARIÁVEIS
     local arq1=""
     local arq2=""
@@ -787,111 +802,22 @@ CLASSIFICAR_MOVER() {
             echo "Arquivo não existe"
             PAUSE
         fi
-
-        ####  ESE CÓDIGO É PARA FAZER UM LOOP DIFERENTE.
-        #resto=$(cat $arqmod | wc -l)
-        #if [ $resto -eq 1 ]; then
-        #    echo "Deu certo"
-        #    exit
-        #else
-        #    echo "entrou aqui: $arqmod"
-        #    sed -i '1d' $arqmod
-        #fi
     done
 }
 
 APAGAR_ARQUIVOS() {
-#################
-# FUNÇÃO PERSONALIZADA
-# AÇÃO: APAGA OS ARQUIVOS TEMPORÁRIOS
-#################
+############
+# TIPO:      FUNÇÃO DE TRANSFORMAÇÃO
+# FUNÇÃO:    Apaga os arquivos temporários
+# ALTERAÇÃO: 15SET2024
+# COMENTÁRIOS: Desabilitado por motivo de testes
+#
+############
     echo -e "$DBG""Debug:$RESET Valor do parâmetro: $1"
     echo -e "$DBG""Debug:$RESET Início apagar arquivos."
+    #./desfazer.sh
     echo -e "\e[1;5;33mdebug:Impedido de fazer para intuito de teste$RESET"
 }
-
-CRIA_PASTA_DUP(){
-#Criar pasta para mover arquivos duplicados
-#DESCONTINUADO. O CAMINHO È REFERINCIADO NO INÌCIO DO SCRIPT
-    ######### DECLARAÇÃO DE VARIÁVEIS
-    local pasta_duplicados=""
-    local local=""
-
-    pasta_duplicados="$1"
-
-    if [[ -d "$pasta_duplicados" ]]; then 
-        echo "Pasta de arquivos duplicados existe"
-        else
-            mkdir "$local/duplicados"
-    fi
-    #Calcula aquantidade de arquivos duplicados
-    qtd_dup=$(cat "$arq4" | wc -l)
-    for (( i=1; i<="$qtd_dup"; i+=1 ));
-    do
-        md5_dup=$(cat .arquivos4.tmp | head -"$i" | tail -1)
-        cat .arquivos2.tmp | grep $(cat .arquivos4.tmp | head -"$i" | tail -1) >> saida.txt
-    done
-        echo "Quantidade de arquivos detectados: $qtd
-        Quantidade de arquivos duplicados: $qtd_dup"      
-}
-
-function MOV_ARQ_DUP () {
-#ESSA FUNÇÃO SERÁ PARA CIRAR ALGO SEPARADO DO PROCESSO PADRÃO.
-#IREI MODIFICAR O PROCESSO DO PROGRAMA COMO UM TODO
-#PRIMEIRO IREI GERAR AS LISTAS E FAZER ISSO AQUI PRIMEIRO PARA ACELEARAR O CÓDIGO
-    ####### DECLARAÇÃO AS VARIÁVEIS
-    local orig=""
-    local arq1=""
-    local arq4=""
-    local arq2=""
-    local dest_dup=""
-    local linha_exibir=""
-    local qtd_dup_total=""
-    local md5_dup=""
-    local qtd_dup=""
-    local dirname_mov=""
-    ####### FIM DECLARAÇÃO AS VARIÁVEIS
-
-    ####### ATRIBUIÇÃO AS VARIÁVEIS
-    local orig="$1"
-    local arq1="$orig/.arquivos.tmp"
-    local arq4="$orig/.arquivos4.tmp" #arquivos duplicados
-    local arq2="$orig/.arquivos2.tmp"
-    local dest_dup="$2"
-
- #head -31 -> linha do duplicado
-    qtd_dup_total=$(cat "$arq4" | wc -l)
-    for (( i=1; i<=qtd_dup_total; i+=1 )); do
-        md5_dup=$(cat "$arq4" | head -"$i" | tail -1 | awk '{print $1}')
-        qtd_dup=$(cat "$arq2" | nl | grep "$md5_dup" | wc -l)
-        #echo $qtd_dup
-            for (( j=1; j<="$qtd_dup"; j+=1 )); do
-                linha_exibir=$(echo $(cat "$arq2" | nl | grep $(cat "$arq4" | head -"$i" | tail -1) | awk '{print $1}') | awk "{print \$""$j""}")
-                #arq_dup_mover=$(cat $arq1 | head -$linha_exibir | tail -1 | sed 's/ /\\/g')
-                arq_dup_mover=$(cat "$arq1" | head -"$linha_exibir" | tail -1)
-                echo "Linha a exibir: $linha_exibir"
-                echo "Arquivo a mover: $arq_dup_mover"
-
-                #dirname_mov=$(dAtualizei o OpenCore Legacy, Tools e as kexts para o Sequoiairname $arq_dup_mover | sed 's/ /\\/g')
-                #echo $dirname_mov"="$dest_dup
-                if [[ "$dest_dup" = "$dirname_mov" ]]; then 
-                    echo "Ignorando"
-                else
-                    if [[ -e "$arq_dup_mover" ]]; then
-                        #arq_dup_mover=\"$arq_dup_mover\"
-                        mv "$arq_dup_mover" "$dest_dup/"
-                    else
-                        echo "$arq_dup_mover Não existe"
-                    fi
-                fi
-            done
-    done
-    #cat $arq2 | nl | grep $md5_dup | awk '{print $1}' | wc -l
-
-    #cat .arquivos2.tmp | nl | grep `cat .arquivos4.tmp | head -31 | tail -1` | awk '{print $1}' | wc -l
-}
-
-
 ######### FIM DAS FUNÇÕES PERSONALIZADAS
 
 ##################################
@@ -899,8 +825,6 @@ function MOV_ARQ_DUP () {
 ##################################
 #Impede que seja utilizado como usuário ROOT - Apague isso com cautela.
 [[ "$UID" -eq 0 ]] && { echo "O programa não pode ser executado como root"; exit 1; }
-
-
 
 ##################################
 #          PARÂMETROS
@@ -1022,7 +946,7 @@ do
                 INFRM "Verificador selecionado $cmd_sum"
             ;;
             *)
-            if [[ !"${entradas[$a]}" = " " ]];then
+            if [[ ! "${entradas[$a]}" = " " ]];then
                 result=$(echo "$a % 2" | bc)
                 if [[ "$a" -eq 0 ]]; then
                     END_BAD "O parâmetro ""${entradas[$a]}"" é um comando inválido"
@@ -1041,7 +965,6 @@ do
 done
 [[ "$debug" -eq 1 ]] && INFRM "(PARÂMETROS) - FIM ENTRADA DE PARÂMETROS"
 ##################### Entrada de parâmetros do script - FIM
-
 
 #Primeira verificação é se as variáveis foram setadas
 #Segunda verificação é se existem os arquivos temporários
@@ -1103,7 +1026,7 @@ if [[ "$resp" = "S" ]]; then
     ########## FUNLÇÃO CLASSIFICAR_MOVER
     ###### VARIÁVEIS UTILIZADAS
     # $local -> LUGAR DE BUSCA DOS ARQUIVOS
-    ### 
+    ### teste
     #CRIA_PASTAS_GERAL Local Destino (Cópia o Mover)
     CLASSIFICAR_MOVER  "$local" "$local_destino" "$local_destino_duplicado" "$execucao"
 else
@@ -1123,36 +1046,36 @@ if [ "$resp" = "S" ]; then
 else
     echo "Muito obrigado por utilizar o $prg $vers"
 fi
+######################################## NOTA 1 - BUG ENCONTRADO
+#Apresentando problema nos arquivos da linha 6089 e 7156 por conta do fato deles serem arquivos de texto e com isso estão lendo o conteúdo dele. posso tentar resolver se eu tirar a variável e colocar o comando dentro da outra variável, com isso pode resolver.
+#Isso faz com que o maior espaço dê valores astronômicos que passa a dar erro quando precisar mover algum arquivo mais abaixo.
+#Enquanto não dá certo, podemos ignorar esse erro? Para testes sim
 
+#19JUN2024 - Fiz a alteração do comando "cat" para "echo" - Resolveu
+######################################## FIM - NOTA 1
 
-
-
-
-##################### COISAS EXTRAS
+######################################## NOTA 2 - COISAS EXTRAS
 ###Preciso decidir como tratar os arquivos duplicados, pois tem dois modos
 # 1 - Mesmo nome, mas com MD5 diferente
 # 2 - Nome diferente, mas com MD5 igual
 # 3 - Mesmo nome e com MD5 igual.
+#RESOLVIDO - A função separa arquivos com nomes iguais
+######################################## FIM - NOTA 2
 
-######################################## NOTA 1 - BUG ENCONTRADO #Apresentando problema nesss comando acima, pois os arquivos da linha 6089 e 7156 por conta do fato deles serem arquivos de texto e com isso estão lendo o conteúdo dele. posso tentar resolver se eu tirar a variável e colocar o comando dentro da outra variável, com isso pode resolver.
-
-#Isso faz com que o maior espaço dê valores astronômicos que passa a dar erro quando precisar mover algum arquivo mais abaixo.
-
-#19JUN2024 - Fiz a alteração do comando "cat" para "echo" - Reolveu
-#Enquanto não dá certo, podemos ignorar esse erro? Para testes sim
-
-######################################## FIM - NOTA 1
-
-
-
-
-
-##################### arquivos temporários
-# .arquivos.tmp  - Resultado do find
-# .arquivos2.tmp - Resultado do MD5 com caminho #Este arquivo ele não pode ser usado para buscar o caminho do arquivo senão vai dar problema na hora de extrair o conteúdo, por isso eu coloquei um novo arquivo com MD5 e data para facilitar a busca. adicionei numa terceira coluna a data de criação do arquivo, mas eu irei retirar e criar um novo arquivo de texto.
-# .arquivos3.tmp - Só os códigos MD5
-# .arquivos4.tmp - arquivos duplicados
-# .arquivos5.tmp - Código MD5 com data
+######################################## NOTA 2 - COMENTÁRIOS SOBRE ARQUIVOS TEMPORÁRIOS
+# + .arquivos.tmp
+#   - Resultado do find com a retirada da pasta duplicados e também dos arquivos de busca
+# + .arquivos2.tmp
+#    - Resultado do MD5 com caminho
+# + .arquivos3.tmp
+#    - Só os códigos MD5
+# + .arquivos4.tmp
+#    - arquivos duplicados
+# + .arquivos5.tmp
+#    - Código MD5 com data
+# + .arquivos6.tmp
+#    - Código MD5 com data formatada curta ou longa
+#       IMPORTANTE: .arquivos2.tmp ele não pode ser usado para buscar o caminho do arquivo senão vai dar problema na hora de extrair o conteúdo, por isso eu coloquei um novo arquivo com MD5 e data para facilitar a busca. adicionei numa terceira coluna a data de criação do arquivo, mas eu irei retirar e criar um novo arquivo de texto.
 ###########################################
 
 
@@ -1164,7 +1087,7 @@ fi
 #Exibe só o nome do arquivo
 #cat .arquivos2.tmp | awk '{print$2}' | sed 's:.*/::'
 
-############ IDEIAS A IMPLEMENTAR
-# Ao se obter a quantidade dos arquvios do disco, a depender da quantidade será necessário dividir a lista em duas (se par), 3 ou mais (de acordo com a divisibilidade) para acelerar a criação do .arquivos2.tmp.
-
-#unset variável
+########################################  IDEIAS A IMPLEMENTAR
+# 1 - Ao se obter a quantidade dos arquvios do disco, a depender da quantidade será necessário dividir a lista em duas (se par), 3 ou mais (de acordo com a divisibilidade) para acelerar a criação do .arquivos2.tmp.
+# 2 - Descontinuar a utilização de arquvios de texto para fazer as listas de arquivos
+# 3 - Dar unset (unset variável) nas variáveis que não usa para economiar memória
