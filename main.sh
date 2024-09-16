@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ######################################################################
-#   fpiokfdaspófisnhjifvshnǘsnǘ0oasni0vasdnjvíoasnvóisnmvóasnvónvsśovnśdnvśvós
+# 
 # AUTOR:        Higlux Morales
 # EMAIL:        higluxmorales@gmail.com
 # PROGRAMA:     duplicados.sh
@@ -135,6 +135,18 @@ DBG(){
     echo -e "$DBG[DEBUG]$RESET - $msg"
 }
 
+ERR(){
+############
+# TIPO:      FUNÇÃO DE INFORMAÇÃO
+# FUNÇÃO:    Exibe mensagem de DEBUG personalizada na cor VERMELHA
+# ALTERAÇÃO: 16SET2024
+############
+    local msg
+    msg=$1
+    [[ -z $msg ]] && echo -e "$ERROS""[ERRO] - ERR requer uma mensagem""$RESET" \ exit;
+    echo -e "$ERROS[ERRO] - $msg$RESET"
+}
+
 PAUSE(){
 ############
 # TIPO:      FUNÇÃO DE INFORMAÇÃO
@@ -189,24 +201,23 @@ CRIA_DESTINO() {
     fi
 
     if [ -z "$destino" ]; then
-        echo  -e "$ERROS ERRO: O local de destino não pode ser vazio$RESET"
-        exit
+        END_BAD "O local de destino não pode ser vazio"
     else
         if [ -d "$destino" ]; then
-            echo -e "$INFO Usando diretório válido:$RESET $destino"
+            INFRM "Usando diretório válido: $destino"
         else           
             if [ -d "$destino" ]; then
-                echo -e "$INFO Diretório $destino existe $RESET"
+                INFRM "Diretório $destino existe"
             else   
-                echo -e "$INFO""Diretório $destino, não exite $RESET"
+                INFRM "Diretório $destino, não exite"
                 read -p "Deseja Criar? [S/N]" resp
                 resp=${resp^^} #passando o conteúdo para uppercase
                 if [ "$resp" = "S" ]; then
-                    echo -e "$INFO Criando $destino:$RESET"
+                    INFORM "Criando $destino:"
                     mkdir "$destino"
                 else
-                    echo -e "$ERROS""Insira um diretório válido$RESET"
-                    END_BAD
+                    END_BAD "Insira um diretório válido"
+                  
                 fi
             fi
         fi
