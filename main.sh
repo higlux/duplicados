@@ -241,18 +241,21 @@ CRIA_LISTAS(){
     local arq3
     local arq4
     local arq5
+    local arq6
 
     local arq1_exist
     local arq2_exist
     local arq3_exist
     local arq4_exist
     local arq5_exist
+    local arq6_exist
 
     local qtd_arq1
     local qtd_arq2
     local qtd_arq3
     local qtd_arq4
     local qtd_arq5
+    local qtd_arq6
 
     local dest_dup
     local fmt
@@ -272,7 +275,8 @@ CRIA_LISTAS(){
     arq3="$origem"/.arquivos3.tmp
     arq4="$origem"/.arquivos4.tmp
     arq5="$origem"/.arquivos5.tmp
-    
+    arq6="$origem"/.arquivos6.tmp
+    fmt="$3"
     ############ FIM DECLARAÇÃO DE VARIÁVEIS
 
     ############ TESTE DE VARIÁVEIS
@@ -281,6 +285,7 @@ CRIA_LISTAS(){
     arq3_exist=$([[ -e $arq3 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     arq4_exist=$([[ -e $arq4 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     arq5_exist=$([[ -e $arq5 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq6_exist=$([[ -e $arq6 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     ############ FIM TESTE DE VARIÁVEIS
 
 
@@ -291,6 +296,7 @@ CRIA_LISTAS(){
         \$arq3: $arq3 - $arq3_exist - Lista MD5 pura
         \$arq4: $arq4 - $arq4_exist - Lista MD5 duplicados
         \$arq5: $arq5 - $arq5_exist - Lista MD5 com data
+        \$arq5: $arq6 - $arq6_exist - Lista MD5 com data extenso
         \$cmd_sum: $cmd_sum - Formatos a serem buscados"
     fi
 
@@ -298,14 +304,13 @@ CRIA_LISTAS(){
     if [[ -z "$origem" ]]; then 
         END_BAD "Origem não pode ser vazio"
     fi
-   
-    echo "$3"
 
     ######## VERIFICAÇÃO SE O ARQUIVO EXISTE
     if [[ ! -e "$arq1" ]]; then
         INFRM "Criação do .arquivos.tmp"
 
         #Aqui cria a lista de arquvios
+        # 15SET2024 - AQUI ENTRARÁ A PARTE DE SELEÇÃO DO TIPO DE ARQUIVO
         find "$origem" -type f > "$arq1"
         qtd_arq1=$(wc -l < $arq1)
 
@@ -318,6 +323,9 @@ CRIA_LISTAS(){
         #Remove a pasta para onde os arquivos serão movidos
         INFRM "QTD Antes: $qtd_arq1"
         sed -i "/$(echo '\/'$remover'\/')/d" "$arq1"
+        #Remove os arquivos .tmp
+        #BUG ENCONTRADO:
+        #   - CASO NÃO SEJA FEITO O QUE ESTÁ ABAIXO ELE VAI MOVER .arquivos.tmp E DARÁ ERRO NA HORA DE MOVER OS ARQUIVOS PARA AS PASTAS CRIADAS
         sed -i "/.tmp/d" "$arq1"
         qtd_arq1=$(wc -l < $arq1)
         INFRM "QTD Depois: $qtd_arq1"
@@ -341,7 +349,7 @@ CRIA_LISTAS(){
        INFRM "O arquivo .arquivos2.tmp de busca existe"
         progresso=1
     else
-        INFRM "Criação dos arquivos 2 e 5"
+        INFRM "Criação dos arquivos 2, 5 e 6"
         for (( i=1; i<="$qtd_arq1"; i+=1 ));
         do
             arq=$(head -"$i" < "$arq1" | tail -1)
@@ -368,13 +376,20 @@ CRIA_LISTAS(){
             progresso=$(echo "scale=2; ($i/$qtd_arq1)*100" | bc)
             echo -ne "\\rProcessando: [$progresso%]  $(echo "$md5tmp" | awk '{print $2}') \\n"
         done
+        cp $arq5 $arq6
+        sed -i "/$(echo '\/'$remover'\/')/d" "$arq6"
 
+        for i in {01..12}
+        do
+            sed -i "s/-$(echo $i)-/-$(FUNMES $i $fmt )-/g" "$arq6"
+        done
+        sed -i "s/-/\//g" "$arq6"
         INFRM "Criação dos arquivos 3 e 4"
         #### Criação do arquivo 3
-        [[ -e "$arq3" ]] && INFRM "O Arquivo 3 existe" || cat "$arq2" | awk '{print $1}' > "$arq3"
+        [[ -e "$arq3" ]] && INFRM "O Arquivo 3 existe" || cat "$arq2" | awk '{print $1}' 1> "$arq3"
 
         ### Criação do arquivo 4
-        [[ -e "$arq4" ]] && INFRM "O Arquivo 4 existe" || sort "$arq3" | uniq > "$arq4"
+        [[ -e "$arq4" ]] && INFRM "O Arquivo 4 existe" || cat "$arq3" | uniq -d 1> "$arq4"
     fi
 }
 
@@ -387,56 +402,49 @@ FUNMES() {
 #################
     #NÃO FAZ SENTIDO TROCAR LINHA A LINHA, MANIA DE PHP. - Pode trocar no arquivo inteiro de uma vez
     #echo "ENTROU NA FUNÇÃO mes! com os dados: $1              2: $2"
-    if [[ "$debug" -eq 1 ]]; then
-        echo -e "$DBG""Debug: Entrou na função mês com os dados:
-        \$1: $1
-        \$2: $2 $RESET"
-    fi
-    if [[ "$1" = "longo" ]]; then
-        long=true
-    else
-        long=false
-    fi
-    echo "Saída de long: "$long
-    exit
-    case $2 in 
-        01)
-           [[ "$long" = false ]] || MES="Janeiro" && MES="Jan"
+
+    fmt="$2"
+    linha="$1"
+
+    case $linha in 
+        01|1)
+           MES="Janeiro"
         ;;
-        02)
-            [[ "$long" = false ]] || MES="Fevereiro" && MES="Fev"
+        02|2)
+            MES="Fevereiro"
         ;;
-        03)
-            [[ "$long" = false ]] || MES="Março" && MES="Mar"
+        03|3)
+            MES="Março"
         ;;
-        04)
-            [[ "$long" = false ]] || MES="Abril" && MES="Abr"
+        04|4)
+            MES="Abril"
         ;;
-        05)
-            [[ "$long" = false ]] || MES="Maio" && MES="Mai"
+        05|5)
+            MES="Maio"
         ;;
-        06)
-            [[ "$long" = false ]] || MES="Junho" && MES="Jun"
+        06|6)
+            MES="Junho"
         ;;
-        07)
-            [[ "$long" = false ]] || MES="Julho" && MES="Jul"
+        07|7)
+            MES="Julho"
         ;;
-        08)
-            [[ "$long" = false ]] || MES="Agosto" && MES="Ago"
+        08|8)
+            MES="Agosto"
         ;;
-        09)
-            [[ "$long" = false ]] || MES="Setembro" && MES="Set"
+        09|9)
+            MES="Setembro"
         ;;
         10)
-            [[ "$long" = false ]] || MES="Outubro" && MES="Out"
+            MES="Outubro"
         ;;
         11)
-            [[ "$long" = false ]] || MES="Novembro" && MES="Nov"
+            MES="Novembro"
         ;;
         12)
-            [[ "$long" = false ]] || MES="Dezembro"  && MES="Dez"
+            MES="Dezembro"
         ;;   
     esac
+    [[ "$fmt" == "longo" ]] || MES=$(echo $MES | cut -b 1-3)
     echo "$MES"
 }
 
@@ -450,30 +458,32 @@ CRIA_PASTAS_GERAL() {
     #### DECLARAÇÃO DE VARIÁVEIS
     local local=""
     local arq5=""
-    local arq7=""
+    local arq=6=""
     local qtd_linhas=""
     local arq=""
     local local_destino=""
+    local fmt
     #### FIM DECLARAÇÃO VARIÁVEIS
 
     local="$1"
     arq5="$local/.arquivos5.tmp"
-    arq7="$local/.arquivos7.tmp"
+    arq6="$local/.arquivos6.tmp"
     qtd_linhas=$(cat "$arq5" | wc -l)
     local_destino="$2"
-
-    if [[ -z "$3" ]]; then
-        arq="$arq5"
-    else
+    arq=$arq5
+    fmt="$3"
+    #if [[ -z "$3" ]]; then
+    #    arq="$arq5"
+    #else
         #AQUI VAI CHAMAR A FUNÇÃO DE TROCAR OS NÚMEROS 1-12 PARA TEXTO
-        arq="$arq7"
-    fi
+    #    arq="$arq6"
+    #fi
     
     if [[ "$debug" -eq 1 ]]; then
         echo -e "$DBG""DEBUG: Entrou em CRIA_PASTAS_GERAL$RESET"
         echo -e "$INFO""Local arquivo: $RESET $local"
         echo -e "$INFO Caminho do .arquvios5: $RESET $arq5 - $INFO" $([[ -e "$arq5" ]] && echo "Arquivo existe $RESET" || echo "$ERROS Arquivo não existe$RESET")
-        echo -e "$INFO Caminho do .arquvios7: $RESET $arq7 - $INFO" $([[ -e "$arq7" ]] && echo -e "$INFO Arquivo existe $RESET" || echo "$ERROS Arquivo não existe$RESET")
+        echo -e "$INFO Caminho do .arquvios6: $RESET $arq6 - $INFO" $([[ -e "$arq6" ]] && echo -e "$INFO Arquivo existe $RESET" || echo "$ERROS Arquivo não existe$RESET")
         echo -e "$INFO Formato de data: $RESET" $([[ -z "$3" ]] && echo "" )
         echo -e "$INFO""Arquivo selecionado: $RESET $arq"
         echo -e "$INFO""Quantidade de arquivos: $RESET $qtd_linhas"
@@ -527,7 +537,14 @@ CRIA_PASTAS_GERAL() {
             for (( j=1; j<="$qtd_pasta_meses"; j+=1 )); do
                 
                 linha_mes=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq | grep "$linha_anos" | cut -b 6-7 | head -$j | tail -1)
-                destcriar=$(echo "$local_destino/$linha_anos/$linha_mes")
+
+                if [[ -z "$fmt" ]]; then
+                    destcriar=$(echo "$local_destino/$linha_anos/$linha_mes")
+                else
+                    linha_mes_ext=$(FUNMES $linha_mes $fmt)
+                    destcriar=$(echo "$local_destino/$linha_anos/$linha_mes_ext")
+                fi
+                
                 #IMPORTANTE - Essa variável $anomes ela irá filtrar dentro da lista do arquivo .arquivos5.tmp
                 anomes=$(echo "$linha_anos-$linha_mes")
 
@@ -549,7 +566,11 @@ CRIA_PASTAS_GERAL() {
                 for (( k=1; k<="$qtd_pasta_dias"; k+=1 )); do
                     linha_dias=$(cat "$arq" | awk '{print $2}' | grep "$anomes" | cut -b 9-10 | sort | uniq | head -"$k" | tail -1)
                     
-                    destcriar=$(echo "$local_destino/$linha_anos/$linha_mes/$linha_dias")
+                    if [[ -z "$fmt" ]]; then
+                        destcriar=$(echo "$local_destino/$linha_anos/$linha_mes/$linha_dias")
+                    else
+                        destcriar=$(echo "$local_destino/$linha_anos/$linha_mes_ext/$linha_dias")
+                    fi
 
                     if [[ "$debug" -eq 1 ]]; then
                         echo -e "$DBGDEBUG: CRIAÇÃO DE PASTAS DIA$RESET"
@@ -611,12 +632,10 @@ CLASSIFICAR_MOVER() {
     arq2=$(echo "$1""/.arquivos2.tmp")
     arq4=$(echo "$1""/.arquivos4.tmp")
     arq5=$(echo "$1""/.arquivos5.tmp")
+    arq6=$(echo "$1""/.arquivos6.tmp")
     lugar="$1"
     destino="$2"
     destino_duplicado="$3"
-
-    #cp $arq5 $1"/.arqmod.tmp"
-    arqmod=$(echo "$1""/.arqmod.tmp")
     dest="$2"
     #LOCAL PARA onde vão os duplicados
     local_dup="$3"
@@ -672,7 +691,11 @@ CLASSIFICAR_MOVER() {
 
         md5_mover=$(cat "$arq5" | awk '{print $1}' | head -$i | tail -1)
         linha_mover=$(cat "$arq5" | nl | grep "$md5_mover" | awk '{print $1}') #aqui aparecem mais de uma linha
-        caminho_mover=$(cat "$arq5" | awk '{print $2}' | sed 's/-/\//g' |head -"$i" | tail -1)
+        if [[ -z "$fmt" ]]; then 
+            caminho_mover=$(cat "$arq5" | awk '{print $2}' | sed 's/-/\//g' | head -"$i" | tail -1)
+        elif [[ ! -z "$fmt" ]]; then
+            caminho_mover=$(cat "$arq6" | awk '{print $2}' | head -"$i" | tail -1)
+        fi
         caminho_mover="$dest/$caminho_mover"
         arq_mover=$(cat "$arq1" | head -"$i" | tail -1)
         linha_qtd=$(cat "$arq5" | nl | grep "$md5_mover" | awk '{print $1}' | wc -l)
@@ -699,8 +722,6 @@ CLASSIFICAR_MOVER() {
         #######
         if [[ -e "$arq_mover" ]]; then 
             if [[ "$linha_qtd" -gt 1 ]]; then
-                echo -e "$linha_mover" | sed 's/ /\n/g' >> ./duplicados.txt
-
                 #arq_original=$($md5_mover)
                     for (( j=1; j<="$linha_qtd"; j+=1 )); do
                         linha_repetido=$(cat "$arq2" | nl | grep "$md5_mover" | head -"$j" | tail -1 | awk '{print $1}')
@@ -851,7 +872,7 @@ function MOV_ARQ_DUP () {
                 echo "Linha a exibir: $linha_exibir"
                 echo "Arquivo a mover: $arq_dup_mover"
 
-                #dirname_mov=$(dirname $arq_dup_mover | sed 's/ /\\/g')
+                #dirname_mov=$(dAtualizei o OpenCore Legacy, Tools e as kexts para o Sequoiairname $arq_dup_mover | sed 's/ /\\/g')
                 #echo $dirname_mov"="$dest_dup
                 if [[ "$dest_dup" = "$dirname_mov" ]]; then 
                     echo "Ignorando"
