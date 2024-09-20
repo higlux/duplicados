@@ -246,6 +246,7 @@ CRIA_LISTAS(){
 #               .arquivos4.tmp - Lista MD5 duplicados
 #               .arquivos5.tmp - Lista MD5 com data
 #               .arquivos6.tmp - Lista MD5 com data por extenso
+#.              .arquivos7.tmp - Lista MD5 com formatos
 ############
     ############ DECLARAÇÃO DE VARIÁVEIS
     local arq1
@@ -254,6 +255,7 @@ CRIA_LISTAS(){
     local arq4
     local arq5
     local arq6
+    local arq7
 
     local arq1_exist
     local arq2_exist
@@ -261,6 +263,7 @@ CRIA_LISTAS(){
     local arq4_exist
     local arq5_exist
     local arq6_exist
+    local arq7_exist
 
     local qtd_arq1
     local qtd_arq2
@@ -288,6 +291,8 @@ CRIA_LISTAS(){
     arq4="$origem"/.arquivos4.tmp
     arq5="$origem"/.arquivos5.tmp
     arq6="$origem"/.arquivos6.tmp
+    arq7="$origem"/.arquivos7.tmp
+
     fmt="$3"
     ############ FIM DECLARAÇÃO DE VARIÁVEIS
 
@@ -298,6 +303,7 @@ CRIA_LISTAS(){
     arq4_exist=$([[ -e $arq4 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     arq5_exist=$([[ -e $arq5 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     arq6_exist=$([[ -e $arq6 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq7_exist=$([[ -e $arq7 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     ############ FIM TESTE DE VARIÁVEIS
 
 
@@ -308,7 +314,8 @@ CRIA_LISTAS(){
         \$arq3: $arq3 - $arq3_exist - Lista MD5 pura
         \$arq4: $arq4 - $arq4_exist - Lista MD5 duplicados
         \$arq5: $arq5 - $arq5_exist - Lista MD5 com data
-        \$arq5: $arq6 - $arq6_exist - Lista MD5 com data extenso
+        \$arq6: $arq6 - $arq6_exist - Lista MD5 com data extenso
+        \$arq7: $arq7 - $arq7_exist - Lista MD5 com data extenso
         \$cmd_sum: $cmd_sum - Formatos a serem buscados"
     fi
 
@@ -361,7 +368,7 @@ CRIA_LISTAS(){
        INFRM "O arquivo .arquivos2.tmp de busca existe"
         progresso=1
     else
-        INFRM "Criação dos arquivos 2, 5 e 6"
+        INFRM "Criação dos arquivos 2, 5, 6 e 7"
         for (( i=1; i<="$qtd_arq1"; i+=1 ));
         do
             arq=$(head -"$i" < "$arq1" | tail -1)
@@ -384,6 +391,10 @@ CRIA_LISTAS(){
             echo "$md5cod" "$exitftmp" >> "$arq5"
 
             ###### Fim modificação
+
+            ###### Criação do . arquivos7.tmp
+
+            ###### Fim Criação
             echo "$saidateste" >> "$arq2"
             progresso=$(echo "scale=2; ($i/$qtd_arq1)*100" | bc)
             echo -ne "\\rProcessando: [$progresso%]  $(echo "$md5tmp" | awk '{print $2}') \\n"
