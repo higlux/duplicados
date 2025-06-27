@@ -5,7 +5,7 @@
 # EMAIL:        higluxmorales@gmail.com
 # PROGRAMA:     duplicados.sh
 # LICENÇA:      GPL 3
-# VERSÃO:       1.0 Beta
+# VERSÃO:       1.3 Beta
 # DESCRIÇÃO:    Programa que busca arquivos duplicados
 #
 # CHANGELOG:
@@ -27,20 +27,35 @@
 #       Ajuste do código
 #       Criação do código que coloca o nome dos meses por extenso tanto curto como longo
 #       Melhoria de prática
+#   (19OUT2024) - 1.2 - Higlux Morales
+#       Adição de comentário para investigação de um BUG
+#   (30OUT2024) - 1.2 - Higlux Morales
+#       Adição de código para identificar arquivo jpeg com problema
+#   (03NOV2024) - 1.2 - Higlux Morales
+#       Unificação dos códigos de mensagem
+#   (03NOV2024) - 1.3 - Higlux Morales
+#       Simplificação de código
 ######################################################################
 
+##################################
+#           BUGS CONHECIDOS
+##################################
+
+# Pasta vazia após criação: Um BUG muito comum é encontar pastas sem conteúdo após a conclusão do script, suspeito que as pastas vazias estão ligadas aos arquivos duplicados que foram movidos para outra pasta e assim essas pastas ficam vazias.
+
 #ESSE CÓDIGO ELE FAZ O SCRIPT SAIR QUANDO DÁ ERRO
-#set -ex #Não dá por enquanto.
+#set -e #Não dá por enquanto.
 
 ##################################
 #           VARIÁVEIS
 ##################################
 readonly prg='Duplicados'
-readonly vers='1.0 Beta'
+readonly vers='1.2 Beta'
 #Por padrão deixar isso ligado
 declare debug=1
-declare local_destino=""
-declare local_destino_duplicado=""
+declare local_destino
+declare local_destino_duplicado
+declare ignore
 
 entradas=($*)
 readonly RESET='\e[0m'      #Volta o texto ao nomal
@@ -51,7 +66,7 @@ readonly EXIST='\e[1;32m'   #VERDE
 ##################################
 #           FUNÇÕES
 ##################################
-
+ignore='S'
 
 #################
 # INÍCIO FUNÇÃO PERSONALIZADA
@@ -78,6 +93,7 @@ RELP() {
                 -debug         Exibe debug do código
                 -m --mover     Pasta para onde irá mover ou copiar os arquivos duplicados
                 -d --destino    Destino dos arquivos (Requerido)
+                -y --yes        Define sim para todas as perguntas
                 
                 $prg - $vers
                 "
@@ -86,65 +102,54 @@ RELP() {
 
 
 ################# FUNÇÕES DE SAÍDA
-END_BAD(){
+MSG() {
 ############
-# TIPO:      FUNÇÃO DE saída
-# FUNÇÃO:    Sair do script indicando erro 1
-# ALTERAÇÃO: 06SET2024
+# TIPO:      FUNÇÃO DE SAÍDA
+# FUNÇÃO:    Exibir mensagens durante o script e código de saida
+# CRIAÇÃO:   03NOV2024
+# OBS:       Cada tipo de mensagem será uma cor:
+#               ENDBAD    -> Saída do script com status de saída 1 (ERRO)
+#               ENDGOOD   -> Saída do script com status de saída 0 (OK)
+#               DBG       -> Mensagem de Debug - Cor Laranja
+#               INFRM     -> Mensagem de informação - Cor Azul
+#               ERR       -> Mensagem de erro - Cor Vermelho
 ############
+    local tipo
     local msg
-    msg=$1
-    echo -e "$ERROS""[ERRO] - $msg""$RESET"
+    local sts_saida
 
-    echo "Muito obrigado por usar $prg $vers"
-    exit 1
-}
+    tipo=$1
+    msg=$2
 
-END_GOOD() {
-############
-# TIPO:      FUNÇÃO DE saída
-# FUNÇÃO:    Sair do script indicando erro 0
-# ALTERAÇÃO: 06SET2024
-############
-    echo "Muito obrigado por usar $prg $vers"
-    exit 0
-}
+    [[ -z "$msg" ]] && echo -e "$ERROS""[ERRO] - INFRM requer uma mensagem""$RESET" \ exit;
 
-INFRM(){
-############
-# TIPO:      FUNÇÃO DE INFORMAÇÃO
-# FUNÇÃO:    Exibe mensagem personalizada na cor azul
-# ALTERAÇÃO: 06SET2024
-############
-    local msg
-    msg=$1
-    [[ -z $msg ]] && echo -e "$ERROS""[ERRO] - INFRM requer uma mensagem""$RESET" \ exit;
-
-    echo -e "$INFO" "[INFORMAÇÃO] - ""$msg$RESET"
-}
-
-DBG(){
-############
-# TIPO:      FUNÇÃO DE INFORMAÇÃO
-# FUNÇÃO:    Exibe mensagem de DEBUG personalizada na cor AMARELA/LARANJA
-# ALTERAÇÃO: 06SET2024
-############
-    local msg
-    msg=$1
-    [[ -z $msg ]] && echo -e "$ERROS""[ERRO] - DBG requer uma mensagem""$RESET" \ exit;
-    echo -e "$DBG[DEBUG]$RESET - $msg"
-}
-
-ERR(){
-############
-# TIPO:      FUNÇÃO DE INFORMAÇÃO
-# FUNÇÃO:    Exibe mensagem de DEBUG personalizada na cor VERMELHA
-# ALTERAÇÃO: 16SET2024
-############
-    local msg
-    msg=$1
-    [[ -z $msg ]] && echo -e "$ERROS""[ERRO] - ERR requer uma mensagem""$RESET" \ exit;
-    echo -e "$ERROS[ERRO] - $msg$RESET"
+     case $tipo in 
+        "ENDBAD")
+        echo -e "$ERROS[ERRO]$RESET - $msg"
+        echo -e "Muito obrigado por usar $prg $vers"
+        exit 1
+        ;;
+        "ENDGOOD")
+        echo -e "$msg"
+        echo -e "Muito obrigado por usar $prg $vers"
+        exit 0
+        ;;
+        "DBG")
+            cor=$DBG
+            tipo="DEBUG"
+        ;;
+        "INFRM")
+            cor=$INFO
+            tipo="INFORMAÇÃO"
+        ;;
+        "ERR")
+            cor=$ERROS
+            tipo="ERRO"
+        ;;
+        *)
+        ;;
+     esac
+     echo -e "$cor [$tipo] - $msg $RESET"
 }
 
 PAUSE(){
@@ -157,6 +162,32 @@ PAUSE(){
     echo ""
 }
 
+TEST_FILE() {
+############
+# TIPO:      FUNÇÃO DE INFORMAÇÃO
+# FUNÇÃO:    Testa para ver se a foto não está corrompida
+# ALTERAÇÃO: 30OUT2024
+############
+    local origem
+    local arquivo
+    local ext
+    
+    origem=$1
+    ext=$2
+    [[ -z "$ext" ]] && ext="*.jpg"
+    find "$origem" -type f > arquivos.tmp
+    qtd=$(wc -l < arquivos.tmp)
+    for (( i=1; i<="$qtd"; i+=1 )); do
+        linha="$(cat arquivos.tmp | head -"$i" | tail -1)"
+        identify -format '%f' "$linha"
+        [[ "$?" -eq 1 ]] && echo "$linha" >> erros.txt || echo "$linha" >> sem_erros.txt
+        true
+     done
+    qtd_erros=$(wc -l < erros.txt)
+    echo "Você possui $qtd_erros/$qtd arquivos com erro"
+    qtd_sem_erros=$(wc -l < sem_erros.txt)
+    echo "Você possui $qtd_sem_erros/$qtd arquivos sem erro"
+}
 CRIA_DESTINO() {
 ############
 # TIPO:      FUNÇÃO DE CRIAÇÃO
@@ -176,53 +207,51 @@ CRIA_DESTINO() {
     origem="$1"
     echo "$dest"
     if [[ -z "$2" ]]; then
-        END_BAD "O local de destino não pode ser vazio"
+        MSG ENDBAD "O local de destino não pode ser vazio"
     else
         nz=$(echo "$dest" | cut -b 1)
         echo "$nz"
         if [[ "$nz" = "\-" ]]; then
-            END_BAD "O local de destino não pode ser vazio"
+            MSG ENDBAD "O local de destino não pode ser vazio"
         fi
     fi
 
     #Segundo testa para ver se a entrada ela é um diretório ou um nome
-    if [[ -d "$1" ]]; then
+    ##### BUG ENCONTRADO!
+    # Aqui ele testa para saber se o caminho existe, quando ele não existe concatena o caminho com o destino dando erro!!!!!
+
+    echo "$1" | grep "/"
+    if [[ "$?" = 0 ]]; then
         local destino="$1"
     else
         #Aqui insere o caminho antes do nome criando o caminho completo
-        local destino="$local/$1"
-    fi
-    
-    if [ "$debug" = "1" ]; then
-        echo -e "$DBG Debug: Entrou em CRIAR_DESTINO $RESET
-        Entrada: $1
-        Destino: $destino
-                    "
+        local destino="$origem/$1"
     fi
 
-    if [ -z "$destino" ]; then
-        END_BAD "O local de destino não pode ser vazio"
-    else
-        if [ -d "$destino" ]; then
-            INFRM "Usando diretório válido: $destino"
-        else           
-            if [ -d "$destino" ]; then
-                INFRM "Diretório $destino existe"
-            else   
-                INFRM "Diretório $destino, não exite"
-                read -p "Deseja Criar? [S/N]" resp
-                resp=${resp^^} #passando o conteúdo para uppercase
-                if [ "$resp" = "S" ]; then
-                    INFORM "Criando $destino:"
-                    mkdir "$destino"
-                else
-                    END_BAD "Insira um diretório válido"
-                  
-                fi
+    if [ "$debug" = "1" ]; then
+        MSG "DBG" "Entrou em CRIAR_DESTINO"
+        echo -e" Entrada: $1
+                 Destino: $destino"
+    fi
+
+    [[ -z "$destino" ]] && MSG "ENDBAD" "O local de destino não pode ser vazio"
+    [[ -d "$destino" ]] && MSG "INFRM" "Usando diretório válido: $destino"
+    
+    if [[ ! -d "$destino" ]]; then
+        if [[ "$ignore" = "S" ]]; then
+            mkdir "$destino"
+        else
+            read -p "Deseja Criar? [S/N]" resp
+            resp=${resp^^} #passando o conteúdo para uppercase
+            if [ "$resp" = "S" ]; then
+                INFORM "Criando $destino:"
+                mkdir "$destino"
+            else
+                MSG ENDBAD "Insira um diretório válido"
             fi
         fi
-        echo "Usando destino: $destino"
     fi
+    echo "Usando destino: $destino"
     echo "$param"
     if [[ "$param" == "-d" ]]; then
         local_destino="$destino"
@@ -246,7 +275,7 @@ CRIA_LISTAS(){
 #               .arquivos4.tmp - Lista MD5 duplicados
 #               .arquivos5.tmp - Lista MD5 com data
 #               .arquivos6.tmp - Lista MD5 com data por extenso
-#.              .arquivos7.tmp - Lista MD5 com formatos
+#               .arquivos7.tmp - Lista MD5 com formatos
 ############
     ############ DECLARAÇÃO DE VARIÁVEIS
     local arq1
@@ -266,11 +295,6 @@ CRIA_LISTAS(){
     local arq7_exist
 
     local qtd_arq1
-    local qtd_arq2
-    local qtd_arq3
-    local qtd_arq4
-    local qtd_arq5
-    local qtd_arq6
 
     local dest_dup
     local fmt
@@ -279,7 +303,7 @@ CRIA_LISTAS(){
     ############ FIM DECLARAÇÃO DE VARIÁVEIS
     
     ######## BLOQUEIO PARA NÃO ENTRAR VALOR VAZIO
-    [[ -z "$1" ]] && END_BAD "Origem não pode ser vazio"
+    [[ -z "$1" ]] && MSG ENDBAD "Origem não pode ser vazio"
     [[ -z "$2" ]] && INFRM "Usando o MD5 como verificador"
     ######## FIM BLOQUEIO PARA NÃO ENTRAR VALOR VAZIO
     
@@ -297,18 +321,18 @@ CRIA_LISTAS(){
     ############ FIM DECLARAÇÃO DE VARIÁVEIS
 
     ############ TESTE DE VARIÁVEIS
-    arq1_exist=$([[ -e $arq1 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
-    arq2_exist=$([[ -e $arq2 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
-    arq3_exist=$([[ -e $arq3 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
-    arq4_exist=$([[ -e $arq4 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
-    arq5_exist=$([[ -e $arq5 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
-    arq6_exist=$([[ -e $arq6 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
-    arq7_exist=$([[ -e $arq7 ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq1_exist=$([[ -e "$arq1" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq2_exist=$([[ -e "$arq2" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq3_exist=$([[ -e "$arq3" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq4_exist=$([[ -e "$arq4" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq5_exist=$([[ -e "$arq5" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq6_exist=$([[ -e "$arq6" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq7_exist=$([[ -e "$arq7" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     ############ FIM TESTE DE VARIÁVEIS
 
 
   if [[ "$debug" -eq 1 ]]; then
-        echo -e "$DBG""Debug: Entrou na função CRIAR_LISTAS com os dados:$RESET
+        MSG "DBG" "Debug: Entrou na função CRIAR_LISTAS com os dados:$RESET
         \$arq1: $arq1 - $arq1_exist - Lista Bruta
         \$arq2: $arq2 - $arq2_exist - Lista MD5
         \$arq3: $arq3 - $arq3_exist - Lista MD5 pura
@@ -321,17 +345,17 @@ CRIA_LISTAS(){
 
     ######## SAÍDA PARA NÃO ENTRAR VALOR VAZIO
     if [[ -z "$origem" ]]; then 
-        END_BAD "Origem não pode ser vazio"
+        MSG "ENDBAD" "Origem não pode ser vazio"
     fi
 
     ######## VERIFICAÇÃO SE O ARQUIVO EXISTE
     if [[ ! -e "$arq1" ]]; then
-        INFRM "Criação do .arquivos.tmp"
+        MSG "INFRM" "Criação do .arquivos.tmp"
 
         #Aqui cria a lista de arquvios
         # 15SET2024 - AQUI ENTRARÁ A PARTE DE SELEÇÃO DO TIPO DE ARQUIVO
         find "$origem" -type f > "$arq1"
-        qtd_arq1=$(wc -l < $arq1)
+        qtd_arq1=$(wc -l < "$arq1")
 
         #CÓDIGO PARA REMOVER A PASTA INDICADA COMO DUPLICADO DO BANCO DE BUSCA
         #Remove o nome da pasta - nome_pasta_duplicados = duplicados estava definido como padrão
@@ -340,35 +364,40 @@ CRIA_LISTAS(){
         echo "A remover $remover"
 
         #Remove a pasta para onde os arquivos serão movidos
-        INFRM "QTD Antes: $qtd_arq1"
-        sed -i "/$(echo '\/'$remover'\/')/d" "$arq1"
+        MSG "INFRM" "QTD Antes: $qtd_arq1"
+        sed -i "/$(echo '\/'"$remover"'\/')/d" "$arq1" #Aqui foi sugestão do shellcheck de colocar aspas
         #Remove os arquivos .tmp
         #BUG ENCONTRADO:
         #   - CASO NÃO SEJA FEITO O QUE ESTÁ ABAIXO ELE VAI MOVER .arquivos.tmp E DARÁ ERRO NA HORA DE MOVER OS ARQUIVOS PARA AS PASTAS CRIADAS
         sed -i "/.tmp/d" "$arq1"
-        qtd_arq1=$(wc -l < $arq1)
-        INFRM "QTD Depois: $qtd_arq1"
+        qtd_arq1=$(wc -l < "$arq1")
+        MSG "INFRM" "QTD Depois: $qtd_arq1"
     fi
-    INFRM "FIM da ciração do .arquivos.tmp"
+    MSG "INFRM" "FIM da ciração do .arquivos.tmp"
 
     
     if [[ "$debug" -eq 1 ]]; then
-        INFRM "INÍCIO CRIAÇÃO DA LISTA MD5"
-        DBG "Variáveis usadas:
+        MSG "INFRM" "INÍCIO CRIAÇÃO DA LISTA MD5"
+        MSG "DBG" "Variáveis usadas:
     Local arquivo: $origem
     Comando usado: $cmd_sum
     Quantidade total de arqvivos: $qtd_arq1
     Caminho do .arquvios2: $arq2
     Caminho do .arquvios5: $arq5"
-    DBG "FIM DEBUG"
+    MSG "DBG" "FIM DEBUG"
 
     fi
 
     if [ -e "$arq2" ]; then
-       INFRM "O arquivo .arquivos2.tmp de busca existe"
+       MSG "INFRM" "O arquivo .arquivos2.tmp de busca existe"
         progresso=1
     else
-        INFRM "Criação dos arquivos 2, 5, 6 e 7"
+        ######### NOVA CRIAÇÃO DO .arquivo2.tmp
+        ## Ele vai criar a lista com o md5
+        #find -type f -exec md5sum {} \; > $arq2
+        ######### NOVA CRIAÇÃO DO .arquivo5.tmp
+        #find -type f -exec ls -lt --time-style=long-iso {} \; | awk '{print $6}' | sed 's/-/\//g' > $arq5
+        MSG "INFRM" "Criação dos arquivos 2, 5, 6 e 7"
         for (( i=1; i<="$qtd_arq1"; i+=1 ));
         do
             arq=$(head -"$i" < "$arq1" | tail -1)
@@ -388,31 +417,32 @@ CRIA_LISTAS(){
             ###### Modificação 27JUN
             ## ALTERAÇÃO DO EXIF PARA DATA
             md5cod=$(echo "$md5tmp" | awk '{print $1}')
-            echo "$md5cod" "$exitftmp" >> "$arq5"
+            ext="${arq##*.}"
+            echo "$md5cod" "$exitftmp" "$ext">> "$arq5"
 
             ###### Fim modificação
-
-            ###### Criação do . arquivos7.tmp
-
-            ###### Fim Criação
             echo "$saidateste" >> "$arq2"
+            ###### Criação do . arquivos7.tmp
+            #echo "$md5cod" "${arq##*.} " >> "$arq7"
+            ext="${arq##*.}"
+            ###### Fim Criação
+            
             progresso=$(echo "scale=2; ($i/$qtd_arq1)*100" | bc)
             echo -ne "\\rProcessando: [$progresso%]  $(echo "$md5tmp" | awk '{print $2}') \\n"
         done
-        cp $arq5 $arq6
-        sed -i "/$(echo '\/'$remover'\/')/d" "$arq6"
-
+        cp "$arq5" "$arq6"
+        sed -i "/$(echo '\/'"$remover"'\/')/d" "$arq6"
         for i in {01..12}
         do
             sed -i "s/-$(echo $i)-/-$(FUNMES $i $fmt )-/g" "$arq6"
         done
         sed -i "s/-/\//g" "$arq6"
-        INFRM "Criação dos arquivos 3 e 4"
+        MSG "INFRM" "Criação dos arquivo 3"
         #### Criação do arquivo 3
-        [[ -e "$arq3" ]] && INFRM "O Arquivo 3 existe" || cat "$arq2" | awk '{print $1}' 1> "$arq3"
-
+        [[ -e "$arq3" ]] && MSG "INFRM" "O Arquivo 3 existe" || cat "$arq2" | awk '{print $1}' 1> "$arq3"
+        MSG "INFRM" "Criação dos arquivo 4"
         ### Criação do arquivo 4
-        [[ -e "$arq4" ]] && INFRM "O Arquivo 4 existe" || cat "$arq3" | uniq -d 1> "$arq4"
+        [[ -e "$arq4" ]] && MSG "INFRM" "O Arquivo 4 existe" || cat "$arq3" | uniq -d 1> "$arq4"
     fi
 }
 
@@ -428,10 +458,10 @@ SET_SUM(){
     sum=$1
     if [[ -z "$sum" ]]; then
         ver_sum=$(whereis md5sum | awk '{print $2}')
-        [[ -e "$ver_sum" ]] || END_BAD "O MD5 não está instalado no seu sistema."
+        [[ -e "$ver_sum" ]] || MSG "ENDBAD" "O MD5 não está instalado no seu sistema."
     else
         ver_sum=$(whereis "$sum" | awk '{print $2}')
-        [[ -e "$ver_sum" ]] || END_BAD "O Verificador $cmd_sum não está instalado no seu sistema."
+        [[ -e "$ver_sum" ]] || MSG "ENDBAD" "O Verificador $cmd_sum não está instalado no seu sistema."
     fi
     cmd_sum="$ver_sum"
 }
@@ -501,36 +531,110 @@ CRIA_PASTAS_GERAL() {
 # COMENTÁRIOS:  Leitura dos arquivos .arquivos5.tmp e .arquivos6.tmp
 #               Recebe o parâmetro $2 de formato de data, se é LONGO, CURTO ou NORMAL        
 ############
-    #### DECLARAÇÃO DE VARIÁVEIS
+#
+#
+# SIMPLIFICAÇÃO DE SCRIPT
+#   TROCAR O LOOP POR: mkdir /usr/local/src/bash/{old,new,dist,bugs}
+#   mkdir $destino/{ano1,ano2,ano3,ano4,anon}
+#   depois mkdir $destino/ano1/{mes1,mes2,mes,3}
+#
+#
+############ SCRIPT SIMPLIFICADO
+#LER O ARQUIVO DE DATAS
+# cat .arquivosX.tmp | print '{print $2}' | sed '/'/\//'
+#mkdir `cat cpastas.tmp | sort | cut -b 1-4 | uniq`
+#mkdir `cat cpastas.tmp | sort | cut -b 1-8 | uniq`
+#mkdir `cat cpastas.tmp | sort | uniq
+#### DECLARAÇÃO DE VARIÁVEIS
     local local=""
     local arq5=""
-    local arq=6=""
+    local arq6=""
+    local arq7=""
     local qtd_linhas=""
     local arq=""
     local local_destino=""
     local fmt
+    
     #### FIM DECLARAÇÃO VARIÁVEIS
 
     local="$1"
     arq5="$local/.arquivos5.tmp"
     arq6="$local/.arquivos6.tmp"
+    arq7="$local/.arquivos7.tmp"
     qtd_linhas=$(cat "$arq5" | wc -l)
     local_destino="$2"
     arq=$arq5
     fmt="$3"
 
     if [[ "$debug" -eq 1 ]]; then
-        echo -e "$DBG""DEBUG: Entrou em CRIA_PASTAS_GERAL$RESET"
-        echo -e "$INFO""Local arquivo: $RESET $local"
-        echo -e "$INFO Caminho do .arquvios5: $RESET $arq5 - $INFO" $([[ -e "$arq5" ]] && echo "Arquivo existe $RESET" || echo "$ERROS Arquivo não existe$RESET")
-        echo -e "$INFO Caminho do .arquvios6: $RESET $arq6 - $INFO" $([[ -e "$arq6" ]] && echo -e "$INFO Arquivo existe $RESET" || echo "$ERROS Arquivo não existe$RESET")
-        echo -e "$INFO Formato de data: $RESET" $([[ -z "$3" ]] && echo "" )
-        echo -e "$INFO""Arquivo selecionado: $RESET $arq"
-        echo -e "$INFO""Quantidade de arquivos: $RESET $qtd_linhas"
+        MSG "DBG" "DEBUG: Entrou em CRIA_PASTAS_GERAL$RESET"
+        MSG "INFO" "Local arquivo: $RESET $local"
+        MSG "INFO Caminho do .arquvios5: $RESET $arq5 - $INFO" $([[ -e "$arq5" ]] && echo "Arquivo existe $RESET" || echo "$ERROS Arquivo não existe$RESET")
+        MSG "INFO" "Caminho do .arquvios6: $RESET $arq6 - $INFO" $([[ -e "$arq6" ]] && echo -e "$INFO Arquivo existe $RESET" || echo "$ERROS Arquivo não existe$RESET")
+        MSG "INFO" "Formato de data: $RESET" $([[ -z "$3" ]] && echo "" )
+        MSG "INFO" "Arquivo selecionado: $RESET $arq"
+        MSG "INFO" "Quantidade de arquivos: $RESET $qtd_linhas"
     fi
+#fazer o if para ler isso
+arq="$arq6"
+MSG "INFRM" "Criando pastas anos"
+caminho=$(echo "$local_destino/"$(cat "$arq" | awk '{print $2}' | cut -b 1-4 | sort | uniq ) | sed "s, , \n$local_destino/,g")
+echo -e "$caminho"
+mkdir "$caminho"
+
+#aqui tem que mudar de acordo com o tipo de formato número
+#numero: 1-7
+#curto: 1-8
+#longo: 1-?
+corte="1-8"
+MSG "INFRM" "Criando pastas meses"
+caminho=$(echo "$local_destino/"$(cat "$arq" | awk '{print $2}' | cut -b "$corte" | sort | uniq ) | sed "s, , \n$local_destino/,g")
+echo -e "$caminho"
+
+#Aqui segue normal sem corte
+MSG "INFRM" "Criando pastas dias"
+caminho=$(echo "$local_destino/"$(cat "$arq" | awk '{print $2}' | sort | uniq ) | sed "s, , \n$local_destino/,g")
+echo -e "$caminho"
+
+MSG "INFRM" "Fim Criação das pastas"
+
+exit
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 
     if [ -e "$arq" ]; then
-        echo -e "$DBG Debug:$RESET Início do código de Criação de pastas"       
+        MSG "DBG" "$RESET Início do código de Criação de pastas"       
         
         ## LOCALIZAÇÃO DOS DADOS DENTRO DO ARQUIVO .arquivos5.tmp
         #cut -b 1-4     #->ano
@@ -550,7 +654,7 @@ CRIA_PASTAS_GERAL() {
             destcriar=$(echo "$local_destino/$linha_anos")
             qtd_pasta_meses=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq | grep "$linha_anos" | cut -b 6-7 | wc -l)
             if [[ "$debug" -eq 1 ]]; then
-                echo -e "$DBG""DEBUG: CRIAÇÃO DE PASTA ANOS - $qtd_total_criada\\$qtd_total $RESET"
+                MSG "DBG" "DEBUG: CRIAÇÃO DE PASTA ANOS - $qtd_total_criada\\$qtd_total $RESET"
                 echo -e "Quantidade de pastas a criar: $qtd_total"
                 echo -e "Quantidade de pastas a criadas: $qtd_total_criada"
                 echo -e "Ano atual: $linha_anos"
@@ -579,17 +683,17 @@ CRIA_PASTAS_GERAL() {
                 linha_mes=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq | grep "$linha_anos" | cut -b 6-7 | head -$j | tail -1)
 
                 if [[ -z "$fmt" ]]; then
-                    destcriar=$(echo "$local_destino/$linha_anos/$linha_mes")
+                    destcriar="$local_destino/$linha_anos/$linha_mes"
                 else
                     linha_mes_ext=$(FUNMES $linha_mes $fmt)
-                    destcriar=$(echo "$local_destino/$linha_anos/$linha_mes_ext")
+                    destcriar="$local_destino/$linha_anos/$linha_mes_ext"
                 fi
                 
                 #IMPORTANTE - Essa variável $anomes ela irá filtrar dentro da lista do arquivo .arquivos5.tmp
-                anomes=$(echo "$linha_anos-$linha_mes")
+                anomes="$linha_anos-$linha_mes"
 
                 if [[ "$debug"  -eq 1 ]]; then
-                    echo -e "$DBGDEBUG: CRIAÇÃO DE PASTAS MESES$RESET"
+                    MSG "DBG" "CRIAÇÃO DE PASTAS MESES$RESET"
                     echo -e "Mês atual: $linha_mes"
                     echo -e "Quantidade de meses: $qtd_pasta_meses"
                     echo -e "*Criando pastas mês $linha_mes: $destcriar"
@@ -607,13 +711,13 @@ CRIA_PASTAS_GERAL() {
                     linha_dias=$(cat "$arq" | awk '{print $2}' | grep "$anomes" | cut -b 9-10 | sort | uniq | head -"$k" | tail -1)
                     
                     if [[ -z "$fmt" ]]; then
-                        destcriar=$(echo "$local_destino/$linha_anos/$linha_mes/$linha_dias")
+                        destcriar="$local_destino/$linha_anos/$linha_mes/$linha_dias"
                     else
-                        destcriar=$(echo "$local_destino/$linha_anos/$linha_mes_ext/$linha_dias")
+                        destcriar="$local_destino/$linha_anos/$linha_mes_ext/$linha_dias"
                     fi
 
                     if [[ "$debug" -eq 1 ]]; then
-                        echo -e "$DBGDEBUG: CRIAÇÃO DE PASTAS DIA$RESET"
+                        MSG "DBG" "CRIAÇÃO DE PASTAS DIA$RESET"
                         echo -e "Dia atual: $linha_dias"
                         echo -e "Quantidade de dias: $qtd_pasta_dias"
                         echo -e "Criando pastas dia $linha_dias: $destcriar"
@@ -630,7 +734,7 @@ CRIA_PASTAS_GERAL() {
         done
     fi
     if [[ "$debug" -eq 1 ]]; then #EXEMPLO: Meses do ano de 2020
-        echo -e "$DBG""FIM DEBUG$RESET"
+        MSG "DBG""FIM DEBUG"
     fi
 }
 
@@ -665,11 +769,11 @@ CLASSIFICAR_MOVER() {
     local linha_qtd=""
     #### FIM DEFINIÇÃO DE VARIÁVEIS
 
-    arq1=$(echo "$1""/.arquivos.tmp")
-    arq2=$(echo "$1""/.arquivos2.tmp")
-    arq4=$(echo "$1""/.arquivos4.tmp")
-    arq5=$(echo "$1""/.arquivos5.tmp")
-    arq6=$(echo "$1""/.arquivos6.tmp")
+    arq1="$1/.arquivos.tmp"
+    arq2="$1/.arquivos2.tmp"
+    arq4="$1/.arquivos4.tmp"
+    arq5="$1/.arquivos5.tmp"
+    arq6="$1/.arquivos6.tmp"
     lugar="$1"
     destino="$2"
     destino_duplicado="$3"
@@ -680,26 +784,26 @@ CLASSIFICAR_MOVER() {
 
     #### TESTES
     if [[ -e "$arq1" ]]; then
-        echo -e "$INFO""Arquivo .arquivos.tmp existe$RESET"
+        MSG "INFO" "Arquivo .arquivos.tmp existe"
     else
-        echo -e "$ERROS""Arquivo não exite$RESET"
+        MSG "ERROS" "Arquivo não exite"
         echo "Erro. Saiu"
-        END_BAD
+        MSG "ENDBAD"
     fi
 
     if [[ -e "$arq2" ]]; then
-        echo -e "$INFO""Arquivo .arquivos2.tmp existe$RESET"
+        MSG "INFO" "Arquivo .arquivos2.tmp existe"
     else
-        echo -e "$ERROS""Arquivo não exite$RESET"
+        MSG "$ERROS" "Arquivo não exite"
         echo "Erro. Saiu"
-        END_BAD
+        MSG "ENDBAD"
     fi
     if [[ -e "$arq5" ]]; then
-        echo -e "$INFO""Arquivo .arquivos5.tmp existe$RESET"
+        MSG "INFO" "Arquivo .arquivos5.tmp existe"
     else
-        echo -e "$ERROS""Arquivo não exite$RESET"
+        MSG "ERROS" "Arquivo não exite"
         echo "Erro. Saiu"
-        END_BAD
+        MSG "ENDBAD"
     fi
     #### BUG DETECTADO 14AGO2024
     #$2 não pode ser vazio
@@ -710,7 +814,7 @@ CLASSIFICAR_MOVER() {
     
     if [[ "$debug" -eq 1 ]]; then
         echo -e \
-        "$DBG""DEBUG: ENTROU EM CLASSIFICAR_MOVER$RESET"
+        "$DBG""DEBUG: ENTROU EM CLASSIFICAR_MOVER""$RESET"
         #EXEMPLO: Meses do ano de 2020
         echo "Arquivo de busca: $arq1"
         echo "Arquivo duplicado: $arq5"
@@ -738,14 +842,14 @@ CLASSIFICAR_MOVER() {
         linha_qtd=$(cat "$arq5" | nl | grep "$md5_mover" | awk '{print $1}' | wc -l)
             
         if [[ "$debug" -eq 1 ]]; then
-            echo -e "$DBG""DEBUG: ENTROU EM CLASSIFICAR_MOVER$RESET
-            MD5 a MOVER: $md5_mover
-            Linha a se mover: $linha_mover
-            Quantidade: $linha_qtd
-            Destino a mover os arquvios: $caminho_mover
-            Destino a mover os arquivos duplicados: $local_dup
-            Arquivo a se mover: $arq_mover
-            $DBG FIM DEBUG$RESET"
+            echo -e "$DBG""DEBUG: ENTROU EM CLASSIFICAR_MOVER""$RESET" \
+            "MD5 a MOVER: $md5_mover" \
+            "Linha a se mover: $linha_mover" \
+            "Quantidade: $linha_qtd" \
+            "Destino a mover os arquvios: $caminho_mover" \
+            "Destino a mover os arquivos duplicados: $local_dup" \
+            "Arquivo a se mover: $arq_mover" \
+            "$DBG FIM DEBUG$RESET"
         fi
         ####### ATENÇÃO
         # Essa parte do script é para prevenir caso o outro script de criação de pasta não funcione como esperado, como pode acontecer por isso ser um script beta.
@@ -808,12 +912,8 @@ CLASSIFICAR_MOVER() {
                 #PAUSE
             else
                 if [[ -d "$caminho_mover" ]]; then
-                    #mv /home/higlux/Imagens/INTOCADO/marinha/IMG-20240410-WA0057.jpg /destino/duplicado/IMG_20240501_095852(2).jpg/2024/04/10/
-                    #echo "
                     mv "$arq_mover" "$caminho_mover/"
-                    #"
                 else
-                #mv /home/higlux/Imagens/INTOCADO/marinha/IMG-20240410-WA0057.jpg /destino/duplicado/IMG_20240501_095852(2).jpg/2024/04/10/
                     RECRIAR_PASTA "$caminho_mover"
                     #echo "
                     mv "$arq_mover" "$caminho_mover/"
@@ -822,7 +922,7 @@ CLASSIFICAR_MOVER() {
             fi
         else
             echo "Arquivo não existe"
-            PAUSE
+            #PAUSE
         fi
     done
 }
@@ -835,10 +935,10 @@ APAGAR_ARQUIVOS() {
 # COMENTÁRIOS: Desabilitado por motivo de testes
 #
 ############
-    echo -e "$DBG""Debug:$RESET Valor do parâmetro: $1"
-    echo -e "$DBG""Debug:$RESET Início apagar arquivos."
+    MSG "DBG" "Valor do parâmetro: $1"
+    MSG "DBG" "Início apagar arquivos."
     #./desfazer.sh
-    echo -e "\e[1;5;33mdebug:Impedido de fazer para intuito de teste$RESET"
+    MSG "DBG" "Impedido de fazer para intuito de teste"
 }
 ######### FIM DAS FUNÇÕES PERSONALIZADAS
 
@@ -854,7 +954,7 @@ APAGAR_ARQUIVOS() {
 
 ##################### Entrada de parâmetros do script
 # Movi para o final do arquivo dia 04AGO2024, para que todo o script rode e depois selecione as opções 
-[[ "$debug" -eq 1 ]] && INFRM "(PARÂMETROS) - ENTRADA DE PARÂMETROS"
+[[ "$debug" -eq 1 ]] && MSG "INFRM" "(PARÂMETROS) - ENTRADA DE PARÂMETROS"
 if [ -z "$1" ]; then
     echo "$prg $vers:"
     echo -e \
@@ -870,7 +970,7 @@ for a in "${!entradas[@]}";
 do
     if [[ ! ${entradas[$a]} = " " ]]; then
         if [[ "$debug" -eq 1 ]]; then
-            DBG "(PARÂMETROS):Valor de entrada $a: ${entradas[$a]}"
+            MSG "DBG" "(PARÂMETROS):Valor de entrada $a: ${entradas[$a]}"
         fi
         case ${entradas[$a]} in 
             -a|--apagar)
@@ -915,7 +1015,7 @@ do
                         if [[ -z $param ]]; then
                             fmt=""
                         else
-                            END_BAD "O formato $param não foi encontrado"
+                            MSG ENDBAD "O formato $param não foi encontrado"
                         fi
                     ;;
                 esac
@@ -935,15 +1035,15 @@ do
                 ((a+=1))
                 local=${entradas[$a]}
                 if [ "$debug" = "1" ]; then
-                    DBG "(PARÂMETROS): Valor de \$local - $local"
+                    MSG "DBG" "(PARÂMETROS): Valor de \$local - $local"
                 fi
                 if [[ -z "$local" ]]; then
-                    END_BAD "O local de verificação não pode ser vazio"
+                    MSG "ENDBAD" "O local de verificação não pode ser vazio"
                 else
                     if [[ -d "$local" ]]; then
                         INFRM "$local - Encontrado"
                     else
-                        END_BAD "O diretório especificado: $local - No Existe. Especifique um diretório válido"
+                        MSG ENDBAD "O diretório especificado: $local - No Existe. Especifique um diretório válido"
                     fi
                 fi
             ;;
@@ -952,7 +1052,7 @@ do
                 (( a+=1 ))
                 local_tmp="${entradas[$a]}"
                 CRIA_DESTINO "$local_tmp" "$param"
-
+                unset $local_tmp
             ;;
             -m| --mover)
                 param="${entradas[$a]}"
@@ -960,6 +1060,7 @@ do
                 (( a+=1 ))
                 local_tmp="${entradas[$a]}"
                 CRIA_DESTINO "$local_tmp" "$param"
+                unset $local_tmp
             ;;
             -t|--tipo)
                 (( a+=1 ))
@@ -967,14 +1068,18 @@ do
                 SET_SUM "$prm"
                 INFRM "Verificador selecionado $cmd_sum"
             ;;
+            -y|--yes)
+                ignore='S'
+                INFRM "Ignorando as perguntas"
+            ;;
             *)
             if [[ ! "${entradas[$a]}" = " " ]];then
                 result=$(echo "$a % 2" | bc)
                 if [[ "$a" -eq 0 ]]; then
-                    END_BAD "O parâmetro ""${entradas[$a]}"" é um comando inválido"
+                    MSG "ENDBAD" "O parâmetro ""${entradas[$a]}"" é um comando inválido"
                 fi
                 if [[ "$result" -eq 0 ]]; then 
-                    END_BAD "O parâmetro ""${entradas[$a]}"" é um comando inválido"
+                    MSG "ENDBAD" "O parâmetro ""${entradas[$a]}"" é um comando inválido"
                 fi
             fi
             #Desabilitar ele para que inicie, pois está saíndo do programa
@@ -985,7 +1090,7 @@ do
         esac
     fi
 done
-[[ "$debug" -eq 1 ]] && INFRM "(PARÂMETROS) - FIM ENTRADA DE PARÂMETROS"
+[[ "$debug" -eq 1 ]] && MSG "INFRM" "(PARÂMETROS) - FIM ENTRADA DE PARÂMETROS"
 ##################### Entrada de parâmetros do script - FIM
 
 #Primeira verificação é se as variáveis foram setadas
@@ -994,13 +1099,13 @@ done
 ################
 #   VERIFICAÇÃO DE VARIÁVEIS
 ################
-INFRM "(VARIAVEIS) - INÍCIO VERIFICAÇÃO DE VARIÁVEIS";
+MSG "INFRM" "(VARIAVEIS) - INÍCIO VERIFICAÇÃO DE VARIÁVEIS";
 [[ -e "$cmd_sum" ]] || cmd_sum="/usr/bin/md5sum"
 [[ -z "$local_destino" ]] && local_destino="$local"
 [[ -z "$local_destino_duplicado" ]] && local_destino_duplicado="Vazio"
 
 if [[ "$debug" -eq 1 ]]; then
-    DBG "(VARIAVEIS) - Variáveis setadas: 
+    MSG "DBG" "(VARIAVEIS) - Variáveis setadas: 
         Origem - \$local: $local
         Verificador - \$cmd_sum: $cmd_sum
         Destino dos arquivos - \$local_destino: $local_destino
@@ -1011,13 +1116,13 @@ fi
 #qtd_total=$(cat $(echo "$local/.arquivos.tmp" ) | wc -l)
 #qtd_total=$(cat "$local/.arquivos.tmp" | wc -l)
 #qtd_total_criada=0
-[[ "$debug" -eq 1 ]] && INFRM "(VARIAVEIS) - FIM VERIFICAÇÃO DE VARIÁVEIS"
+[[ "$debug" -eq 1 ]] && MSG "INFRM"  "(VARIAVEIS) - FIM VERIFICAÇÃO DE VARIÁVEIS"
 ################ FIM VERIFICAÇÃO DE VARIÁVEIS
 
 ##################################
 #             MAIN
 ##################################
-[[ "$debug" -eq 1 ]] && INFRM "(MAIN) - EXECUÇÃO DO SCRIPT"
+[[ "$debug" -eq 1 ]] && MSG "INFRM" "(MAIN) - EXECUÇÃO DO SCRIPT"
 
 ##################### CRIAÇÃO DOS .arquivos*.tmp
 #.arquivos  - Lista Bruta
@@ -1025,6 +1130,7 @@ fi
 #.arquivos3 - Lista MD5 pura
 #.arquivos4 - Lista MD5 duplicados
 #.arquivos5 - Lista MD5 com data
+#.arquivos6 - Lista MD5 com formatos
 #CRIA_LISTAS $1=Origem $2=MD5/SHA $3=Formato
 
 CRIA_LISTAS "$local" "$cmd_sum" "$fmt" "$local_destino_duplicado"
@@ -1039,24 +1145,26 @@ CRIA_PASTAS_GERAL "$local" "$local_destino" "$fmt"
 
 #####
 
-echo "Deseja mover os arquivos para essas pastas? [S/N]"
-read -r resp
-resp=${resp^^}
-
-if [[ "$resp" = "S" ]]; then
-    echo "respondeu Sim"
-    ########## FUNLÇÃO CLASSIFICAR_MOVER
-    ###### VARIÁVEIS UTILIZADAS
-    # $local -> LUGAR DE BUSCA DOS ARQUIVOS
-    ### teste
-    #CRIA_PASTAS_GERAL Local Destino (Cópia o Mover)
+if [[ "$ignore" = "S" ]]; then
     CLASSIFICAR_MOVER  "$local" "$local_destino" "$local_destino_duplicado" "$execucao"
 else
-    echo "respondeu Não"
-    exit
-fi
+    echo "Deseja mover os arquivos para essas pastas? [S/N]"
+    read -r resp
+    resp=${resp^^}
 
-MOV_ARQ_DUP "$local"
+    if [[ "$resp" = "S" ]]; then
+        echo "respondeu Sim"
+        ########## FUNLÇÃO CLASSIFICAR_MOVER
+        ###### VARIÁVEIS UTILIZADAS
+        # $local -> LUGAR DE BUSCA DOS ARQUIVOS
+        ### teste
+        #CRIA_PASTAS_GERAL Local Destino (Cópia o Mover)
+        CLASSIFICAR_MOVER  "$local" "$local_destino" "$local_destino_duplicado" "$execucao"
+    else
+        echo "respondeu Não"
+        exit
+    fi
+fi
 
 echo "O script terminou a execução"
 echo "Deseja apagar os arquivos temporários? [S/N]"
@@ -1113,3 +1221,13 @@ fi
 # 1 - Ao se obter a quantidade dos arquvios do disco, a depender da quantidade será necessário dividir a lista em duas (se par), 3 ou mais (de acordo com a divisibilidade) para acelerar a criação do .arquivos2.tmp.
 # 2 - Descontinuar a utilização de arquvios de texto para fazer as listas de arquivos
 # 3 - Dar unset (unset variável) nas variáveis que não usa para economiar memória
+#In case identify is missing, here is how to install it in Ubuntu: sudo apt install imagemagick --no-install-recommends
+
+
+#Apagar pastas vazias
+##### qtd=$(cat saida.tmp)
+#####for (( i=1; i<="$qtd"; i+=1 )); do  rm -d "$(cat saida.tmp | head -"$i" | tail -1)" ; done
+
+#Cria diretamente a lista com Md5 completa
+####find . -type f -exec md5sum {} \; # Cria o arquivo .arquivos2.tmp -> Lista com MD5
+#Criar uma função para ler linha a linha um arquivo.
