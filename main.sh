@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
+
+ENCERREI POR HOJE, CORRIJI O ERRO DE NÃO CRIAR PASTA E TAMBÉM MOVER ARQUIVOS, ESTÁ FAZENDO.
+
+FALTA:  COLOCAR O SCRIPT DE ARQUVIOS CORROMPIDOS PARA FUNCIONAR
+        TESTAR PARA VER SE ESTÁ MOVENDO TODOS OS ARQUVIOS (COMPARAR O ANTES COM O DEPOIS)
+        COLOCAR O DESFAZEDOR PARA FUNCIONAR
+
+
 ######################################################################
 # 
 # AUTOR:        Higlux Morales
 # EMAIL:        higluxmorales@gmail.com
 # PROGRAMA:     duplicados.sh
 # LICENÇA:      GPL 3
-# VERSÃO:       1.3 Beta
+# VERSÃO:       1.4 Beta
 # DESCRIÇÃO:    Programa que busca arquivos duplicados
 #
 # CHANGELOG:
@@ -35,6 +43,12 @@
 #       Unificação dos códigos de mensagem
 #   (03NOV2024) - 1.3 - Higlux Morales
 #       Simplificação de código
+#   (09JUL2026) - 1.4 - Higlux Morales
+#       Adicionar verificador de comandos faltantes
+#       Adicionado verificação de sistema operacional e distribuição
+#       Adicionando verificação de arquivos corrompidos (BADFILE jpg)
+#   (10JUL2026) - 1.4 - Higlux Morales
+#       Corrigido BUG que não criava pastas mês e dia (cut errado)
 ######################################################################
 
 ##################################
@@ -50,12 +64,14 @@
 #           VARIÁVEIS
 ##################################
 readonly prg='Duplicados'
-readonly vers='1.2 Beta'
+readonly vers='1.4 Beta'
 #Por padrão deixar isso ligado
-declare debug=1
+declare debug
 declare local_destino
 declare local_destino_duplicado
 declare ignore
+#Informações sobre o sistema atual
+source /etc/os-release
 
 entradas=($*)
 readonly RESET='\e[0m'      #Volta o texto ao nomal
@@ -67,7 +83,8 @@ readonly EXIST='\e[1;32m'   #VERDE
 #           FUNÇÕES
 ##################################
 ignore='S'
-
+debug=1
+badfile=0
 #################
 # INÍCIO FUNÇÃO PERSONALIZADA
 #################
@@ -81,24 +98,24 @@ RELP() {
                     echo "Opções disponíveis:           
                 -h --help      Exibe ajuda
                 -l --local     Local de verificação dos arquivos (Requerido)
-                -f --formatos  Formatos de verificação
+                -f --filtrar   Remove extensões da busca (filtro)
                 -t --tipo      Tipo de verificação (MD5 padrão)
                 -o --copy      Execução alternativa (Mover arquivo duplicado padrão)
                 -a --apagar    Deleta os arquivos temporários
                 -v --version   Versão do aplicativo
-                -c --create    Cria a pasta a partir das datas
-                                para mudar o formato adicione 
-                                (c - Curto Ex. JAN) (l - Longo Ex. Janeiro).
-                                Sem parâmetro as datas serão numéricas
+                -u --mudar     Muda o formato do mês para
+                               (c - Curto Ex. JAN) (l - Longo Ex. Janeiro).
+                               Sem parâmetro as datas serão numéricas
                 -debug         Exibe debug do código
                 -m --mover     Pasta para onde irá mover ou copiar os arquivos duplicados
-                -d --destino    Destino dos arquivos (Requerido)
-                -y --yes        Define sim para todas as perguntas
-                
+                -d --destino   Destino dos arquivos (Requerido)
+                -y --yes       Define sim para todas as perguntas
+                -b --badfile   Localiza arquivos corrompidos (Desativado padrão)
                 $prg - $vers
                 "
 }
-
+#BUG - 10JUL2026: Está saindo o nome do mês com 2 dígitos enquanto não passa o parãmentro de curto ou longo.
+#                 o correto seria aparecer números, o que não ocorre.
 
 
 ################# FUNÇÕES DE SAÍDA
@@ -162,31 +179,164 @@ PAUSE(){
     echo ""
 }
 
-TEST_FILE() {
+BADFILE_TEST() {
 ############
-# TIPO:      FUNÇÃO DE INFORMAÇÃO
+# TIPO:      FUNÇÃO DE TRANSFORMAÇÃO
 # FUNÇÃO:    Testa para ver se a foto não está corrompida
 # ALTERAÇÃO: 30OUT2024
+# ALTERAÇÃO: 09JUL2026
+# OBS:       VARIÁVEIS: 
+#                       $1 ORIGEM - Onde estão os arquivos temporários
+#                       $2 BADFILE - DIZ SE ESTÁ HABILITADO
+#           Não sei qual é a melhor alternativa para retirar os arquivos corrompidos
+#           
+#           $1 - Origem
+#           
 ############
+
+ ############ DECLARAÇÃO DE VARIÁVEIS
+    local arq1
+    local arq2
+    local arq3
+    local arq4
+    local arq5
+    local arq6
+    local arq7
+    local arq8
+
+    local arq1_exist
+    local arq2_exist
+    local arq3_exist
+    local arq4_exist
+    local arq5_exist
+    local arq6_exist
+    local arq7_exist
+    local arq8_exist
+
+    local qtd_arq1
+
+    local dest_bad
     local origem
-    local arquivo
-    local ext
+    ############ FIM DECLARAÇÃO DE VARIÁVEIS
     
+    ######## BLOQUEIO PARA NÃO ENTRAR VALOR VAZIO
+    [[ -z "$1" ]] && MSG "ENDBAD" "Origem não pode ser vazio"
+    #AQUI PRECISO TESTAR SE O COMANDO EXISTE
+    [[ -z "$2" ]] && MSG "INFRM" "Usando o MD5 como verificador"
+    ######## FIM BLOQUEIO PARA NÃO ENTRAR VALOR VAZIO
+    
+    ############ ATRIBUIÇÃO DE VARIÁVEIS
+    origem="$1"
+    arq1="$origem"/.arquivos.tmp
+    arq8="$origem"/.arquivos8.tmp
+    arq9="$origem"/.arquivos9.tmp
+    ############ FIM ATRIBUIÇÃO DE VARIÁVEIS
+
+    ############ TESTE DE VARIÁVEIS
+    arq1_exist=$([[ -e "$arq1" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq8_exist=$([[ -e "$arq8" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq9_exist=$([[ -e "$arq9" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    ############ FIM TESTE DE VARIÁVEIS
+
+  if [[ "$debug" -eq 1 ]]; then
+        MSG "DBG" "Debug: Entrou na função BADFILE_TEST com os dados:$RESET
+        \$arq1: $arq1 - $arq1_exist - Lista Bruta (*)
+        \$arq2: $arq2 - $arq2_exist - Lista MD5
+        \$arq3: $arq3 - $arq3_exist - Lista MD5 pura
+        \$arq4: $arq4 - $arq4_exist - Lista MD5 duplicados
+        \$arq5: $arq5 - $arq5_exist - Lista MD5 com data
+        \$arq6: $arq6 - $arq6_exist - Lista MD5 com data extenso
+        \$arq7: $arq7 - $arq7_exist - Lista MD5 com data extenso
+        \$arq8: $arq8 - $arq8_exist - Lista arquivos não corrompidos (*)
+        \$arq8: $arq9 - $arq9_exist - Lista arquivos corrompidos (*)
+        \$cmd_sum: $cmd_sum - Formatos a serem buscados"
+    fi
+    #Aqui irá criar o arquivo origem se ele não existir
+    #BUG: MOVER ARQUIVOS .TMP, .SH
+    #GUGU
+    if [[ ! -e "$arq1" ]]; then
+        find -type f > .arquivos.tmp
+    fi
+    #NOVA FUNÇÃO - 09JUL26
+    #FILTRA ENTRADAS NA LISTA
+    FILTRA_LISTA $arq1
+    #FIM NOVA FUNÇÃO
+
+    for (( linha=1;linha<="$arq1_qtd";linha+=1 ));
+    do
+        arq1="$(cat .arquivos.tmp | head -$linha | tail -1)"
+        magick identify -regard-warnings "$arq1"
+        if [ "$?" -eq 0 ]; then
+            echo "$arq" >> "$arq8" #Arquivos não corrompidos
+        else
+            echo "$arq" >> "$arq9" #Arquivos corrompidos
+    fi
+    done
+    #Quantidade de arquivos:
+    echo "Arquivos não corrompidos: $(cat .arquivos8.tmp | wc -l)"
+    echo "Arquivos corrompidos: $(cat .arquivos9.tmp | wc -l)"
+    #PERGUNTA - Saber se pode mover os arquivos corrompidos
+    echo 'Gostaria de [M/m]over arquivos corrompidos, [A/a]pagar arquivos corrompidos ou [C/c]ancelar?'
+    MSG "INFRM" "Essa ação não poderá ser desfeita."
+    echo "Mover arquivos corrompidos [M/A/C]: "
+    read -n 1 -r resp
+    case $resp in
+        M|m)
+        mkdir "$origem\badfile"
+        dest="$orige\badfile"
+        BADFILE_ACAO "$orig" "$dest" "$arq9" "mv"
+        ;;
+        A|a)
+        BADFILE_ACAO "$orig" "$dest" "$arq9" "rm -rf"
+        ;;
+        C|c)
+        exit 0
+        ;;
+    esac
+#Remover os arquivos corrompidos do arquivo original
+mv "$arq1" "$arq1.old"
+mv "$arq8" "$arq1"
+}
+
+BADFILE_ACAO() {
+############
+# TIPO:      FUNÇÃO DE TRANSFORMAÇÃO
+# FUNÇÃO:    Move ou apaga a foto corrompida
+# ALTERAÇÃO: 09JUL2026
+# OBS:       Função criada para mover os arquivos duplicados
+#           
+############
+    local destino
+    local arq
+    local origem
     origem=$1
-    ext=$2
-    [[ -z "$ext" ]] && ext="*.jpg"
-    find "$origem" -type f > arquivos.tmp
-    qtd=$(wc -l < arquivos.tmp)
-    for (( i=1; i<="$qtd"; i+=1 )); do
-        linha="$(cat arquivos.tmp | head -"$i" | tail -1)"
-        identify -format '%f' "$linha"
-        [[ "$?" -eq 1 ]] && echo "$linha" >> erros.txt || echo "$linha" >> sem_erros.txt
-        true
-     done
-    qtd_erros=$(wc -l < erros.txt)
-    echo "Você possui $qtd_erros/$qtd arquivos com erro"
-    qtd_sem_erros=$(wc -l < sem_erros.txt)
-    echo "Você possui $qtd_sem_erros/$qtd arquivos sem erro"
+    destino=$2
+    arq=$3
+    cmd=$4
+    qtd_arq="$(cat $arq | wc -l)"
+
+    if [[ -e "$destino" ]]; then 
+        echo "diretório $destino existe"
+    else
+        mkdir "$destino"
+    fi
+#Separado somente por medo.
+    if [[ "$cmd" == "mv" ]]; then
+        for ((vez=1;vez<=qtd_arq;vez+=1));
+        do
+            file="$(cat $arq | head -"$vez" | tail -1)"
+            echo "Movendo $file para $destino"
+            "$cmd" "$file" "$destino"
+        done
+    fi
+    if [[ "$cmd" == "rm -rf" ]]; then
+        for ((vez=1;vez<=qtd_arq;vez+=1));
+        do
+            file="$(cat $arq | head -"$vez" | tail -1)"
+            echo "Apagando $file para $destino"
+            "$cmd" "$file" "$destino"
+        done
+    fi
 }
 CRIA_DESTINO() {
 ############
@@ -276,6 +426,8 @@ CRIA_LISTAS(){
 #               .arquivos5.tmp - Lista MD5 com data
 #               .arquivos6.tmp - Lista MD5 com data por extenso
 #               .arquivos7.tmp - Lista MD5 com formatos
+#               .arquivos8.tmp - Lista sem arquivos corrompidos
+#               .arquivos8.tmp - Lista com arquivos corrompidos
 ############
     ############ DECLARAÇÃO DE VARIÁVEIS
     local arq1
@@ -285,6 +437,7 @@ CRIA_LISTAS(){
     local arq5
     local arq6
     local arq7
+    local arq8
 
     local arq1_exist
     local arq2_exist
@@ -293,6 +446,7 @@ CRIA_LISTAS(){
     local arq5_exist
     local arq6_exist
     local arq7_exist
+    local arq8_exist
 
     local qtd_arq1
 
@@ -303,8 +457,8 @@ CRIA_LISTAS(){
     ############ FIM DECLARAÇÃO DE VARIÁVEIS
     
     ######## BLOQUEIO PARA NÃO ENTRAR VALOR VAZIO
-    [[ -z "$1" ]] && MSG ENDBAD "Origem não pode ser vazio"
-    [[ -z "$2" ]] && INFRM "Usando o MD5 como verificador"
+    [[ -z "$1" ]] && MSG "ENDBAD" "Origem não pode ser vazio"
+    [[ -z "$2" ]] && MSG "INFRM" "Usando o MD5 como verificador"
     ######## FIM BLOQUEIO PARA NÃO ENTRAR VALOR VAZIO
     
     ############ ATRIBUIÇÃO DE VARIÁVEIS
@@ -316,6 +470,8 @@ CRIA_LISTAS(){
     arq5="$origem"/.arquivos5.tmp
     arq6="$origem"/.arquivos6.tmp
     arq7="$origem"/.arquivos7.tmp
+    arq8="$origem"/.arquivos8.tmp
+    arq9="$origem"/.arquivos9.tmp
 
     fmt="$3"
     ############ FIM DECLARAÇÃO DE VARIÁVEIS
@@ -328,18 +484,22 @@ CRIA_LISTAS(){
     arq5_exist=$([[ -e "$arq5" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     arq6_exist=$([[ -e "$arq6" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     arq7_exist=$([[ -e "$arq7" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq8_exist=$([[ -e "$arq8" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
+    arq9_exist=$([[ -e "$arq9" ]] && echo "[$EXIST EXISTE $RESET]" || echo "[$ERROS NÃO EXISTE $RESET]")
     ############ FIM TESTE DE VARIÁVEIS
 
 
   if [[ "$debug" -eq 1 ]]; then
         MSG "DBG" "Debug: Entrou na função CRIAR_LISTAS com os dados:$RESET
-        \$arq1: $arq1 - $arq1_exist - Lista Bruta
-        \$arq2: $arq2 - $arq2_exist - Lista MD5
-        \$arq3: $arq3 - $arq3_exist - Lista MD5 pura
-        \$arq4: $arq4 - $arq4_exist - Lista MD5 duplicados
-        \$arq5: $arq5 - $arq5_exist - Lista MD5 com data
+        \$arq1: $arq1 - $arq1_exist - Lista Bruta (*)
+        \$arq2: $arq2 - $arq2_exist - Lista MD5 (*)
+        \$arq3: $arq3 - $arq3_exist - Lista MD5 pura (*)
+        \$arq4: $arq4 - $arq4_exist - Lista MD5 duplicados (*)
+        \$arq5: $arq5 - $arq5_exist - Lista MD5 com data (*)
         \$arq6: $arq6 - $arq6_exist - Lista MD5 com data extenso
         \$arq7: $arq7 - $arq7_exist - Lista MD5 com data extenso
+        \$arq8: $arq8 - $arq8_exist - Lista sem arquivos corrompidos
+        \$arq9: $arq9 - $arq8_exist - Lista dos arquivos corrompidos
         \$cmd_sum: $cmd_sum - Formatos a serem buscados"
     fi
 
@@ -362,16 +522,9 @@ CRIA_LISTAS(){
 
         remover=$(basename "$local_destino_duplicado")
         echo "A remover $remover"
-
-        #Remove a pasta para onde os arquivos serão movidos
-        MSG "INFRM" "QTD Antes: $qtd_arq1"
-        sed -i "/$(echo '\/'"$remover"'\/')/d" "$arq1" #Aqui foi sugestão do shellcheck de colocar aspas
-        #Remove os arquivos .tmp
-        #BUG ENCONTRADO:
-        #   - CASO NÃO SEJA FEITO O QUE ESTÁ ABAIXO ELE VAI MOVER .arquivos.tmp E DARÁ ERRO NA HORA DE MOVER OS ARQUIVOS PARA AS PASTAS CRIADAS
-        sed -i "/.tmp/d" "$arq1"
-        qtd_arq1=$(wc -l < "$arq1")
-        MSG "INFRM" "QTD Depois: $qtd_arq1"
+        #NOVA FUNÇÃO - FILTRAR OS DADOS DA LISTA 1
+        FILTRA_LISTA $arq1
+        #FIM NOVA FUNÇÃO - FILTRAR OS DADOS DA LISTA 1
     fi
     MSG "INFRM" "FIM da ciração do .arquivos.tmp"
 
@@ -585,7 +738,7 @@ mkdir "$caminho"
 #aqui tem que mudar de acordo com o tipo de formato número
 #numero: 1-7
 #curto: 1-8
-#longo: 1-?
+#longo: 1-? # AQUI tem que capturar o que está entre barras 
 corte="1-8"
 MSG "INFRM" "Criando pastas meses"
 caminho=$(echo "$local_destino/"$(cat "$arq" | awk '{print $2}' | cut -b "$corte" | sort | uniq ) | sed "s, , \n$local_destino/,g")
@@ -598,39 +751,6 @@ echo -e "$caminho"
 
 MSG "INFRM" "Fim Criação das pastas"
 
-exit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
 
 
     if [ -e "$arq" ]; then
@@ -638,7 +758,7 @@ exit
         
         ## LOCALIZAÇÃO DOS DADOS DENTRO DO ARQUIVO .arquivos5.tmp
         #cut -b 1-4     #->ano
-        #cut -b 6-7     #->mês
+        #cut -b 6-8     #->mês
         #cut -b 9-10    #->dia
         
         #Aqui a quantidade de linhas únicas do ano, será usado para ser o limite do loop abaixo
@@ -652,7 +772,7 @@ exit
             #Aqui vai aparecer linha a linha do arquivo
             linha_anos=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-4 | uniq | head -"$i" | tail -1)
             destcriar=$(echo "$local_destino/$linha_anos")
-            qtd_pasta_meses=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq | grep "$linha_anos" | cut -b 6-7 | wc -l)
+            qtd_pasta_meses=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-8 | uniq | grep "$linha_anos" | cut -b 6-8 | wc -l)
             if [[ "$debug" -eq 1 ]]; then
                 MSG "DBG" "DEBUG: CRIAÇÃO DE PASTA ANOS - $qtd_total_criada\\$qtd_total $RESET"
                 echo -e "Quantidade de pastas a criar: $qtd_total"
@@ -679,10 +799,12 @@ exit
             #INÍCIO DO CAMPO PARA CRIAÇÃO DO MÊS
             #CRIAÇÂO DA PASTA DOS MESES
             for (( j=1; j<="$qtd_pasta_meses"; j+=1 )); do
+                #linha removida - aparecia "JA" ao invés "JAN ou JANEIRO" -cut estava indo até 7, correto até 8 (10JUL26)
+                #tam_mes="6-8" #Adicionado para passar o mês corretamente, para corrigir posso procurar as barras (Ideias)
+                linha_mes=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-8 | uniq | grep "$linha_anos" | cut -b 6-8 | head -"$j" | tail -1)
+                #cat .arquivos6.tmp | awk '{print $2}'| grep "2011" | sort | uniq | cut -b 6-8 | uniq
                 
-                linha_mes=$(cat "$arq" | awk '{print $2}' | sort | cut -b 1-7 | uniq | grep "$linha_anos" | cut -b 6-7 | head -$j | tail -1)
-
-                if [[ -z "$fmt" ]]; then
+                if [[ "$fmt"=="curto" ]]; then
                     destcriar="$local_destino/$linha_anos/$linha_mes"
                 else
                     linha_mes_ext=$(FUNMES $linha_mes $fmt)
@@ -703,14 +825,15 @@ exit
                 fi
                 #Verificando se a pasta exite e cria se não existir
                 #
-                test -d "$destcriar" || mkdir "$destcriar" && echo "Pasta existe"
-
-                qtd_pasta_dias=$(cat "$arq" | awk '{print $2}' | grep "$anomes" | uniq | sort | uniq | wc -l)
+                [[ -d "$destcriar" ]] || mkdir "$destcriar" && echo "Pasta existe"
+                #qtd_pasta_dias=$(cat "$arq" | awk '{print $2}' | grep "$linha_mes" | uniq | sort | uniq | wc -l)
+                qtd_pasta_dias=$(cat "$arq" | awk '{print $2}' | grep "$linha_ano" | grep "$linha_mes" | uniq | sort | uniq | wc -l)
                 
                 for (( k=1; k<="$qtd_pasta_dias"; k+=1 )); do
-                    linha_dias=$(cat "$arq" | awk '{print $2}' | grep "$anomes" | cut -b 9-10 | sort | uniq | head -"$k" | tail -1)
-                    
-                    if [[ -z "$fmt" ]]; then
+                #linha_dias=$(cat "$arq" | awk '{print $2}' | grep "$linha_ano" | grep "$linha_mes" | cut -b 10-11 | sort | uniq | head -"$k" | tail -1)
+                    linha_dias=$(cat "$arq" | awk '{print $2}' | grep "$linha_ano" | grep "$linha_mes" | uniq | sort | head -1 | tail -1 | cut -b "10-11")
+
+                    if [[ "$fmt"=="curto" ]]; then
                         destcriar="$local_destino/$linha_anos/$linha_mes/$linha_dias"
                     else
                         destcriar="$local_destino/$linha_anos/$linha_mes_ext/$linha_dias"
@@ -940,8 +1063,83 @@ APAGAR_ARQUIVOS() {
     #./desfazer.sh
     MSG "DBG" "Impedido de fazer para intuito de teste"
 }
-######### FIM DAS FUNÇÕES PERSONALIZADAS
 
+VRF_SO() {
+############
+# TIPO:      FUNÇÃO DE VERIFICAÇÃO SO
+# FUNÇÃO:    Verifica o SO e configura o gerenciador de pacote
+# ALTERAÇÃO: 09JUL2026
+# COMENTÁRIOS: 
+#
+############
+case "$ID_LIKE" in
+    "debian")
+        COMMAND="apt"
+        ;;
+    "arch")
+        COMMAND=""
+        ;;
+    "fedora")
+        COMMAND="dnf"
+        ;;
+    "suse")
+        COMMAND="zypper"
+        ;;
+esac
+MSG "INFRM" "Sua distro é $NAME e seu gerenciador é $COMMAND"
+}
+
+VRF_COMMAND() {
+############
+# TIPO:      FUNÇÃO DE VERIFICAÇÃO DE COMANDOS INSTALADOS
+# FUNÇÃO:    Verifica os pacotes necessários estão instalados
+# ALTERAÇÃO: 09JUL2026
+# COMENTÁRIOS:
+#               verify - Imagemagick
+#               md5sum
+#               bc sudo apt-get install bc
+#
+############
+# Assim se executa o comando: $COMMAND update
+echo "Verificando se o pacote identify está instalado." #Ele funciona testando se o arquivo jpg está corrompido
+PCT=("identify" "md5sum" "sha512sum" "sha256sum") 
+PCT_SRC=("imagemagick" "coreutils" "coreutils" "coreutils")
+which $1
+if [ $? -eq 0 ]; then
+    MSG "INFORM" "O $1 está instalado"
+else
+    MSG "ENDBAD" "O $1 Não está instalado"
+    MSG "ENDBAD" "Instale o pacote para prosseguir"
+    exit 1
+fi
+
+}
+FILTRA_LISTA() {
+############
+# TIPO:      FUNÇÃO DE TRANSFORMAÇÃO
+# FUNÇÃO:    Recebe a lista dos arquivos e exclui extensões/arquivos importantes
+# CRIAÇÃO:   09JUL2026
+# COMENTÁRIOS: Função que evita bug de mover arquivos, diretórios importantes
+#
+############
+
+arq1=$1
+qtd_arq1=$(wc -l < "$arq1")
+remover=$(basename "$local_destino_duplicado")
+MSG "INFRM" "QTD Antes: $qtd_arq1"
+sed -i "/$(echo '\/'"$remover"'\/')/d" "$arq1"
+sed -i "/.tmp/d" "$arq1"
+sed -i "/.sh/d" "$arq1"
+qtd_arq1=$(wc -l < "$arq1")
+MSG "INFRM" "QTD Depois: $qtd_arq1"
+#AQUI VAI ENTRAR O CÓDIGO PARA CHAMAR A FUNÇÃO DE TIRAR ARQUIVOS CORROMPIDOS?
+if [[ "$badfile" -ne "1" ]];#AQUI ENTRA UM IF SE QUER TIRAR O ARQUIVO CORROMPIDO
+        then
+            BADFILE_TEST $arq1
+            qtd_arq1=$(wc -l < "$arq1") #QTD DEPOIS DE TIRAR OS CORROMPIDOS
+        fi #FIM DO IF PARA TIRAR ARQUIVO CORROMPIDO
+}
+######### FIM DAS FUNÇÕES PERSONALIZADAS
 ##################################
 #           TESTES
 ##################################
@@ -959,9 +1157,12 @@ if [ -z "$1" ]; then
     echo "$prg $vers:"
     echo -e \
     "   $DBG Debug$RESET ativado automáticamente
-        As menságens em $(echo -e "$DBG laranja$RESET") são saídas do script.
-        Use o parâmetro $(echo -e "$INFO -h ou --help$RESET") para exibir as opções
+        As menságens em$(echo -e "$DBG laranja$RESET") são saídas do script.
+        Use o parâmetro$(echo -e "$INFO -h ou --help$RESET") para exibir as opções
+        O script funciona apenas no Ubuntu e derivados
+        Dados do Sistema: $(echo -e "$DBG$NAME $VERSION $(uname -r)")$RESET
     "
+#TESTANDO FUNCAO QUE ESTOU TRABALHANDO
     exit 0
 fi
 ##### ERRO NOS PARÂMETROS
@@ -973,7 +1174,7 @@ do
             MSG "DBG" "(PARÂMETROS):Valor de entrada $a: ${entradas[$a]}"
         fi
         case ${entradas[$a]} in 
-            -a|--apagar)
+            -a|--apagar) #Aqui somente apaga os arquivos temporários - Não funciona (10JUL2026)
                 echo 'Realmente deseja apagar os arquivos temporários?'
                 echo -e "\e[5;31mEssa ação não poderá ser desfeita.$RESET"
                 echo -en "\e[1mApagar arquivos temporários [S/N]: $RESET"
@@ -982,24 +1183,25 @@ do
                 if [ "$resp" = "S" ]; then
                     apagar_arquivos "$resp"
                 fi
-                exit
+                exit 0
             ;;
             -h|--help)
-                RELP
-                exit
+                RELP #AJUDA
+                exit 0
             ;;
             -v|--version)
-                echo 'Versão: '
+                echo 'Versão: ' #Versão
                 echo "$prg" "$vers"
-                exit
+                exit 0
             ;;
             --debug)
                 echo "Modo debug ativado"
                 debug=1;
             ;;
-            -c|--create)
+            -u|--mudar)
                 #CRIA as pastas
                 #Função CRIAPASTAS $1-LOCAL do .arquivos5.tmp $2 - Formato
+                # 10JUL2026 - MELHORAR ESSA OPÇÃO, UM NOME NOVO PARA APENAS FORMATAR O NOME DA PASTA MÊS LONGO OU MÊS CURTO
                 
                 (( a+=1 ))
                 param="${entradas[$a]}"
@@ -1041,7 +1243,11 @@ do
                     MSG "ENDBAD" "O local de verificação não pode ser vazio"
                 else
                     if [[ -d "$local" ]]; then
-                        INFRM "$local - Encontrado"
+                        if [[ "$local"=='./' ]]; then
+                            local="$PWD"
+                            MSG "INFRM" "$local - passado como './' torcando para \$PWD"
+                        fi
+                        MSG "INFRM" "$local - Encontrado"
                     else
                         MSG ENDBAD "O diretório especificado: $local - No Existe. Especifique um diretório válido"
                     fi
@@ -1051,7 +1257,7 @@ do
                 param="${entradas[$a]}"
                 (( a+=1 ))
                 local_tmp="${entradas[$a]}"
-                CRIA_DESTINO "$local_tmp" "$param"
+                [[ -e "$local_tmp" ]] || CRIA_DESTINO "$local_tmp" "$param"
                 unset $local_tmp
             ;;
             -m| --mover)
@@ -1066,11 +1272,16 @@ do
                 (( a+=1 ))
                 prm="${entradas["$a"]}"
                 SET_SUM "$prm"
-                INFRM "Verificador selecionado $cmd_sum"
+                MSG "INFRM" "Verificador selecionado $cmd_sum"
             ;;
             -y|--yes)
                 ignore='S'
-                INFRM "Ignorando as perguntas"
+                MSG "INFRM" "Ignorando as perguntas"
+            ;;
+            -b|--badfile)
+                (( a+=1 ))
+                MSG "INFRM" "Verificando arquivos corrompidos (BADFILES)" #Padrão 0
+                badfile='1'
             ;;
             *)
             if [[ ! "${entradas[$a]}" = " " ]];then
@@ -1109,7 +1320,8 @@ if [[ "$debug" -eq 1 ]]; then
         Origem - \$local: $local
         Verificador - \$cmd_sum: $cmd_sum
         Destino dos arquivos - \$local_destino: $local_destino
-        Destino dos duplicados - \$local_destino_duplicado: $local_destino_duplicado"
+        Destino dos duplicados - \$local_destino_duplicado: $local_destino_duplicado
+        Detectando arquivos corrompidos - \$badfile:  $badfile" #aparecenada
 fi
 
 #### Isso aqui é para saber a quantidade de linhas do arquvio e fazer barra de progresso. - Descontinuado
@@ -1192,7 +1404,7 @@ fi
 #RESOLVIDO - A função separa arquivos com nomes iguais
 ######################################## FIM - NOTA 2
 
-######################################## NOTA 2 - COMENTÁRIOS SOBRE ARQUIVOS TEMPORÁRIOS
+######################################## NOTA 3 - COMENTÁRIOS SOBRE ARQUIVOS TEMPORÁRIOS
 # + .arquivos.tmp
 #   - Resultado do find com a retirada da pasta duplicados e também dos arquivos de busca
 # + .arquivos2.tmp
