@@ -1,21 +1,27 @@
 # Duplicados
-Shell script double files detector and remover
+Nova Atualização 10JUL2026:
+O Script faz:
+ - Organiza arquivos
+ - Detecta arquivos duplicados
+ - Detecta arquivos corrompidos
+(Shell script double files detector and remover)
 
-Um código cagado que eu fiz que pode ser útil para alguém, logo, copie, faça melhor e me avise.
+Um código menos cagado a cada dia que eu faço que pode ser útil para alguém, logo, copie, faça melhor e me avise.
 
-Foi idealizado para solucionar o problema de fotos duplicados dentro do meu disco externo, ainda adicionei um código para organizar as fotos por data de criação com a informação vindo da criação do arquivo no disco.
+Foi idealizado para solucionar o problema de fotos duplicados dentro do meu disco externo, ainda adicionei um código para organizar as fotos por data de criação, com a informação vindo da criação do arquivo no disco, agora com detecção de arquivo corrompido.
 
 Para entender essa carroça você vai precisar saber como funciona:
-  BASH
-  MD5SUM
-  SED
-  WC
-  CAT
-  SORT
-  ECHO
-  MV
-  CHMOD
-
+  - BASH
+  - MD5SUM
+  - SED
+  - WC
+  - CAT
+  - SORT
+  - ECHO
+  - MV
+  - CHMOD
+  - Imagemagick
+  
 -> Vou disponibilizar o arquivo funcional (Não no sentido completo da palavra) como versão e a atual como em desenvolvimento.
 
 Como usar:
@@ -41,6 +47,11 @@ Atualizado em 04SET2024
 - Melhoria na estrutura e nas práticas de programação.
 - Funciona de modo fidedigno, ele está por padrão mover os arquivos para fazer o programa copiar organizado tem que ser alterado.
 
+Atualizado em 10JUL2026
+- Correção de BUG que não criava pastas
+- Adição de comando para detectar bibliotecas faltantes
+- Correção de erros que impossibilitavam uso
+- Simplificação de código
 
 Qualquer dúvida entre em contato pelo e-mail: higluxmorales@gmail.com
 
